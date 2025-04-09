@@ -15,6 +15,7 @@ public class Proyecto_TPOO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Creacion Proyecto");
     }
     
 }
