@@ -35,7 +35,10 @@ public class Persona {
         return Nombre;
     }
 
-    public void setNombre(String Nombre) {
+    public void setNombre(String Nombre)throws Exception {
+        if(Nombre.isEmpty()){
+            throw new Exception("Error, no se aceptan valores vacios o null");
+        }
         this.Nombre = Nombre;
     }
 
@@ -43,7 +46,10 @@ public class Persona {
         return Apellido;
     }
 
-    public void setApellido(String Apellido) {
+    public void setApellido(String Apellido) throws Exception{
+          if(Apellido.isEmpty()){
+            throw new Exception("Error, no se aceptan valores vacios o null");
+        }
         this.Apellido = Apellido;
     }
 
@@ -51,7 +57,10 @@ public class Persona {
         return DNI;
     }
 
-    public void setDNI(int DNI) {
+    public void setDNI(int DNI) throws Exception {
+          if(String.valueOf(DNI).isEmpty()){
+            throw new Exception("Error, no se aceptan valores vacios o null");
+        }
         this.DNI = DNI;
     }
 
@@ -64,10 +73,12 @@ public class Persona {
     }
 
     public LocalDateTime getFecha() {
+        
         return Fecha;
     }
 
     public void setFecha(LocalDateTime Fecha) {
+        
         this.Fecha = Fecha;
     }
 
