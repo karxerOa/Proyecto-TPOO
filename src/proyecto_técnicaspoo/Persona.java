@@ -32,10 +32,12 @@ public class Persona {
     }
 
     public String getNombre() {
+        
         return Nombre;
     }
 
     public void setNombre(String Nombre) {
+        if (Nombre.isEmpty())
         this.Nombre = Nombre;
     }
 
