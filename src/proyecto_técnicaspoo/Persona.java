@@ -32,6 +32,7 @@ public class Persona {
     }
 
     public String getNombre() {
+        
         return Nombre;
     }
 
@@ -39,8 +40,9 @@ public class Persona {
         if(Nombre.isEmpty()){
             throw new Exception("Error, no se aceptan valores vacios o null");
         }
-        this.Nombre = Nombre;
+        this.Nombre=Nombre;
     }
+
 
     public String getApellido() {
         return Apellido;
