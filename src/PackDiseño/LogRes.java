@@ -17,6 +17,7 @@ public class LogRes extends javax.swing.JFrame {
     int xMouse, yMouse;
     public LogRes() {
         initComponents();
+        setLocationRelativeTo(null);
         txtUsuario.putClientProperty(FlatClientProperties.STYLE, "arc: 20");
         txtContraseña.putClientProperty(FlatClientProperties.STYLE, "arc: 20");
         txtConfContra.putClientProperty(FlatClientProperties.STYLE, "arc: 20");
@@ -126,6 +127,7 @@ public class LogRes extends javax.swing.JFrame {
 
         cbRol.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         cbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Doctor", "Recepcionista" }));
+        cbRol.setSelectedIndex(-1);
 
         bntRegistro.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         bntRegistro.setText("Register");
@@ -371,9 +373,9 @@ public class LogRes extends javax.swing.JFrame {
 
     private void bntRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistroActionPerformed
         // TODO add your handling code here:
-        FormMenuAdmin a = new FormMenuAdmin();
-        a.setVisible(true);
+        FormMenuRecep a = new FormMenuRecep();
         this.setVisible(false);
+        a.setVisible(true);
     }//GEN-LAST:event_bntRegistroActionPerformed
 
     /**
