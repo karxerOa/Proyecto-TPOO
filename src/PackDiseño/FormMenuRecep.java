@@ -22,6 +22,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
     Color colorTemp;
     public FormMenuRecep() {
         initComponents();
+        setLocationRelativeTo(null);
         
     }
     /**

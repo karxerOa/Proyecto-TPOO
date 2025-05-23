@@ -6,6 +6,9 @@ package PackDiseño;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 /**
@@ -13,13 +16,19 @@ import javax.swing.UIManager;
  * @author apnil
  */
 public class FormMenuAdmin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FormMenuAdmin
-     */
+    int xMouse, yMouse;
     public FormMenuAdmin() {
         initComponents();
-        PanelMenu.putClientProperty(FlatClientProperties.STYLE, "arc: 20");
+        setLocationRelativeTo(null);
+        JPanel PanelRegistrarDoctor = new PanelRegistrarDoctor();
+        JPanel PanelRegistrarTurnos = new PanelRegistrarTurnos();
+        
+        CardLayout cl=new CardLayout();
+        PanelContenedor.setLayout(cl);
+        PanelContenedor.add(PanelRegistrarDoctor,"PanelRegistrarDoctor");
+        PanelContenedor.add(PanelRegistrarTurnos,"PanelRegistrarTurnos");
+     
+       
 
     }
 
@@ -32,38 +41,187 @@ public class FormMenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PanelMenu = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        BtnRegistroDoctor = new javax.swing.JButton();
+        BtnAsignarTurnos = new javax.swing.JButton();
+        BtnHistorialTrabajo = new javax.swing.JButton();
+        PanelBarraSuperior = new javax.swing.JPanel();
+        BtnCerrar = new javax.swing.JButton();
+        BtnMinimizar = new javax.swing.JButton();
+        PanelContenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
-        PanelMenu.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
-        PanelMenu.setLayout(PanelMenuLayout);
-        PanelMenuLayout.setHorizontalGroup(
-            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel1.setFont(new java.awt.Font("Algerian", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("MENU");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 113, -1));
+
+        jLabel2.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoRegistro.png"))); // NOI18N
+        jLabel2.setText("Historial de Trabajo");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoDoctor.png"))); // NOI18N
+        jLabel3.setText("Registrar Doctor");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoCronometro.png"))); // NOI18N
+        jLabel4.setText("Asignar Turnos");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        BtnRegistroDoctor.setBackground(new java.awt.Color(0, 102, 102));
+        BtnRegistroDoctor.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        BtnRegistroDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegistroDoctor.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnRegistroDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistroDoctorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnRegistroDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 280, 50));
+
+        BtnAsignarTurnos.setBackground(new java.awt.Color(0, 102, 102));
+        BtnAsignarTurnos.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        BtnAsignarTurnos.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAsignarTurnos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAsignarTurnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAsignarTurnosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnAsignarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 280, 50));
+
+        BtnHistorialTrabajo.setBackground(new java.awt.Color(0, 102, 102));
+        BtnHistorialTrabajo.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        BtnHistorialTrabajo.setForeground(new java.awt.Color(255, 255, 255));
+        BtnHistorialTrabajo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnHistorialTrabajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHistorialTrabajoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BtnHistorialTrabajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 280, 50));
+
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 596));
+
+        PanelBarraSuperior.setBackground(new java.awt.Color(0, 204, 204));
+        PanelBarraSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                PanelBarraSuperiorMouseDragged(evt);
+            }
+        });
+        PanelBarraSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PanelBarraSuperiorMousePressed(evt);
+            }
+        });
+        PanelBarraSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnCerrar.setBackground(new java.awt.Color(0, 204, 204));
+        BtnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/x (1).png"))); // NOI18N
+        BtnCerrar.setBorder(null);
+        BtnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCerrarActionPerformed(evt);
+            }
+        });
+        PanelBarraSuperior.add(BtnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 40, 30));
+
+        BtnMinimizar.setBackground(new java.awt.Color(0, 204, 204));
+        BtnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/minimizar-ventana.png"))); // NOI18N
+        BtnMinimizar.setBorder(null);
+        BtnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMinimizarActionPerformed(evt);
+            }
+        });
+        PanelBarraSuperior.add(BtnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 40, 30));
+
+        jPanel3.add(PanelBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 910, 30));
+
+        javax.swing.GroupLayout PanelContenedorLayout = new javax.swing.GroupLayout(PanelContenedor);
+        PanelContenedor.setLayout(PanelContenedorLayout);
+        PanelContenedorLayout.setHorizontalGroup(
+            PanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
-        PanelMenuLayout.setVerticalGroup(
-            PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        PanelContenedorLayout.setVerticalGroup(
+            PanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
+
+        jPanel3.add(PanelContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 630, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 904, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnHistorialTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHistorialTrabajoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHistorialTrabajoActionPerformed
+
+    private void BtnRegistroDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroDoctorActionPerformed
+        CardLayout cl = (CardLayout) PanelContenedor.getLayout();
+        cl.show(PanelContenedor, "PanelRegistrarDoctor");
+    }//GEN-LAST:event_BtnRegistroDoctorActionPerformed
+
+    private void BtnAsignarTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAsignarTurnosActionPerformed
+        CardLayout cl = (CardLayout) PanelContenedor.getLayout();
+        cl.show(PanelContenedor, "PanelRegistrarTurnos");
+    }//GEN-LAST:event_BtnAsignarTurnosActionPerformed
+
+    private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
+        dispose();
+        LogRes a = new LogRes();
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_BtnCerrarActionPerformed
+
+    private void BtnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMinimizarActionPerformed
+        setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_BtnMinimizarActionPerformed
+
+    private void PanelBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBarraSuperiorMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_PanelBarraSuperiorMousePressed
+
+    private void PanelBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBarraSuperiorMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse , y - yMouse);
+    }//GEN-LAST:event_PanelBarraSuperiorMouseDragged
 
     /**
      * @param args the command line arguments
@@ -105,6 +263,18 @@ public class FormMenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelMenu;
+    private javax.swing.JButton BtnAsignarTurnos;
+    private javax.swing.JButton BtnCerrar;
+    private javax.swing.JButton BtnHistorialTrabajo;
+    private javax.swing.JButton BtnMinimizar;
+    private javax.swing.JButton BtnRegistroDoctor;
+    private javax.swing.JPanel PanelBarraSuperior;
+    private javax.swing.JPanel PanelContenedor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
