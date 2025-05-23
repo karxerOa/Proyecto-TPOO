@@ -373,7 +373,7 @@ public class LogRes extends javax.swing.JFrame {
 
     private void bntRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegistroActionPerformed
         // TODO add your handling code here:
-        FormMenuDoctor a = new FormMenuDoctor();
+        FormMenuAdmin a = new FormMenuAdmin();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_bntRegistroActionPerformed
