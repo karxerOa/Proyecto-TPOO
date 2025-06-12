@@ -64,7 +64,7 @@ public class LogRes extends javax.swing.JFrame {
 
         btnCambio.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnCambio.setText("LOGIN / REGISTER");
-        btnCambio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCambio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,7 +131,7 @@ public class LogRes extends javax.swing.JFrame {
 
         bntRegistro.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         bntRegistro.setText("Register");
-        bntRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntRegistroActionPerformed(evt);
@@ -235,7 +235,7 @@ public class LogRes extends javax.swing.JFrame {
         txtExit.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 24)); // NOI18N
         txtExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtExit.setText("X");
-        txtExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtExitMouseClicked(evt);

@@ -8,15 +8,12 @@ package Clases;
  *
  * @author apnil
  */
-public class Recepcionista extends Usuario{
-    private String IdRecepcionista;
+public class Recepcionista extends Persona{
+    private Usuario user;
 
-    public String getIdRecepcionista() {
-        return IdRecepcionista;
-    }
-
-    public void setIdRecepcionista(String IdRecepcionista) {
-        this.IdRecepcionista = IdRecepcionista;
+    @Override
+    public String mostrarInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

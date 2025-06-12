@@ -4,8 +4,6 @@
  */
 package PackDiseño;
 
-import Clases.Placeholders;
-
 /**
  *
  * @author William

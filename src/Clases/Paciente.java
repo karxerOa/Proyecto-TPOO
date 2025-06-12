@@ -11,22 +11,10 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class Paciente extends Persona{
-    private String IdPaciente;
     private String grupoSanguineo;
-    private ArrayList<Alergias> alergias;
+    private ArrayList<Alergia> alergias;
+    private ArrayList<Visita> HistorialMedico;
 
-    public Paciente(String IdPaciente, String grupoSanguineo) {
-        this.IdPaciente = IdPaciente;
-        this.grupoSanguineo = grupoSanguineo;
-    }
-    
-    public String getIdPaciente() {
-        return IdPaciente;
-    }
-
-    public void setIdPaciente(String IdPaciente) {
-        this.IdPaciente = IdPaciente;
-    }
 
     public String getGrupoSanguineo() {
         return grupoSanguineo;
@@ -36,12 +24,25 @@ public class Paciente extends Persona{
         this.grupoSanguineo = grupoSanguineo;
     }
 
-    public ArrayList<Alergias> getAlergias() {
+    public ArrayList<Alergia> getAlergias() {
         return alergias;
     }
 
-    public void setAlergias(ArrayList<Alergias> alergias) {
+    public void setAlergias(ArrayList<Alergia> alergias) {
         this.alergias = alergias;
+    }
+    
+    public void agregarAlergia(Alergia alergia) {
+        alergias.add(alergia);
+    }
+
+    public void agregarVisita(Visita visita) {
+        HistorialMedico.add(visita);
+    }
+
+    @Override
+    public String mostrarInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

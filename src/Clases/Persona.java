@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
  *
  * @author USUARIO
  */
-abstract class Persona {
+public abstract class Persona {
     protected String Nombre;
     protected String ApellidoPaterno;
     protected String ApellidoMaterno;
-    protected int NumDoc;
+    protected String NumDoc;
     protected String TipoDoc;
     protected String Telefono;
     protected LocalDateTime FechaNacimiento;
@@ -47,11 +47,11 @@ abstract class Persona {
         this.ApellidoMaterno = ApellidoMaterno;
     }
 
-    public int getNumDoc() {
+    public String getNumDoc() {
         return NumDoc;
     }
 
-    public void setNumDoc(int NumDoc) {
+    public void setNumDoc(String NumDoc) {
         this.NumDoc = NumDoc;
     }
 
@@ -110,6 +110,6 @@ abstract class Persona {
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
     }
-    
+    public abstract String mostrarInfo();
     
 }

@@ -8,8 +8,9 @@ package Clases;
  *
  * @author apnil
  */
-public class Administrador extends Usuario{
+public class Administrador extends Persona{
    private String IdAdministrador;
+   private Usuario user;
 
     public String getIdAdministrador() {
         return IdAdministrador;
@@ -17,5 +18,18 @@ public class Administrador extends Usuario{
 
     public void setIdAdministrador(String IdAdministrador) {
         this.IdAdministrador = IdAdministrador;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+    
+    @Override
+    public String mostrarInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -8,18 +8,10 @@ package Clases;
  *
  * @author apnil
  */
-public class Usuario extends Persona{
-    private String IdUsuario;
+public class Usuario{
     private String NombreUsuario;
     private String Contraseña;
-
-    public String getIdUsuario() {
-        return IdUsuario;
-    }
-
-    public void setIdUsuario(String IdUsuario) {
-        this.IdUsuario = IdUsuario;
-    }
+    private String Rol;
 
     public String getNombreUsuario() {
         return NombreUsuario;
@@ -36,4 +28,25 @@ public class Usuario extends Persona{
     public void setContraseña(String Contraseña) {
         this.Contraseña = Contraseña;
     }
+
+    public String getRol() {
+        return Rol;
+    }
+
+    public void setRol(String Rol) {
+        this.Rol = Rol;
+    }
+    
+    public boolean esDoctor() {
+        return Rol.equals("Doctor");
+    }
+
+    public boolean esAdministrador() {
+        return Rol.equals("Administrador");
+    }
+
+    public boolean esRecepcionista() {
+        return Rol.equals("Recepcionista");
+    }
+
 }
