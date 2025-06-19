@@ -49,12 +49,4 @@ public class Doctor extends Usuario{
         this.user = user;
     }
     
-    public boolean verificarTurnoDisponible(LocalDateTime fechaHora) {
-        for (Turno turno : Turnos) {
-            if (turno.getHoraInicio().isBefore(fechaHora) && turno.getHoraFin().isAfter(fechaHora)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

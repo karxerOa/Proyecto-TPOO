@@ -23,15 +23,14 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
         TableActionEvent event = new TableActionEvent() {
             @Override
-            public void Action(int row) {
-                //evento del boton de la tabla
+            public void Action(int row, String texto) {
                 JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true);
                 a.setLocationRelativeTo(null);
-                a.setVisible(true);
+                a.setVisible(true);            
             }
         };
         jTable1.getColumnModel().getColumn(1).setCellRenderer(new TableActionCellRender());
-        jTable1.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditor(event));
+        jTable1.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditor(event, "Atender"));
     }
 
     /**

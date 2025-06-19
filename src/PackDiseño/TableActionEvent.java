@@ -9,5 +9,5 @@ package PackDiseño;
  * @author apnil
  */
 public interface TableActionEvent {
-    public void Action(int row);
+    public void Action(int row, String texto);
 }

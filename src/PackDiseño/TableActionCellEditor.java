@@ -15,15 +15,17 @@ import javax.swing.JTable;
 public class TableActionCellEditor extends DefaultCellEditor{
 
     private TableActionEvent event;
-    public TableActionCellEditor(TableActionEvent ev) {
+    private String texto;
+    public TableActionCellEditor(TableActionEvent ev, String texto) {
         super(new JCheckBox());
         this.event = ev;
+        this.texto = texto;
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        PanelAction action = new PanelAction();
-        action.initEvent(event, row);
+        PanelAction action = new PanelAction(texto);
+        action.initEvent(event, row, texto);
         action.setBackground(table.getSelectionBackground());
         return action;
     }

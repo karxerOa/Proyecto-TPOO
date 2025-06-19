@@ -13,16 +13,16 @@ import java.time.LocalDateTime;
 public class Cita {
     private String IdCita;
     private LocalDateTime FechaHora;
-    private Paciente paciente;
-    private Doctor doctor;
+    private Paciente pacienteSolicitante;
+    private Doctor doctorSolicitado;
     private String EspecialidadSolicitada;
     private boolean Antendida;
 
-    public Cita(String IdCita, LocalDateTime FechaHora, Paciente paciente, Doctor doctor, String EspecialidadSolicitada, boolean Antendida) {
+    public Cita(String IdCita, LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
         this.IdCita = IdCita;
         this.FechaHora = FechaHora;
-        this.paciente = paciente;
-        this.doctor = doctor;
+        this.pacienteSolicitante = pacienteSolicitante;
+        this.doctorSolicitado = doctorSolicitado;
         this.EspecialidadSolicitada = EspecialidadSolicitada;
         this.Antendida = false;
     }
@@ -44,20 +44,20 @@ public class Cita {
         this.FechaHora = FechaHora;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Paciente getPacienteSolicitante() {
+        return pacienteSolicitante;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacienteSolicitante(Paciente pacienteSolicitante) {
+        this.pacienteSolicitante = pacienteSolicitante;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public Doctor getDoctorSolicitado() {
+        return doctorSolicitado;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorSolicitado(Doctor doctorSolicitado) {
+        this.doctorSolicitado = doctorSolicitado;
     }
 
     public String getEspecialidadSolicitada() {
@@ -68,22 +68,20 @@ public class Cita {
         this.EspecialidadSolicitada = EspecialidadSolicitada;
     }
 
-    public boolean isAntendida() {
+    public boolean esAntendida() {
         return Antendida;
     }
 
     public void setAntendida(boolean Antendida) {
         this.Antendida = Antendida;
     }
-    public boolean verificarDisponibilidad() {
-        return doctor.verificarTurnoDisponible(FechaHora) && doctor.getEspecialidad().equals(EspecialidadSolicitada);
-    }
+
     
-    public void atenderCita(String diagnostico, String tratamiento) {
-        if (!Antendida) {
-            Visita visita = new Visita(FechaHora, doctor, diagnostico, tratamiento);
-            paciente.agregarVisita(visita);
-            Antendida = true;
-        }
-    }
+//    public void atenderCita(String diagnostico, String tratamiento) {
+//        if (!Antendida) {
+//            Visita visita = new Visita(FechaHora, doctor, diagnostico, tratamiento, );
+//            paciente.agregarVisita(visita);
+//            Antendida = true;
+//        }
+//    }
 }

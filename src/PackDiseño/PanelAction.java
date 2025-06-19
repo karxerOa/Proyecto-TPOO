@@ -16,16 +16,17 @@ public class PanelAction extends javax.swing.JPanel {
     /**
      * Creates new form PanelAction
      */
-    public PanelAction() {
+    public PanelAction(String texto) {
         initComponents();
+        actionButton1.setText(texto);
     }
 
-    public void initEvent(TableActionEvent event, int row) {
+    public void initEvent(TableActionEvent event, int row, String texto) {
         
         actionButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                event.Action(row);
+                event.Action(row, texto);
             }
         });
     }

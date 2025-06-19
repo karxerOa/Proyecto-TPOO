@@ -4,15 +4,13 @@
  */
 package Clases;
 
-import java.time.LocalDateTime;
-
 /**
  *
  * @author apnil
  */
-public class Receta {
-    private Paciente Paciente;
-    private Doctor Doctor;
-    private String Medicamentos_Dosis;
-    private String Recomendaciones;
+public class Diagnostico {
+    private Paciente paciente;
+    private Doctor doctor;
+    private String Sintomas;
+    private String EnfermedadDiagnosticada;
 }

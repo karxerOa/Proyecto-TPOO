@@ -13,34 +13,44 @@ import java.time.LocalDateTime;
 public class Visita {
     private LocalDateTime Fecha;
     private Doctor Doctor;
+    private Receta receta;
     private String Diagnostico;
     private String Tratamiento;
 
-    public Visita(LocalDateTime Fecha, Doctor Doctor, String Diagnostico, String Tratamiento) {
-        this.Fecha = Fecha;
-        this.Doctor = Doctor;
-        this.Diagnostico = Diagnostico;
-        this.Tratamiento = Tratamiento;
-    }
-
     public LocalDateTime getFecha() {
         return Fecha;
+    }
+
+    public void setFecha(LocalDateTime Fecha) {
+        this.Fecha = Fecha;
     }
 
     public Doctor getDoctor() {
         return Doctor;
     }
 
+    public void setDoctor(Doctor Doctor) {
+        this.Doctor = Doctor;
+    }
+
+    public Receta getReceta() {
+        return receta;
+    }
+
+    public void setReceta(Receta receta) {
+        this.receta = receta;
+    }
+
     public String getDiagnostico() {
         return Diagnostico;
     }
 
-    public String getTratamiento() {
-        return Tratamiento;
-    }
-
     public void setDiagnostico(String Diagnostico) {
         this.Diagnostico = Diagnostico;
+    }
+
+    public String getTratamiento() {
+        return Tratamiento;
     }
 
     public void setTratamiento(String Tratamiento) {

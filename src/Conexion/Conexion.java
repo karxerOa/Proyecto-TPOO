@@ -4,30 +4,29 @@
  */
 package Conexion;
 
-import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.*;
-import javax.swing.JOptionPane;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 /**
  *
  * @author apnil
  */
 public class Conexion {
-    private static final String URL = "jdbc:sqlserver://NILBER:1433;databaseName=SisHospitalTecnicas;encrypt=false;trustServerCertificate=true;";
-    private static final String USER = "NilberBD";
-    private static final String PASSWORD = "Nil123";
+    private static final String url = "jdbc:sqlserver://servertpoo.database.windows.net:1433;"
+           + "database=SistemaGestionHospitalarioTPOO;"
+           + "user=AdminTPOO;"
+           + "password=TPOO108254.;"
+           + "encrypt=true;"
+           + "trustServerCertificate=false;"
+           + "loginTimeout=30;";
 
     public static Connection getConexion(){
         try {
-            Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
-
-            if (con != null) {
-                return con;
-            }
+            Connection conn = DriverManager.getConnection(url);
+            return conn;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getErrorCode());
+            return null;
         }
-        return null;
     }
 }
 
