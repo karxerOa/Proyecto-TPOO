@@ -9,44 +9,46 @@ package Clases;
  * @author apnil
  */
 public class Usuario{
-    private String NombreUsuario;
-    private String Contraseña;
-    private String Rol;
+    private String nombreUsuario;
+    private String contraseña;
+    private String rol;
 
     public String getNombreUsuario() {
-        return NombreUsuario;
+        return nombreUsuario;
     }
 
-    public void setNombreUsuario(String NombreUsuario) {
-        this.NombreUsuario = NombreUsuario;
+    public void setNombreUsuario(String nombreUsuario)throws Exception {
+        if (nombreUsuario == null || nombreUsuario.isBlank()) {
+            throw new Exception("El nombre de usuario no puede estar vacío.");
+        }
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getContraseña() {
-        return Contraseña;
+        return contraseña;
     }
 
-    public void setContraseña(String Contraseña) {
-        this.Contraseña = Contraseña;
+    public void setContraseña(String contraseña) throws Exception {
+        if (contraseña == null || contraseña.isBlank()) {
+            throw new Exception("La contraseña no puede estar vacía.");
+        }
+        if (contraseña.length() < 8) {
+            throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+        }
+        this.contraseña = contraseña;
     }
 
     public String getRol() {
-        return Rol;
+        return rol;
     }
 
-    public void setRol(String Rol) {
-        this.Rol = Rol;
+    public void setRol(String rol)throws Exception {
+        if (rol == null || rol.isBlank()) {
+            throw new Exception("Debe especificar el rol del usuario.");
+        }
+        this.rol = rol;
     }
-    
-    public boolean esDoctor() {
-        return Rol.equals("Doctor");
+    public boolean verificarContraseña(String ingreso) {
+        return this.contraseña.equals(ingreso);
     }
-
-    public boolean esAdministrador() {
-        return Rol.equals("Administrador");
-    }
-
-    public boolean esRecepcionista() {
-        return Rol.equals("Recepcionista");
-    }
-
 }

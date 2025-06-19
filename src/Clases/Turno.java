@@ -4,42 +4,68 @@
  */
 package Clases;
 
-import java.time.LocalDateTime;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  *
  * @author apnil
  */
 public class Turno {
-    private String Id;
-    private LocalDateTime HoraInicio;
-    private LocalDateTime HoraFin;
-    private String Especialidad;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
+    private ArrayList<DayOfWeek> DiasPorSemana;
 
-    public Turno(String Id, LocalDateTime HoraInicio, LocalDateTime HoraFin, String Especialidad) {
-        this.Id = Id;
-        this.HoraInicio = HoraInicio;
-        this.HoraFin = HoraFin;
-        this.Especialidad = Especialidad;
+    public LocalTime getHoraInicio() {
+        return horaInicio;
     }
 
-    public String getId() {
-        return Id;
+    public void setHoraInicio(LocalTime horaInicio) throws Exception {
+        if (horaInicio == null) {
+            throw new Exception("La hora de inicio no puede ser nula.");
+        }
+        this.horaInicio = horaInicio;
+        validarHoras();
     }
 
-    public LocalDateTime getHoraInicio() {
-        return HoraInicio;
+    public LocalTime getHoraFin() {
+        return horaFin;
     }
 
-    public LocalDateTime getHoraFin() {
-        return HoraFin;
+    public void setHoraFin(LocalTime horaFin) throws Exception {
+        if (horaFin == null) {
+            throw new Exception("La hora de fin no puede ser nula.");
+        }
+        this.horaFin = horaFin;
+        validarHoras();
     }
 
-    public String getEspecialidad() {
-        return Especialidad;
+    public ArrayList<DayOfWeek> getDiasPorSemana() {
+        return DiasPorSemana;
     }
 
-    public boolean VerificarDisponibilidad(LocalDateTime fechaCita, String EspecialidadRequerida){
-        return fechaCita.isAfter(HoraInicio) && fechaCita.isBefore(HoraFin) && EspecialidadRequerida.equals(Especialidad);
+    public void setDiasPorSemana(ArrayList<DayOfWeek> DiasPorSemana)throws Exception {
+        if (DiasPorSemana == null || DiasPorSemana.isEmpty()) {
+            throw new Exception("Debe asignar al menos un día de la semana.");
+        }
+        this.DiasPorSemana = DiasPorSemana;
+    }
+
+    public void agregarDia(DayOfWeek dia) throws Exception {
+        if (dia == null){
+            throw new Exception("El día no puede ser nulo.");
+        }
+        if (!DiasPorSemana.contains(dia)) {
+            DiasPorSemana.add(dia);
+        }
+        else{
+            throw new Exception("Turno del dia ya registrado");
+        }
+    }
+    private void validarHoras() throws Exception {
+        if (horaInicio != null && horaFin != null && !horaFin.isAfter(horaInicio)) {
+            throw new Exception("La hora de fin debe ser posterior a la hora de inicio.");
+        }
     }
 }

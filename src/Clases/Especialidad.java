@@ -16,7 +16,10 @@ public class Especialidad {
         return Nombre;
     }
 
-    public void setNombre(String Nombre) {
+    public void setNombre(String Nombre)throws Exception {
+        if (Nombre == null || Nombre.isBlank()) {
+            throw new Exception("El nombre de la especialidad no puede estar vacío.");
+        }
         this.Nombre = Nombre;
     }
 
@@ -24,7 +27,10 @@ public class Especialidad {
         return Descripcion;
     }
 
-    public void setDescripcion(String Descripcion) {
+    public void setDescripcion(String Descripcion) throws Exception {
+        if (Descripcion == null || Descripcion.isBlank()) {
+            throw new Exception("La descripción de la especialidad no puede estar vacía.");
+        }
         this.Descripcion = Descripcion;
     }
     

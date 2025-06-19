@@ -10,10 +10,7 @@ package Clases;
  */
 public class Recepcionista extends Persona{
     private Usuario user;
-
-    @Override
-    public String mostrarInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setUser(Usuario user) {
+        this.user = user;
     }
-    
 }

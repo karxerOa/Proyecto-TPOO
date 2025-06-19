@@ -11,36 +11,25 @@ import java.time.LocalDateTime;
  * @author apnil
  */
 public class Cita {
-    private String IdCita;
     private LocalDateTime FechaHora;
     private Paciente pacienteSolicitante;
     private Doctor doctorSolicitado;
     private String EspecialidadSolicitada;
     private boolean Antendida;
 
-    public Cita(String IdCita, LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
-        this.IdCita = IdCita;
+    public Cita(LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
         this.FechaHora = FechaHora;
         this.pacienteSolicitante = pacienteSolicitante;
         this.doctorSolicitado = doctorSolicitado;
         this.EspecialidadSolicitada = EspecialidadSolicitada;
-        this.Antendida = false;
-    }
-    
-    
-    public String getIdCita() {
-        return IdCita;
-    }
-
-    public void setIdCita(String IdCita) {
-        this.IdCita = IdCita;
+        this.Antendida = Antendida;
     }
 
     public LocalDateTime getFechaHora() {
         return FechaHora;
     }
 
-    public void setFechaHora(LocalDateTime FechaHora) {
+    public void setFechaHora(LocalDateTime FechaHora)throws Exception {
         this.FechaHora = FechaHora;
     }
 
@@ -48,7 +37,10 @@ public class Cita {
         return pacienteSolicitante;
     }
 
-    public void setPacienteSolicitante(Paciente pacienteSolicitante) {
+    public void setPacienteSolicitante(Paciente pacienteSolicitante)throws Exception {
+        if (pacienteSolicitante == null) {
+            throw new Exception("Debe asignar un paciente solicitante.");
+        }
         this.pacienteSolicitante = pacienteSolicitante;
     }
 
@@ -56,7 +48,10 @@ public class Cita {
         return doctorSolicitado;
     }
 
-    public void setDoctorSolicitado(Doctor doctorSolicitado) {
+    public void setDoctorSolicitado(Doctor doctorSolicitado)throws Exception {
+        if (doctorSolicitado == null) {
+            throw new Exception("Debe asignar un doctor solicitado.");
+        }
         this.doctorSolicitado = doctorSolicitado;
     }
 
@@ -64,24 +59,14 @@ public class Cita {
         return EspecialidadSolicitada;
     }
 
-    public void setEspecialidadSolicitada(String EspecialidadSolicitada) {
+    public void setEspecialidadSolicitada(String EspecialidadSolicitada)throws Exception {
+        if (EspecialidadSolicitada == null || EspecialidadSolicitada.isBlank()) {
+            throw new Exception("La especialidad solicitada no puede estar vacía.");
+        }
         this.EspecialidadSolicitada = EspecialidadSolicitada;
     }
 
-    public boolean esAntendida() {
-        return Antendida;
-    }
-
-    public void setAntendida(boolean Antendida) {
+    public void setAntendida(boolean Antendida){
         this.Antendida = Antendida;
     }
-
-    
-//    public void atenderCita(String diagnostico, String tratamiento) {
-//        if (!Antendida) {
-//            Visita visita = new Visita(FechaHora, doctor, diagnostico, tratamiento, );
-//            paciente.agregarVisita(visita);
-//            Antendida = true;
-//        }
-//    }
 }

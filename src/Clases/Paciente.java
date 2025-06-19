@@ -12,15 +12,17 @@ import java.util.ArrayList;
  */
 public class Paciente extends Persona{
     private String grupoSanguineo;
-    private ArrayList<Alergia> alergias;
-    private ArrayList<Visita> HistorialMedico;
-
+    private ArrayList<Alergia> alergias = new ArrayList<>();
+    private ArrayList<Atencion> HistorialMedico = new ArrayList<>();
 
     public String getGrupoSanguineo() {
         return grupoSanguineo;
     }
 
-    public void setGrupoSanguineo(String grupoSanguineo) {
+    public void setGrupoSanguineo(String grupoSanguineo) throws Exception {
+        if (grupoSanguineo == null || grupoSanguineo.isBlank()) {
+            throw new Exception("El grupo sanguíneo no puede estar vacío.");
+        }
         this.grupoSanguineo = grupoSanguineo;
     }
 
@@ -28,22 +30,16 @@ public class Paciente extends Persona{
         return alergias;
     }
 
-    public void setAlergias(ArrayList<Alergia> alergias) {
-        this.alergias = alergias;
+    public ArrayList<Atencion> getHistorialMedico() {
+        return HistorialMedico;
     }
     
-    public void agregarAlergia(Alergia alergia) {
-        alergias.add(alergia);
-    }
-
-    public void agregarVisita(Visita visita) {
-        HistorialMedico.add(visita);
-    }
-
-    @Override
-    public String mostrarInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarAlergia(Alergia alergia) throws Exception {
+        this.alergias.add(alergia);
     }
     
+    public void agregarHistoriaMedico(Atencion atencion) throws Exception {
+        this.HistorialMedico.add(atencion);
+    }
     
 }

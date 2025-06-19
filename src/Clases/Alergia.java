@@ -22,7 +22,10 @@ public class Alergia {
         return NombreAlergia;
     }
 
-    public void setNombreAlergia(String NombreAlergia) {
+    public void setNombreAlergia(String NombreAlergia)throws Exception {
+        if (NombreAlergia == null || NombreAlergia.isBlank()) {
+            throw new Exception("El nombre de la alergia no puede estar vacío.");
+        }
         this.NombreAlergia = NombreAlergia;
     }
 
@@ -30,15 +33,21 @@ public class Alergia {
         return Severidad;
     }
 
-    public void setSeveridad(String serveridad) {
-        this.Severidad = serveridad;
+    public void setSeveridad(String severidad)throws Exception {
+        if (severidad == null || severidad.isBlank()) {
+            throw new Exception("La severidad no puede estar vacía.");
+        }
+        this.Severidad = severidad;
     }
 
     public String getTipoAlergia() {
         return TipoAlergia;
     }
 
-    public void setTipoAlergia(String TipoAlergia) {
+    public void setTipoAlergia(String TipoAlergia)throws Exception {
+        if (TipoAlergia == null || TipoAlergia.isBlank()) {
+            throw new Exception("El tipo de alergia no puede estar vacío.");
+        }
         this.TipoAlergia = TipoAlergia;
     }
 }

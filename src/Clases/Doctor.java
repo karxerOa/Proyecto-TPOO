@@ -4,24 +4,26 @@
  */
 package Clases;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
  *
  * @author apnil
  */
-public class Doctor extends Usuario{
+public class Doctor extends Persona{
     private String CodigoColegiatura;
     private String Especialidad;
-    private ArrayList<Turno> Turnos;
+    private ArrayList<Turno> Turnos = new ArrayList<>();
     private Usuario user;
 
     public String getCodigoColegiatura() {
         return CodigoColegiatura;
     }
 
-    public void setCodigoColegiatura(String CodigoColegiatura) {
+    public void setCodigoColegiatura(String CodigoColegiatura) throws Exception{
+        if (CodigoColegiatura == null || CodigoColegiatura.isBlank()) {
+            throw new Exception("El código de colegiatura no puede estar vacío.");
+        }
         this.CodigoColegiatura = CodigoColegiatura;
     }
 
@@ -29,7 +31,11 @@ public class Doctor extends Usuario{
         return Especialidad;
     }
 
-    public void setEspecialidad(String Especialidad) {
+    public void setEspecialidad(String Especialidad) throws Exception{
+        if (Especialidad == null || Especialidad.isBlank()) {
+            throw new Exception("La especialidad no puede estar vacía.");
+        }
+    this.Especialidad = Especialidad;
         this.Especialidad = Especialidad;
     }
 
@@ -37,16 +43,11 @@ public class Doctor extends Usuario{
         return Turnos;
     }
 
-    public void setTurnos(ArrayList<Turno> Turnos) {
-        this.Turnos = Turnos;
-    }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
+    public void setUser(Usuario user)throws Exception {
         this.user = user;
     }
-    
+    public void AgregarTuno(Turno turno)throws Exception {
+        if (turno == null) throw new Exception("El turno no puede ser nulo.");
+        this.Turnos.add(turno);
+    }
 }
