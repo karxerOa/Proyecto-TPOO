@@ -59,6 +59,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Diseño sin título (4).png"))); // NOI18N
         jLabel12.setToolTipText("");
 
