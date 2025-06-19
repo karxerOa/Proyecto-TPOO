@@ -138,7 +138,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnHistorial.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         btnHistorial.setForeground(new java.awt.Color(255, 255, 255));
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoRegistro.png"))); // NOI18N
-        btnHistorial.setText("Historial de Trabajo");
+        btnHistorial.setText("Gestión de especialidades");
         btnHistorial.setBorder(null);
         btnHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,13 +154,13 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnHistorialActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 310, 80));
+        PanelMenu.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 310, 80));
 
         btnRegistrarDoc.setBackground(new java.awt.Color(0, 125, 118));
         btnRegistrarDoc.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         btnRegistrarDoc.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoDoctor.png"))); // NOI18N
-        btnRegistrarDoc.setText("Registar Doctor");
+        btnRegistrarDoc.setText("Gestión de personal");
         btnRegistrarDoc.setBorder(null);
         btnRegistrarDoc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarDoc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,13 +176,13 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnRegistrarDocActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnRegistrarDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, 80));
+        PanelMenu.add(btnRegistrarDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 310, 80));
 
         btnAsignarTurnos.setBackground(new java.awt.Color(0, 125, 118));
         btnAsignarTurnos.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         btnAsignarTurnos.setForeground(new java.awt.Color(255, 255, 255));
         btnAsignarTurnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoCronometro.png"))); // NOI18N
-        btnAsignarTurnos.setText("Asignar Turnos");
+        btnAsignarTurnos.setText("Gestión de turnos");
         btnAsignarTurnos.setBorder(null);
         btnAsignarTurnos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAsignarTurnos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +198,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnAsignarTurnosActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnAsignarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 310, 80));
+        PanelMenu.add(btnAsignarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 310, 80));
 
         jPanel1.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 310, 730));
 
