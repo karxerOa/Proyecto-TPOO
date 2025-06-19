@@ -195,7 +195,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Recursos/IconoRegistro.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Historial de Trabajo"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de especialidades"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -210,7 +210,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="270" width="310" height="80"/>
+                  <AbsoluteConstraints x="0" y="130" width="310" height="80"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -228,7 +228,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Recursos/IconoDoctor.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registar Doctor"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de personal"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -243,7 +243,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="110" width="310" height="80"/>
+                  <AbsoluteConstraints x="0" y="310" width="310" height="80"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -261,7 +261,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Recursos/IconoCronometro.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Asignar Turnos"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de turnos"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -276,7 +276,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="190" width="310" height="80"/>
+                  <AbsoluteConstraints x="0" y="220" width="310" height="80"/>
                 </Constraint>
               </Constraints>
             </Component>
