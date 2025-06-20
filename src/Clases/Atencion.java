@@ -11,10 +11,15 @@ import java.time.LocalDateTime;
  * @author apnil
  */
 public class Atencion {
+    private int IdAtencion;
     private Diagnostico diagnostico;
     private Receta receta;
     private LocalDateTime fecha;
     private boolean estado;
+
+    public int getIdAtencion() {
+        return IdAtencion;
+    }
     
     public Diagnostico getDiagnostico() {
         return diagnostico;

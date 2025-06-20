@@ -7,6 +7,7 @@ package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author apnil
@@ -25,7 +26,17 @@ public class Conexion {
             Connection conn = DriverManager.getConnection(url);
             return conn;
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return null;
+        }
+    }
+    public static void cerrarConexion(Connection conexion) {
+        try {
+            if (conexion != null && !conexion.isClosed()) {
+                conexion.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

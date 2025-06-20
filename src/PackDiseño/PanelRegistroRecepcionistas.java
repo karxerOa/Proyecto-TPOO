@@ -55,7 +55,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         cbGenero = new javax.swing.JComboBox<>();
-        dpFN = new org.netbeans.modules.form.InvalidComponent();
+        dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -224,7 +224,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbGenero.setSelectedIndex(-1);
         jPanel5.add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, 30));
-        jPanel5.add(dpFN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
+        jPanel5.add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -259,12 +259,12 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1072, Short.MAX_VALUE)
+            .addGap(0, 970, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 51, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 51, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +281,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistar;
     private javax.swing.JComboBox<String> cbGenero;
-    private org.netbeans.modules.form.InvalidComponent dpFN;
+    private org.jdesktop.swingx.JXDatePicker dpFechaNac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

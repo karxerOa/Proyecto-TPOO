@@ -8,6 +8,7 @@ package Clases;
  * @author apnil
  */
 public class Alergia {
+    private int IdAlergia;
     private String NombreAlergia;
     private String Severidad;
     private String TipoAlergia;
@@ -16,10 +17,6 @@ public class Alergia {
         this.NombreAlergia = NombreAlergia;
         this.Severidad = Severidad;
         this.TipoAlergia = TipoAlergia;
-    }
-
-    public String getNombreAlergia() {
-        return NombreAlergia;
     }
 
     public void setNombreAlergia(String NombreAlergia)throws Exception {

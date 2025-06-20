@@ -4,7 +4,8 @@
  */
 package Clases;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -17,141 +18,111 @@ public abstract class Persona {
     protected String numDoc;
     protected String tipoDoc;
     protected String telefono;
-    protected LocalDateTime fechaNacimiento;
-    protected int edad;
+    protected LocalDate fechaNacimiento;
     protected String genero;
     protected String correo;
     protected String direccion;
 
-    public String getNombre() {
-        return nombre;
+    public Persona(String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        this.nombre = validarTexto(nombre, "El nombre");
+        this.apellidoPaterno = validarTexto(apellidoPaterno, "El Apellido Paterno");
+        this.apellidoMaterno = validarTexto(apellidoMaterno, "El Apellido Materno");
+        this.numDoc = validarDoc(numDoc);
+        this.tipoDoc = tipoDoc;
+        this.telefono = telefono;
+        this.fechaNacimiento = validarFecha(fechaNacimiento);
+        this.genero = genero;
+        this.correo = validarCorreo(correo);
+        this.direccion = direccion;
     }
 
-    public void setNombre(String nombre) throws Exception {
-        if (nombre == null || nombre.isBlank()) {
-            throw new Exception("El nombre no puede estar vacío.");
-        }
-        this.nombre = nombre;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) throws Exception {
-        if (apellidoPaterno == null || apellidoPaterno.isBlank()) {
-            throw new Exception("El apellido paterno no puede estar vacío.");
-        }
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
     public String getApellidoMaterno() {
         return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) throws Exception {
-        if (apellidoMaterno == null || apellidoMaterno.isBlank()) {
-            throw new Exception("El apellido materno no puede estar vacío.");
-        }
-        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getNumDoc() {
         return numDoc;
     }
 
-    public void setNumDoc(String numDoc) throws Exception {
-        if (numDoc == null || numDoc.isBlank()) {
-            throw new Exception("El número de documento no puede estar vacío.");
-        }
-        this.numDoc = numDoc;
-    }
-
     public String getTipoDoc() {
         return tipoDoc;
-    }
-
-    public void setTipoDoc(String tipoDoc) throws Exception {
-        if (tipoDoc == null || tipoDoc.isBlank()) {
-            throw new Exception("Debe especificar el tipo de documento.");
-        }
-        this.tipoDoc = tipoDoc;
     }
 
     public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) throws Exception {
-        if (telefono == null || telefono.isBlank()) {
-            throw new Exception("El número de teléfono no puede estar vacío.");
-        }
-        this.telefono = telefono;
-    }
-
-    public LocalDateTime getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(LocalDateTime fechaNacimiento) throws Exception {
-        if (fechaNacimiento == null) {
-            throw new Exception("Debe ingresar la fecha de nacimiento.");
-        }
-        if (fechaNacimiento.isAfter(LocalDateTime.now())) {
-            throw new Exception("La fecha de nacimiento no puede estar en el futuro.");
-        }
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) throws Exception {
-        if (edad < 0 || edad > 120) {
-            throw new Exception("Edad no válida.");
-        }
-        this.edad = edad;
     }
 
     public String getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) throws Exception {
-        if (genero == null || genero.isBlank()) {
-            throw new Exception("Debe especificar el género.");
-        }
-        this.genero = genero;
-    }
-
     public String getCorreo() {
         return correo;
-    }
-
-    public void setCorreo(String correo) throws Exception {
-        if (correo == null || correo.isBlank()) {
-            throw new Exception("El correo no puede estar vacío.");
-        }
-        if (!correo.matches("^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$")) {
-            throw new Exception("Correo electrónico inválido.");
-        }
-        this.correo = correo;
     }
 
     public String getDireccion() {
         return direccion;
     }
-
-    public void setDireccion(String direccion) throws Exception {
-        if (direccion == null || direccion.isBlank()) {
-            throw new Exception("La dirección no puede estar vacía.");
-        }
-        this.direccion = direccion;
+    
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
-    public String verNombreCompleto() {
-        return nombre + " " + apellidoPaterno + " " + apellidoMaterno;
+
+    public void setCorreo(String correo) {
+        this.correo = validarCorreo(correo);
+    }
+
+    //sets usados solo para actualizar info?
+    public void setDireccion(String direccion) {
+        this.direccion = validarTexto(direccion, "La direccion");
+    }
+    
+    private String validarTexto(String valor, String dato) {
+        if (valor == null || valor.trim().isEmpty()) {
+            throw new IllegalArgumentException(dato + " no puede estar vacío.");
+        }
+        return valor.trim();
+    }
+    
+    //validaciones (srirven para seters y constructor)
+    private String validarDoc(String doc) {
+        if (doc == null || doc.length() != 12 || doc.length() != 8) {
+            throw new IllegalArgumentException("Número de documento inválido.");
+        }
+        return doc;
+    }
+    
+    private String validarCorreo(String correo) {
+        if (correo == null || !correo.contains("@")) {
+            throw new IllegalArgumentException("Correo inválido.");
+        }
+        return correo;
+    }
+    
+    private LocalDate validarFecha(LocalDate fecha) {
+        if (fecha == null || fecha.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Fecha de nacimiento inválida.");
+        }
+        return fecha;
+    }
+    
+    public int verEdad(){
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
+    
+    public String verNombreCompleto(){
+        return this.nombre + " " + this.apellidoPaterno + " " + this.apellidoMaterno;
     }
 }
-
-   

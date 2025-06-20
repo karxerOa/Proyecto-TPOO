@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -12,40 +13,38 @@ import java.util.ArrayList;
  */
 public class Doctor extends Persona{
     private String CodigoColegiatura;
-    private String Especialidad;
-    private ArrayList<Turno> Turnos = new ArrayList<>();
+    private ArrayList<Especialidad> Especialidades;
+    private ArrayList<Turno> Turnos;
     private Usuario user;
+
+    public Doctor(String CodigoColegiatura, Usuario user, String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+        this.CodigoColegiatura = CodigoColegiatura;
+        this.Especialidades = new ArrayList<>();
+        this.Turnos = new ArrayList<>();
+        this.user = user;
+    }
 
     public String getCodigoColegiatura() {
         return CodigoColegiatura;
     }
 
-    public void setCodigoColegiatura(String CodigoColegiatura) throws Exception{
-        if (CodigoColegiatura == null || CodigoColegiatura.isBlank()) {
-            throw new Exception("El código de colegiatura no puede estar vacío.");
-        }
-        this.CodigoColegiatura = CodigoColegiatura;
-    }
-
-    public String getEspecialidad() {
-        return Especialidad;
-    }
-
-    public void setEspecialidad(String Especialidad) throws Exception{
-        if (Especialidad == null || Especialidad.isBlank()) {
-            throw new Exception("La especialidad no puede estar vacía.");
-        }
-    this.Especialidad = Especialidad;
-        this.Especialidad = Especialidad;
+    public ArrayList<Especialidad> getEspecialidades() {
+        return Especialidades;
     }
 
     public ArrayList<Turno> getTurnos() {
         return Turnos;
     }
 
-    public void setUser(Usuario user)throws Exception {
-        this.user = user;
+    public Usuario getUser() {
+        return user;
     }
+
+    public void setTurnos(ArrayList<Turno> Turnos) {
+        this.Turnos = Turnos;
+    }
+
     public void AgregarTuno(Turno turno)throws Exception {
         if (turno == null) throw new Exception("El turno no puede ser nulo.");
         this.Turnos.add(turno);
