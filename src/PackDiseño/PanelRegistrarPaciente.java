@@ -88,7 +88,6 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jSeparator7 = new javax.swing.JSeparator();
         jLabel22 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
-        btnRegistrar = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
         dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
@@ -99,6 +98,19 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         txtNombres = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        txtTipoSangre = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        rbNoTieneAlergia = new javax.swing.JRadioButton();
+        rbAlergiaAlimentos = new javax.swing.JRadioButton();
+        jLabel27 = new javax.swing.JLabel();
+        txtTipoSangrePac = new javax.swing.JTextField();
+        rbAlergiaMedicamentos = new javax.swing.JRadioButton();
+        jLabel28 = new javax.swing.JLabel();
+        txtTipoSangre2 = new javax.swing.JTextField();
+        btnRegistrar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(970, 620));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,7 +122,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         lblFecha.setFont(new java.awt.Font("OCR A Extended", 1, 36)); // NOI18N
         lblFecha.setForeground(new java.awt.Color(51, 51, 51));
         lblFecha.setText("Hoy es 0 de Mes de 0000");
-        add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 516, 740, 70));
+        add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, 740, 50));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -119,118 +131,184 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Nombres");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 130, 30));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Apellido Paterno");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 130, 30));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 130, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Documento de Identidad");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 190, 30));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 190, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Fecha Nacimiento");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 130, 30));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 130, 30));
 
         txtEdad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtEdad.setText("00");
         txtEdad.setEnabled(false);
-        add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 80, 30));
+        add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 80, 30));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Edad");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 80, 30));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 80, 30));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Genero");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 80, 30));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, 30));
 
         cbGenero.setBackground(new java.awt.Color(242, 242, 242));
         cbGenero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
         cbGenero.setOpaque(true);
-        add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, -1, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 50, 10));
-        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 160, 10));
+        add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, 30));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 50, 10));
+        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 160, 10));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setText("Apellido Materno");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 130, 30));
-        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 160, 10));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 130, 30));
+        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 160, 10));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Telefono");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 130, 30));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 130, 30));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel20.setText("Correo");
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 130, 30));
-        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, 350, 10));
-        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 350, 10));
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 130, 30));
+        add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 350, 10));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 350, 10));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel22.setText("Direccion");
-        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, 130, 30));
-        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, 350, 10));
-
-        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(null);
-        add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 350, 50));
-        add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 350, 10));
-        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 350, 10));
-        add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 130, 30));
+        add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, 130, 30));
+        add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 350, 10));
+        add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 350, 10));
+        add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 350, 10));
+        add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 130, 30));
 
         txtDocIdentidad.setBackground(new java.awt.Color(242, 242, 242));
         txtDocIdentidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtDocIdentidad.setForeground(new java.awt.Color(153, 153, 153));
         txtDocIdentidad.setText("Ingrese el numero de su documento de indentidad (DNI / CE)");
         txtDocIdentidad.setBorder(null);
-        add(txtDocIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 350, 30));
+        add(txtDocIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 350, 30));
 
         txtDireccion.setBackground(new java.awt.Color(242, 242, 242));
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(153, 153, 153));
         txtDireccion.setText("Ingrese su Direccion");
         txtDireccion.setBorder(null);
-        add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 350, 30));
+        add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, 350, 30));
 
         txtAPaterno.setBackground(new java.awt.Color(242, 242, 242));
         txtAPaterno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtAPaterno.setForeground(new java.awt.Color(153, 153, 153));
         txtAPaterno.setText("Ingrese su Apellido Paterno");
         txtAPaterno.setBorder(null);
-        add(txtAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 160, 30));
+        add(txtAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 160, 30));
 
         txtAMaterno.setBackground(new java.awt.Color(242, 242, 242));
         txtAMaterno.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtAMaterno.setForeground(new java.awt.Color(153, 153, 153));
         txtAMaterno.setText("Ingrese su Apellido Materno");
         txtAMaterno.setBorder(null);
-        add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 160, 30));
+        add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 160, 30));
 
         txtNombres.setBackground(new java.awt.Color(242, 242, 242));
         txtNombres.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtNombres.setForeground(new java.awt.Color(153, 153, 153));
         txtNombres.setText("Ingrese sus nombres");
         txtNombres.setBorder(null);
-        add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 350, 30));
+        add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 350, 30));
 
         txtTelefono.setBackground(new java.awt.Color(242, 242, 242));
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtTelefono.setForeground(new java.awt.Color(153, 153, 153));
         txtTelefono.setText("Ingrese su Numero de Telefono");
         txtTelefono.setBorder(null);
-        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 350, 30));
+        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 350, 30));
 
         txtCorreo.setBackground(new java.awt.Color(242, 242, 242));
         txtCorreo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(153, 153, 153));
         txtCorreo.setText("Ingrese su Correo");
         txtCorreo.setBorder(null);
-        add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 350, 30));
+        add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 350, 30));
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Descripción:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, 30));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Datos médicos");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, 30));
+
+        txtTipoSangre.setBackground(new java.awt.Color(63, 154, 154));
+        txtTipoSangre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTipoSangre.setForeground(new java.awt.Color(255, 255, 255));
+        txtTipoSangre.setText("Ingrese descripción solo si posee alguna alergia");
+        txtTipoSangre.setBorder(null);
+        jPanel1.add(txtTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 280, 30));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Tipo de sangre:");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 30));
+
+        rbNoTieneAlergia.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rbNoTieneAlergia.setForeground(new java.awt.Color(255, 255, 255));
+        rbNoTieneAlergia.setText("No posee alergias");
+        jPanel1.add(rbNoTieneAlergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+
+        rbAlergiaAlimentos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rbAlergiaAlimentos.setForeground(new java.awt.Color(255, 255, 255));
+        rbAlergiaAlimentos.setText("Alimentos");
+        jPanel1.add(rbAlergiaAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Tipo de alergia:");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
+
+        txtTipoSangrePac.setBackground(new java.awt.Color(242, 242, 242));
+        txtTipoSangrePac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTipoSangrePac.setForeground(new java.awt.Color(153, 153, 153));
+        txtTipoSangrePac.setText("Ingrese el tipo de sangre");
+        txtTipoSangrePac.setBorder(null);
+        jPanel1.add(txtTipoSangrePac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
+
+        rbAlergiaMedicamentos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        rbAlergiaMedicamentos.setForeground(new java.awt.Color(255, 255, 255));
+        rbAlergiaMedicamentos.setText("Medicamentos");
+        jPanel1.add(rbAlergiaMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Severidad");
+        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, 30));
+
+        txtTipoSangre2.setBackground(new java.awt.Color(63, 154, 154));
+        txtTipoSangre2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTipoSangre2.setForeground(new java.awt.Color(255, 255, 255));
+        txtTipoSangre2.setText("Ingrese severidad de la alergia solo si posee alguna.");
+        txtTipoSangre2.setBorder(null);
+        jPanel1.add(txtTipoSangre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 280, 30));
+
+        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorder(null);
+        jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 350, 50));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 430, 460));
     }// </editor-fold>//GEN-END:initComponents
     public void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtNombres, "Ingrese sus nombres");
@@ -254,9 +332,15 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator3;
@@ -267,6 +351,9 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JRadioButton rbAlergiaAlimentos;
+    private javax.swing.JRadioButton rbAlergiaMedicamentos;
+    private javax.swing.JRadioButton rbNoTieneAlergia;
     private javax.swing.JTextField txtAMaterno;
     private javax.swing.JTextField txtAPaterno;
     private javax.swing.JTextField txtCorreo;
@@ -275,5 +362,8 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel txtEdad;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTipoSangre;
+    private javax.swing.JTextField txtTipoSangre2;
+    private javax.swing.JTextField txtTipoSangrePac;
     // End of variables declaration//GEN-END:variables
 }
