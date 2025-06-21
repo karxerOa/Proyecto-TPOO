@@ -64,7 +64,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         cbDoctor = new javax.swing.JComboBox<>();
-        dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
+        dpFechaNac = new org.netbeans.modules.form.InvalidComponent();
         jLabel20 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -282,7 +282,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
-        jLabel16.setText("Ubicacion:");
+        jLabel16.setText("Ubicación:");
         add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
@@ -296,7 +296,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, -1, -1));
 
         checkMiercoles.setBackground(new java.awt.Color(255, 255, 255));
-        checkMiercoles.setText("Miercoles");
+        checkMiercoles.setText("Miércoles");
         add(checkMiercoles, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, -1, -1));
 
         checkDomingo.setBackground(new java.awt.Color(255, 255, 255));
@@ -320,7 +320,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         add(checkViernes, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, -1, -1));
 
         checkSabado.setBackground(new java.awt.Color(255, 255, 255));
-        checkSabado.setText("Sabado");
+        checkSabado.setText("Sábado");
         add(checkSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6:00 a.m", "18:00 a.m" }));
@@ -343,7 +343,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
-        jLabel20.setText("Seleccion Doctor:");
+        jLabel20.setText("Selección Doctor:");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -358,7 +358,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkMiercoles;
     private javax.swing.JCheckBox checkSabado;
     private javax.swing.JCheckBox checkViernes;
-    private org.jdesktop.swingx.JXDatePicker dpFechaNac;
+    private org.netbeans.modules.form.InvalidComponent dpFechaNac;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
@@ -388,7 +388,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }
