@@ -317,7 +317,7 @@ private void EstablecerColor(JButton btn){
             EstablecerColor(btnRegistrarDoc);
             btnAsignarTurnos.setBackground(new Color(0,125,118));
             btnGestionEspecialidad.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Registrar Paciente");
+            lblTitulo.setText("GestionPersonal");
             MostrarPanelHijo.Mostrar(new PanelRegistarDoctor(), PanelHijo, 970, 620);
         }
     }//GEN-LAST:event_btnRegistrarDocActionPerformed

@@ -8,6 +8,7 @@ import Clases.ReturnGenerico;
 import Controladores.ControladorUsuarios;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -150,31 +151,41 @@ public class LogRes extends javax.swing.JFrame {
     }
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
         // TODO add your handling code here:
-        ControladorUsuarios cUsuarios = new ControladorUsuarios();
-        ReturnGenerico<Boolean, String, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
-        if (cUsuarios != null) {
-            if (resultado.valor1) {
-                switch (resultado.valor2) {
-                    case "Administrador":
-                        FormMenuAdmin a = new FormMenuAdmin();
-                        this.setVisible(false);
-                        a.setVisible(true);
-                        break;
-                    case "Recepcionista":
-                        FormMenuRecep b = new FormMenuRecep();
-                        this.setVisible(false);
-                        b.setVisible(true);
-                        break;
-                    case "Doctor":
-                        FormMenuDoctor c = new FormMenuDoctor();
-                        this.setVisible(false);
-                        c.setVisible(true);
-                        break;
-                    default:
-                        throw new AssertionError();
+        try {
+            ControladorUsuarios cUsuarios = new ControladorUsuarios();
+            ReturnGenerico<Boolean, String, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
+            if (resultado != null) {
+                if (resultado.valor1) {
+                    switch (resultado.valor2) {
+                        case "Administrador":
+                            FormMenuAdmin a = new FormMenuAdmin();
+                            this.setVisible(false);
+                            a.setVisible(true);
+                            break;
+                        case "Recepcionista":
+                            FormMenuRecep b = new FormMenuRecep();
+                            this.setVisible(false);
+                            b.setVisible(true);
+                            break;
+                        case "Doctor":
+                            FormMenuDoctor c = new FormMenuDoctor();
+                            this.setVisible(false);
+                            c.setVisible(true);
+                            break;
+                        default:
+                            
+                    }
                 }
             }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
