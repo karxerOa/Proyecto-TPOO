@@ -15,7 +15,7 @@ public abstract class Persona {
     protected String nombre;
     protected String apellidoPaterno;
     protected String apellidoMaterno;
-    protected String numDoc;
+    protected int numDoc;
     protected String tipoDoc;
     protected String telefono;
     protected LocalDate fechaNacimiento;
@@ -23,7 +23,7 @@ public abstract class Persona {
     protected String correo;
     protected String direccion;
 
-    public Persona(String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+    public Persona(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
         this.nombre = validarTexto(nombre, "El nombre");
         this.apellidoPaterno = validarTexto(apellidoPaterno, "El Apellido Paterno");
         this.apellidoMaterno = validarTexto(apellidoMaterno, "El Apellido Materno");
@@ -48,7 +48,7 @@ public abstract class Persona {
         return apellidoMaterno;
     }
 
-    public String getNumDoc() {
+    public int getNumDoc() {
         return numDoc;
     }
 
@@ -97,9 +97,10 @@ public abstract class Persona {
     }
     
     //validaciones (srirven para seters y constructor)
-    private String validarDoc(String doc) {
-        if (doc == null || doc.length() != 12 || doc.length() != 8) {
-            throw new IllegalArgumentException("Número de documento inválido.");
+    private int validarDoc(int doc) {
+        int length = Integer.toString(doc).length();
+        if (length != 8 && length != 12) {
+            throw new IllegalArgumentException("Número de documento inválido. Debe tener 8 o 12 dígitos.");
         }
         return doc;
     }

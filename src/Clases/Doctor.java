@@ -12,17 +12,30 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class Doctor extends Persona{
+    private int IdDoctor;
     private String CodigoColegiatura;
     private ArrayList<Especialidad> Especialidades;
     private ArrayList<Turno> Turnos;
     private Usuario user;
 
-    public Doctor(String CodigoColegiatura, Usuario user, String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
-        this.CodigoColegiatura = CodigoColegiatura;
-        this.Especialidades = new ArrayList<>();
-        this.Turnos = new ArrayList<>();
-        this.user = user;
+    public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+        
+    }
+
+
+
+//    public Doctor(String CodigoColegiatura, Usuario user, String nombre, String apellidoPaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+//        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+//        this.CodigoColegiatura = CodigoColegiatura;
+//        this.Especialidades = new ArrayList<>();
+//        this.Turnos = new ArrayList<>();
+//        this.user = user;
+//    }
+
+    
+    public int getIdDoctor() {
+        return IdDoctor;
     }
 
     public String getCodigoColegiatura() {

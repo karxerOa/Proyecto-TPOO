@@ -18,34 +18,46 @@ public class ControladorUsuarios {
 
     public ControladorUsuarios() {
         UsuariosRegistrados = new ArrayList<>();
-        LlenarLista();
+//        LlenarLista();
     }
     
     
-    private void LlenarLista(){
-        try {
-            Connection Conect = Conexion.Conexion.getConexion();
-            Statement stmt = Conect.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Usuario");
-            while (rs.next()) {
+//    private void LlenarLista() {
+//        String sql = "SELECT UsuarioID, NombreUsuario, Contraseña, Rol FROM Usuario";
+//        UsuariosRegistrados.clear();
+//        try (Connection conn = Conexion.Conexion.getConexion();
+//             PreparedStatement pstmt = conn.prepareStatement(sql);
+//             ResultSet rs = pstmt.executeQuery()) {
+//
+//            while (rs.next()) {
+//                int id = rs.getInt("UsuarioID");
+//                String usuario = rs.getString("NombreUsuario");
+//                String contraseña = rs.getString("Contraseña");
+//                String rol = rs.getString("Rol");
+//                Usuario user = new Usuario(id, usuario, contraseña, rol);
+//                UsuariosRegistrados.add(user);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error al cargar usuarios desde la base de datos", e);
+//        }
+//    }
+    
+    public ReturnGenerico login(String nombreUsuario, String contraseña) {
+        String sql = "SELECT * FROM Usuario WHERE NombreUsuario = ? AND Contraseña = ?";
+        try (Connection conn = Conexion.Conexion.getConexion();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nombreUsuario);
+            pstmt.setString(2, contraseña);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
                 int id = rs.getInt("UsuarioID");
-                String usuario = rs.getString("NombreUsuario");
-                String contraseña = rs.getString("Contraseña");
                 String rol = rs.getString("Rol");
-                Usuario user = new Usuario(id, usuario, contraseña, rol);
-                UsuariosRegistrados.add(user);
+                Usuario user = new Usuario(id, nombreUsuario, contraseña, rol);
+                return new ReturnGenerico<>(true, user);
             }
-            
-        } catch (SQLException  e) {
-            throw new RuntimeException("Error al cargar usuarios desde la base de datos", e);
-        } 
-    }
-    public ReturnGenerico login(String nombreUsuario, String contraseña){
-        for(Usuario u : UsuariosRegistrados){
-            if (u.getNombreUsuario().equals(nombreUsuario) && u.getContraseña().equals(contraseña)) {
-                return new ReturnGenerico<>(true, u.getRol());
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al validar login", e);
         }
-        return null;
+        return new ReturnGenerico<>(false, null);
     }
 }

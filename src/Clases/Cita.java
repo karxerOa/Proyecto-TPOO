@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  * @author apnil
  */
 public class Cita {
+    private int idCita;
     private LocalDateTime FechaHora;
     private Paciente pacienteSolicitante;
     private Doctor doctorSolicitado;
@@ -23,6 +24,10 @@ public class Cita {
         this.doctorSolicitado = doctorSolicitado;
         this.EspecialidadSolicitada = EspecialidadSolicitada;
         this.Antendida = Antendida;
+    }
+
+    public int getIdCita() {
+        return idCita;
     }
 
     public LocalDateTime getFechaHora() {

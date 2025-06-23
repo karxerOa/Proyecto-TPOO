@@ -12,15 +12,22 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class Paciente extends Persona{
+    private int IdPaciente;
     private String grupoSanguineo;
     private ArrayList<Alergia> alergias;
     private ArrayList<Atencion> HistorialMedico;
 
-    public Paciente(String grupoSanguineo, String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+    public Paciente(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.grupoSanguineo = grupoSanguineo;
         this.alergias = new ArrayList<>();
         this.HistorialMedico = new ArrayList<>();
+    }
+
+
+
+    public int getIdPaciente() {
+        return IdPaciente;
     }
     
     public String getGrupoSanguineo() {

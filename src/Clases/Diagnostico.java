@@ -9,11 +9,16 @@ package Clases;
  * @author apnil
  */
 public class Diagnostico {
+    private int IdDiagnostico;
     private Paciente paciente;
     private Doctor doctor;
     private String sintomas;
     private String enfermedadDiagnosticada;
 
+    public int getIdDiagnostico() {
+        return IdDiagnostico;
+    }
+    
     public Paciente getPaciente() {
         return paciente;
     }

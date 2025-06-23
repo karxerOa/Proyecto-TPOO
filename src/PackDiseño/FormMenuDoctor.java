@@ -4,10 +4,9 @@
  */
 package PackDiseño;
 
-import java.awt.BorderLayout;
+import Clases.Usuario;
 import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  *
@@ -18,10 +17,18 @@ public class FormMenuDoctor extends javax.swing.JFrame {
     /**
      * Creates new form FormMenuDoctor
      */
+    private Usuario us;
+    private int IdDoctor;
     public FormMenuDoctor() {
         initComponents();
-        MostrarPanelHijo.Mostrar(new PanelInicioDoc(), PanelHijo, 970, 620);
     }
+    public FormMenuDoctor(Usuario user) {
+        this();
+        us = user;
+        IdDoctor = us.identificarPropietario();
+        MostrarPanelHijo.Mostrar(new PanelInicioDoc(IdDoctor), PanelHijo, 970, 620);
+    }
+    
     int xMouse, yMouse;
     Color colorTemp;
     /**

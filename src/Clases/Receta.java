@@ -9,10 +9,15 @@ package Clases;
  * @author apnil
  */
 public class Receta {
+    private  int IdReceta;
     private Paciente paciente;
     private Doctor doctor;
     private String medicamentosDosis;
     private String recomendaciones;
+
+    public int getIdReceta() {
+        return IdReceta;
+    }
     
     public Paciente getPaciente() {
         return paciente;

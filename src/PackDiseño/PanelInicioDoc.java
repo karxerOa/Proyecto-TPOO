@@ -15,12 +15,17 @@ public class PanelInicioDoc extends javax.swing.JPanel {
     /**
      * Creates new form PanelInicioDoc
      */
-    public PanelInicioDoc() {
+    private int IdDoctor;
+    public PanelInicioDoc(int idDoc) {
         initComponents();
+        IdDoctor = idDoc;
         panelGradiante1.setGradientColorsAndRadius(Color.decode("#1976D2"), Color.decode("#42A5F5"), 40);
         panelGradiante2.setGradientColorsAndRadius(Color.decode("#90CAF9"), Color.decode("#E3F2FD"), 40);
         panelGradiante3.setGradientColorsAndRadius(Color.decode("#4CAF50"), Color.decode("#A5D6A7"), 40);
- 
+        
+    }
+    private void ActualizarCampos(){
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.

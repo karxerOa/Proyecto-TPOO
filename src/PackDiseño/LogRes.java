@@ -5,6 +5,7 @@
 package PackDiseño;
 
 import Clases.ReturnGenerico;
+import Clases.Usuario;
 import Controladores.ControladorUsuarios;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -153,10 +154,10 @@ public class LogRes extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             ControladorUsuarios cUsuarios = new ControladorUsuarios();
-            ReturnGenerico<Boolean, String, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
+            ReturnGenerico<Boolean, Usuario, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
             if (resultado != null) {
                 if (resultado.valor1) {
-                    switch (resultado.valor2) {
+                    switch (resultado.valor2.getRol()) {
                         case "Administrador":
                             FormMenuAdmin a = new FormMenuAdmin();
                             this.setVisible(false);
@@ -168,7 +169,7 @@ public class LogRes extends javax.swing.JFrame {
                             b.setVisible(true);
                             break;
                         case "Doctor":
-                            FormMenuDoctor c = new FormMenuDoctor();
+                            FormMenuDoctor c = new FormMenuDoctor(resultado.valor2);
                             this.setVisible(false);
                             c.setVisible(true);
                             break;

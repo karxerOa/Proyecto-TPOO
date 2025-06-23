@@ -11,14 +11,22 @@ import java.time.LocalDate;
  * @author apnil
  */
 public class Recepcionista extends Persona{
+    private int IdRecepcionista;
     private Usuario user;
 
-    public Recepcionista(Usuario user, String nombre, String apellidoPaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
-        this.user = user;
+    public Recepcionista(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+        
     }
+
+
 
     public Usuario getUser() {
         return user;
     }
+
+    public int getIdRecepcionista() {
+        return IdRecepcionista;
+    }
+    
 }

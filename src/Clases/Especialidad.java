@@ -9,8 +9,13 @@ package Clases;
  * @author apnil
  */
 public class Especialidad {
+    private int IdEspecialidad;
     private String Nombre;
     private String Descripcion;
+
+    public int getIdEspecialidad() {
+        return IdEspecialidad;
+    }
 
     public String getNombre() {
         return Nombre;
@@ -33,5 +38,4 @@ public class Especialidad {
         }
         this.Descripcion = Descripcion;
     }
-    
 }

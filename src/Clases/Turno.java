@@ -13,9 +13,14 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class Turno {
+    private int idTurno;
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private ArrayList<DayOfWeek> DiasPorSemana;
+
+    public int getIdTurno() {
+        return idTurno;
+    }
 
     public LocalTime getHoraInicio() {
         return horaInicio;
