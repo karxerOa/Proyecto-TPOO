@@ -25,7 +25,6 @@ public class Paciente extends Persona{
     }
 
 
-
     public int getIdPaciente() {
         return IdPaciente;
     }

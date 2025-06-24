@@ -4,9 +4,8 @@
  */
 package Controladores;
 
-import Clases.ReturnGenerico;
+import Clases.ContenedorGenerico;
 import Clases.Usuario;
-import java.util.ArrayList;
 import java.sql.*;
 
 /**
@@ -14,10 +13,9 @@ import java.sql.*;
  * @author apnil
  */
 public class ControladorUsuarios {
-    private ArrayList<Usuario> UsuariosRegistrados;
 
     public ControladorUsuarios() {
-        UsuariosRegistrados = new ArrayList<>();
+
 //        LlenarLista();
     }
     
@@ -42,7 +40,7 @@ public class ControladorUsuarios {
 //        }
 //    }
     
-    public ReturnGenerico login(String nombreUsuario, String contraseña) {
+    public ContenedorGenerico login(String nombreUsuario, String contraseña) {
         String sql = "SELECT * FROM Usuario WHERE NombreUsuario = ? AND Contraseña = ?";
         try (Connection conn = Conexion.Conexion.getConexion();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -53,11 +51,11 @@ public class ControladorUsuarios {
                 int id = rs.getInt("UsuarioID");
                 String rol = rs.getString("Rol");
                 Usuario user = new Usuario(id, nombreUsuario, contraseña, rol);
-                return new ReturnGenerico(true, user);
+                return new ContenedorGenerico(true, user);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al validar login", e);
         }
-        return new ReturnGenerico(false, null);
+        return new ContenedorGenerico(false, null);
     }
 }

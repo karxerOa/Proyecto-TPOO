@@ -4,7 +4,7 @@
  */
 package PackDiseño;
 
-import Clases.ReturnGenerico;
+import Clases.ContenedorGenerico;
 import Clases.Usuario;
 import Controladores.ControladorUsuarios;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -154,7 +154,7 @@ public class LogRes extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             ControladorUsuarios cUsuarios = new ControladorUsuarios();
-            ReturnGenerico<Boolean, Usuario, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
+            ContenedorGenerico<Boolean, Usuario, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
             if (resultado != null) {
                 if (resultado.valor1) {
                     switch (resultado.valor2.getRol()) {

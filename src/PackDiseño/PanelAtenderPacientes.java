@@ -4,10 +4,13 @@
  */
 package PackDiseño;
 
-import java.awt.Color;
+import Clases.ContenedorGenerico;
+import Controladores.ControladorPaciente;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,21 +21,43 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
     /**
      * Creates new form PanelAtenderPacientes
      */
-    public PanelAtenderPacientes() {
+    private ArrayList<ContenedorGenerico<Integer, String, Void, Void>> pacientes;
+    public PanelAtenderPacientes(int IdDoctor) {
         initComponents();
+        ObtenerDatos(IdDoctor);
+        ActualizarTabla();
+        EventoTabla(IdDoctor);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
+    }
+    
+    private void EventoTabla(int IdDoctor){
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void Action(int row, String texto) {
-                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true);
+                int IdPaciente = (int)TablaAtencion.getValueAt(row, 0);
+                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true, IdPaciente, IdDoctor);
                 a.setLocationRelativeTo(null);
                 a.setVisible(true);            
             }
         };
-        jTable1.getColumnModel().getColumn(1).setCellRenderer(new TableActionCellRender());
-        jTable1.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditor(event, "Atender"));
+        TablaAtencion.getColumnModel().getColumn(1).setCellRenderer(new TableActionCellRender());
+        TablaAtencion.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditor(event, "Atender"));
     }
-
+    
+    private void ObtenerDatos(int IdDoctor){
+        ControladorPaciente controladorPaciente = new ControladorPaciente();
+        pacientes = controladorPaciente.ObtenerListaPacientesEnEspera(IdDoctor); 
+    }
+    
+    private void ActualizarTabla(){
+        DefaultTableModel tab =  (DefaultTableModel)TablaAtencion.getModel();
+        tab.setRowCount(0);
+        for (ContenedorGenerico<Integer, String, Void, Void> pac : pacientes) {
+            tab.addRow((new Object[]{
+            pac.valor1,
+            pac.valor2}));
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +69,7 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaAtencion = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblNombreDoc = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -54,7 +79,7 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaAtencion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null}
             },
@@ -70,14 +95,14 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setRowHeight(30);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 204, 255));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(500);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(120);
+        TablaAtencion.setRowHeight(30);
+        TablaAtencion.setSelectionBackground(new java.awt.Color(0, 204, 255));
+        jScrollPane1.setViewportView(TablaAtencion);
+        if (TablaAtencion.getColumnModel().getColumnCount() > 0) {
+            TablaAtencion.getColumnModel().getColumn(0).setResizable(false);
+            TablaAtencion.getColumnModel().getColumn(0).setPreferredWidth(500);
+            TablaAtencion.getColumnModel().getColumn(1).setResizable(false);
+            TablaAtencion.getColumnModel().getColumn(1).setPreferredWidth(120);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -122,11 +147,11 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaAtencion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblNombreDoc;
     // End of variables declaration//GEN-END:variables

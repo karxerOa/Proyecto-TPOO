@@ -4,7 +4,7 @@
  */
 package PackDiseño;
 
-import Clases.ReturnGenerico;
+import Clases.ContenedorGenerico;
 import Controladores.ControladorDoctor;
 import java.awt.Color;
 
@@ -22,7 +22,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
         initComponents();
         try {
             lbCitasPorAtender.setText(Integer.toString(ConntroladorDoc.cantidadCitasPorAtender(idDoc)));
-            ReturnGenerico<String, String, Void, Void> resultado = ConntroladorDoc.TurnoActual(IdDoctor);
+            ContenedorGenerico<String, String, Void, Void> resultado = ConntroladorDoc.TurnoActual(IdDoctor);
             lbHoraInicio.setText(resultado.valor1);
             lbHoraFin.setText(resultado.valor2);
             

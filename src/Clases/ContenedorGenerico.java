@@ -8,24 +8,24 @@ package Clases;
  *
  * @author apnil
  */
-public class ReturnGenerico<T, U, V, W>  {
+public class ContenedorGenerico<T, U, V, W>  {
     public T valor1;
     public U valor2;
     public V valor3;
     public W valor4;
 
-    public ReturnGenerico(T valor1, U valor2) {
+    public ContenedorGenerico(T valor1, U valor2) {
         this.valor1 = valor1;
         this.valor2 = valor2;
     }
 
-    public ReturnGenerico(T valor1, U valor2, V valor3) {
+    public ContenedorGenerico(T valor1, U valor2, V valor3) {
         this.valor1 = valor1;
         this.valor2 = valor2;
         this.valor3 = valor3;
     }
 
-    public ReturnGenerico(T valor1, U valor2, V valor3, W valor4) {
+    public ContenedorGenerico(T valor1, U valor2, V valor3, W valor4) {
         this.valor1 = valor1;
         this.valor2 = valor2;
         this.valor3 = valor3;

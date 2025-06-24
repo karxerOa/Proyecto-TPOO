@@ -5,7 +5,7 @@
 package Controladores;
 
 import Clases.Doctor;
-import Clases.ReturnGenerico;
+import Clases.ContenedorGenerico;
 import Conexion.Conexion;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -61,7 +61,7 @@ public class ControladorDoctor {
         }
         return cantidad;
     }
-    public ReturnGenerico TurnoActual(int doctorId)throws Exception {
+    public ContenedorGenerico TurnoActual(int doctorId)throws Exception {
         String inicio = "";
         String fin = "";
         try {
@@ -85,10 +85,10 @@ public class ControladorDoctor {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 inicio = sdf.format(horaInicio);
                 fin = sdf.format(horaFin);
-                return new ReturnGenerico(inicio, fin);
+                return new ContenedorGenerico(inicio, fin);
             }
             else{
-                return new ReturnGenerico("00:00", "00:00");
+                return new ContenedorGenerico("00:00", "00:00");
             }
         } catch (SQLException e) {
             throw new SQLException("No se encontraron datos: " + e.getMessage());

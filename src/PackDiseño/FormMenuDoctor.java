@@ -262,7 +262,7 @@ public class FormMenuDoctor extends javax.swing.JFrame {
             EstablecerColor(btnAtender);
             btnPerfil.setBackground(new Color(25,118,210));
             lblTitulo.setText("Atender Pacientes");
-            MostrarPanelHijo.Mostrar(new PanelAtenderPacientes(), PanelHijo, 970, 620);
+            MostrarPanelHijo.Mostrar(new PanelAtenderPacientes(IdDoctor), PanelHijo, 970, 620);
         }
     }//GEN-LAST:event_btnAtenderActionPerformed
 
