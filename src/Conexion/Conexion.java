@@ -30,14 +30,5 @@ public class Conexion {
             return null;
         }
     }
-    public static void cerrarConexion(Connection conexion) {
-        try {
-            if (conexion != null && !conexion.isClosed()) {
-                conexion.close();
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 }
 

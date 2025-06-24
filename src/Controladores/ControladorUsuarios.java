@@ -53,11 +53,11 @@ public class ControladorUsuarios {
                 int id = rs.getInt("UsuarioID");
                 String rol = rs.getString("Rol");
                 Usuario user = new Usuario(id, nombreUsuario, contraseña, rol);
-                return new ReturnGenerico<>(true, user);
+                return new ReturnGenerico(true, user);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al validar login", e);
         }
-        return new ReturnGenerico<>(false, null);
+        return new ReturnGenerico(false, null);
     }
 }
