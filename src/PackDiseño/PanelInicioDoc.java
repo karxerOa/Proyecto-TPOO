@@ -7,7 +7,6 @@ package PackDiseño;
 import Clases.ContenedorGenerico;
 import Controladores.ControladorDoctor;
 import java.awt.Color;
-
 /**
  *
  * @author apnil
@@ -17,15 +16,16 @@ public class PanelInicioDoc extends javax.swing.JPanel {
     /**
      * Creates new form PanelInicioDoc
      */
-    private int IdDoctor;    private ControladorDoctor ConntroladorDoc = new ControladorDoctor();
+    private ControladorDoctor ConntroladorDoc = new ControladorDoctor();
     public PanelInicioDoc(int idDoc) {
         initComponents();
         try {
             lbCitasPorAtender.setText(Integer.toString(ConntroladorDoc.cantidadCitasPorAtender(idDoc)));
-            ContenedorGenerico<String, String, Void, Void> resultado = ConntroladorDoc.TurnoActual(IdDoctor);
+            ContenedorGenerico<String, String, Void, Void> resultado = ConntroladorDoc.TurnoActual(idDoc);
             lbHoraInicio.setText(resultado.valor1);
             lbHoraFin.setText(resultado.valor2);
-            
+            lbPoximaAntecion.setText(ConntroladorDoc.PacienteEnEspera(idDoc));
+            lblNombreDoc.setText(ConntroladorDoc.VerNombresDoctor(idDoc));
         } catch (Exception e) {
             
         }
@@ -55,7 +55,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
         panelGradiante3 = new PackDiseño.PanelGradiante();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lbPoximaAntecion = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         panelGradiante2 = new PackDiseño.PanelGradiante();
         jLabel6 = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
         jLabel1.setText("INICIO");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Pacientes por atender");
 
@@ -141,10 +141,10 @@ public class PanelInicioDoc extends javax.swing.JPanel {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/paciente1.png"))); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Nombres Apellidos");
+        lbPoximaAntecion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbPoximaAntecion.setForeground(new java.awt.Color(255, 255, 255));
+        lbPoximaAntecion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbPoximaAntecion.setText("Nombres Apellidos");
 
         javax.swing.GroupLayout panelGradiante3Layout = new javax.swing.GroupLayout(panelGradiante3);
         panelGradiante3.setLayout(panelGradiante3Layout);
@@ -158,7 +158,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbPoximaAntecion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGradiante3Layout.setVerticalGroup(
@@ -169,7 +169,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addGap(29, 29, 29)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbPoximaAntecion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -306,7 +306,6 @@ public class PanelInicioDoc extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -321,6 +320,7 @@ public class PanelInicioDoc extends javax.swing.JPanel {
     private javax.swing.JLabel lbCitasPorAtender;
     private javax.swing.JLabel lbHoraFin;
     private javax.swing.JLabel lbHoraInicio;
+    private javax.swing.JLabel lbPoximaAntecion;
     private javax.swing.JLabel lblNombreDoc;
     private PackDiseño.PanelGradiante panelGradiante1;
     private PackDiseño.PanelGradiante panelGradiante2;

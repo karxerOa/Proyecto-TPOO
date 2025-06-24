@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class ControladorPaciente {
-    public ArrayList<ContenedorGenerico<Integer, String, Void, Void>> ObtenerListaPacientesEnEspera(int IdDoc){
+    public ArrayList<ContenedorGenerico<Integer, String, Void, Void>> ObtenerListaPacientesEnEspera(int IdDoc)throws Exception {
         ArrayList<ContenedorGenerico<Integer, String, Void, Void>> pacientes = new ArrayList<>();
         try {
             Connection con = Conexion.getConexion();
@@ -33,7 +33,7 @@ public class ControladorPaciente {
                 pacientes.add(new ContenedorGenerico(idPaciente, nombrePaciente));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al cargar los pacientes desde la base de datos");
+            throw new Exception("Error al cargar los pacientes desde la base de datos");
         }
         return pacientes;
     }

@@ -44,6 +44,27 @@ public class ControladorDoctor {
         }
         return doctor;
     }
+    public String VerNombresDoctor(int idDoc)throws Exception {
+        String doctor = " ";
+        try {
+            Connection con = Conexion.getConexion();
+            String consulta = """
+                              SELECT D.Nombre + ' ' + D.ApellidoMaterno + ' ' + D.ApellidoPaterno AS Nombre
+                              FROM Doctor D
+                              WHERE D.DoctorID = ?
+                              """;
+            PreparedStatement stmt = con.prepareStatement(consulta);
+            stmt.setInt(1, idDoc);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                doctor = rs.getString("Nombre");
+            }
+            con.close();
+        } catch (SQLException  e) {
+            throw new SQLException("No se encontraron datos");
+        }
+        return doctor;
+    }
     public int cantidadCitasPorAtender(int doctorId)throws Exception {
         int cantidad = 0;
         try {
@@ -67,7 +88,6 @@ public class ControladorDoctor {
         try {
             Connection con = Conexion.getConexion();
             String consulta = """
-                         
                          SELECT D.DoctorID, T.HoraInicio, T.HoraFin
                          FROM Doctor D
                          JOIN Doctor_Turno DT ON D.DoctorID = DT.DoctorID
@@ -111,7 +131,7 @@ public class ControladorDoctor {
                 nombrePac = rs.getString("Paciente");
             }
         } catch (SQLException e) {
-            throw new SQLException("No se encontraron datos: " + e.getMessage());
+            throw new SQLException("No se encontraron datos");
         }
         return nombrePac;
     }

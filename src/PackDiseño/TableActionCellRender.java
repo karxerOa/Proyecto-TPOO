@@ -15,10 +15,16 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class TableActionCellRender extends DefaultTableCellRenderer{
 
+    private String texto;
+    public TableActionCellRender(String texto) {
+        this.texto = texto;
+    }
+    
+    
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component com  = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        PanelAction a = new PanelAction("Accion");
+        PanelAction a = new PanelAction(texto);
         if (isSelected == false && row % 2 == 0) {
             a.setBackground(Color.WHITE);
         }else{

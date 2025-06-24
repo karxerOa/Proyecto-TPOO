@@ -54,7 +54,7 @@ public class ControladorUsuarios {
                 return new ContenedorGenerico(true, user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al validar login", e);
+            throw new RuntimeException("Error al validar login");
         }
         return new ContenedorGenerico(false, null);
     }
