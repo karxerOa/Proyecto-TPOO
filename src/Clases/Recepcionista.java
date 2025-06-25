@@ -14,19 +14,23 @@ public class Recepcionista extends Persona{
     private int IdRecepcionista;
     private Usuario user;
 
-    public Recepcionista(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+    public Recepcionista(int IdRecepcionista, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
-        
+        this.IdRecepcionista = IdRecepcionista;
+        this.user = user;
+    }    
+     public int getIdRecepcionista() {
+        return IdRecepcionista;
     }
 
-
-
+    public void setIdRecepcionista(int idRecepcionista) {
+        this.IdRecepcionista = idRecepcionista;
+    }
     public Usuario getUser() {
         return user;
     }
-
-    public int getIdRecepcionista() {
-        return IdRecepcionista;
+    public void setUser(Usuario user) {
+        this.user = user;
     }
     
 }
