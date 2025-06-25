@@ -7,9 +7,12 @@ package PackDiseño;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -27,6 +30,10 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     public PanelRegistrarPaciente(Color col) {
         initComponents();
         inicializarPlaceholders();
+        configurarEdad(); 
+        btgAlergias.add(rbAlergiaAlimentos);
+        btgAlergias.add(rbAlergiaMedicamentos);
+        btgAlergias.add(rbNoTieneAlergia);
         lblFecha.setText(EstablecerFecha());
         this.col = col;
         cbGenero.setSelectedIndex(-1);
@@ -336,7 +343,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
        String tipoDoc = txtDocIdentidad.getText();
        String telefono = txtTelefono.getText();
        String grupoSanguineo = txtTipoSangrePac.getText();
-       String correo = txtCorreo.getName();
+       String correo = txtCorreo.getText();
        Date fechaSeleccionada = dpFechaNac.getDate(); 
             if (fechaSeleccionada == null) {
                 JOptionPane.showMessageDialog(this, "Debes seleccionar una fecha de nacimiento.");
@@ -346,11 +353,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
         int edad = Period.between(fechaNac, LocalDate.now()).getYears();
-        txtEdad.setText(String.valueOf(edad));
-        
-        btgAlergias.add(rbAlergiaAlimentos);
-        btgAlergias.add(rbAlergiaMedicamentos);
-        btgAlergias.add(rbNoTieneAlergia);
+        txtEdad.setText(String.valueOf(edad));      
         String tipoAlergia = null;
         if (rbAlergiaAlimentos.isSelected()) {
             tipoAlergia = "Alimentos";
@@ -359,10 +362,50 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         } else if (rbNoTieneAlergia.isSelected()) {
             tipoAlergia = "Ninguna";
         } else {
-            JOptionPane.showMessageDialog(this, "⚠️ Debes seleccionar un tipo de alergia.");            
-        }           
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un tipo de alergia.");            
+        }   
+        //que ingrese la severidad y descripcion
+        if (!tipoAlergia.equals("Ninguna")) {
+            if (txtDescripciònAlergia.getText().trim().isEmpty() || txtSeveridadAlerg.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes ingresar la descripción y severidad de la alergia.");
+            return;
+            }
+        }
+        //VALIDAR
+
+        if (Nombres.trim().isEmpty() || aPaterno.trim().isEmpty() || aMaterno.trim().isEmpty()
+        || tipoDoc.trim().isEmpty() || telefono.trim().isEmpty()
+        || grupoSanguineo.trim().isEmpty() || txtCorreo.getText().trim().isEmpty()
+        || cbGenero.getSelectedIndex() == -1 || dpFechaNac.getDate() == null) {
+
+        JOptionPane.showMessageDialog(this, "⚠️ Debes completar todos los campos obligatorios.");
+    }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
-    
+    private void configurarEdad(){
+        dpFechaNac.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                Date fechaNacimiento = dpFechaNac.getDate();
+                if (fechaNacimiento != null) {
+                    Calendar nacimiento = Calendar.getInstance();
+                nacimiento.setTime(fechaNacimiento);
+
+                Calendar hoy = Calendar.getInstance();
+                int edad = hoy.get(Calendar.YEAR) - nacimiento.get(Calendar.YEAR);
+
+                // Ajustar si aún no cumple años este año
+                if (hoy.get(Calendar.DAY_OF_YEAR) < nacimiento.get(Calendar.DAY_OF_YEAR)) {
+                    edad--;
+                }
+
+                txtEdad.setText(String.valueOf(edad));
+            } else {
+                txtEdad.setText("0");
+            }
+            }
+        });            
+    }
     public void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtNombres, "Ingrese sus nombres");
         Placeholders.configurarPlaceholder(txtAPaterno, "Ingrese su Apellido Paterno");
