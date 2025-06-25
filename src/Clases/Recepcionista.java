@@ -31,6 +31,6 @@ public class Recepcionista extends Persona{
     }
     public void setUser(Usuario user) {
         this.user = user;
-    }
+    } 
     
 }

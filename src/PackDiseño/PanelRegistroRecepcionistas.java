@@ -223,6 +223,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
 
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbGenero.setSelectedIndex(-1);
+        cbGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGeneroActionPerformed(evt);
+            }
+        });
         jPanel5.add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, 30));
         jPanel5.add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
 
@@ -276,6 +281,10 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGeneroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

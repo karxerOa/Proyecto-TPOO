@@ -5,6 +5,7 @@
 package Controladores;
 
 import Clases.ContenedorGenerico;
+import Clases.Paciente;
 import Conexion.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,5 +37,38 @@ public class ControladorPaciente {
             throw new Exception("Error al cargar los pacientes desde la base de datos");
         }
         return pacientes;
+    }
+    public int registrar_paciente(Paciente paciente) throws Exception{
+        String sql = """
+        INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumDocumento, TipoDocumento, 
+                              Telefono, FechaNacimiento, Genero, Correo, Direccion, GrupoSanguineo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+        try (Connection con = Conexion.getConexion();
+        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, paciente.getNombre());
+            stmt.setString(2, paciente.getApellidoPaterno());
+            stmt.setString(3, paciente.getApellidoMaterno());
+            stmt.setInt(4, paciente.getNumDoc());
+            stmt.setString(5, paciente.getTipoDoc());
+            stmt.setString(6, paciente.getTelefono());
+            stmt.setDate(7, Date.valueOf(paciente.getFechaNacimiento()));
+            stmt.setString(8, paciente.getGenero());
+            stmt.setString(9, paciente.getCorreo());
+            stmt.setString(10, paciente.getDireccion());
+            stmt.setString(11, paciente.getGrupoSanguineo());
+
+             stmt.executeUpdate();
+
+            // Obtener el ID generado
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1); // ID del paciente insertado
+                } else {
+                    throw new Exception("No se pudo obtener el ID del paciente insertado.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new Exception("Error al registrar paciente: " + e.getMessage());
+        }
     }
 }
