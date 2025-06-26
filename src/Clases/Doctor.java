@@ -18,13 +18,26 @@ public class Doctor extends Persona{
     private ArrayList<Turno> Turnos;
     private Usuario user;
 
+    public Doctor() {
+    }
+
+    public Doctor(String CodigoColegiatura, ArrayList<Especialidad> Especialidades, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+        this.CodigoColegiatura = CodigoColegiatura;
+        this.Especialidades = Especialidades;
+        this.user = user;
+    }
+
     public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion, String CodigoColegiatura) {
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.IdDoctor = IdDoctor;
         this.CodigoColegiatura = CodigoColegiatura;
     }
 
-
+   
+    public void setCodigoColegiatura(String CodigoColegiatura) {
+        this.CodigoColegiatura = CodigoColegiatura;
+    }
 
 //    public Doctor(String CodigoColegiatura, Usuario user, String nombre, String apellidoPaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
 //        super(nombre, apellidoPaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
@@ -33,8 +46,14 @@ public class Doctor extends Persona{
 //        this.Turnos = new ArrayList<>();
 //        this.user = user;
 //    }
+    public void setEspecialidades(ArrayList<Especialidad> Especialidades) {
+        this.Especialidades = Especialidades;
+    }
 
-    
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
+
     public int getIdDoctor() {
         return IdDoctor;
     }
@@ -63,4 +82,5 @@ public class Doctor extends Persona{
         if (turno == null) throw new Exception("El turno no puede ser nulo.");
         this.Turnos.add(turno);
     }
+    
 }

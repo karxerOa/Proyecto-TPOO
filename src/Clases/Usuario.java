@@ -18,6 +18,9 @@ public class Usuario{
     private String contraseña;
     private String rol;
 
+    public Usuario() {
+    }
+
     public Usuario(String nombreUsuario, String contraseña, String rol) {
         this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
@@ -33,6 +36,10 @@ public class Usuario{
 
     public int getIdUsuario() {
         return IdUsuario;
+    }
+
+    public void setIdUsuario(int IdUsuario) {
+        this.IdUsuario = IdUsuario;
     }
 
     public String getNombreUsuario() {

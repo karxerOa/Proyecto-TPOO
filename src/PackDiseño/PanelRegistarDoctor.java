@@ -4,6 +4,19 @@
  */
 package PackDiseño;
 
+import Clases.Doctor;
+import Clases.Especialidad;
+import Clases.Usuario;
+import Controladores.ControladorAdministrador;
+import static Controladores.ControladorAdministrador.determinarTipoDocumento;
+import Controladores.ControladorDoctor;
+import Controladores.ControladorUsuarios;
+import java.util.Date;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author William
@@ -13,9 +26,24 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistarDoctor
      */
+    private ArrayList<Especialidad> lista;
     public PanelRegistarDoctor() {
         initComponents();
         inicializarPlaceholders();
+        cargarCombobox();
+       
+    }
+    public void cargarCombobox(){
+        lista = new ArrayList();
+        
+        ControladorAdministrador admin = new ControladorAdministrador();
+        lista = admin.Obtener_Especilidad();
+        
+        cbEspecialidad.removeAllItems();
+        
+        for (Especialidad esp : lista){
+            cbEspecialidad.addItem(esp.getNombre());
+        }
     }
     public void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtNombre, "Ingrese sus nombres");
@@ -25,7 +53,10 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         Placeholders.configurarPlaceholder(txtCorreo, "Ingrese su correo electronico");
         Placeholders.configurarPlaceholder(txtDireccion, "Ingrese su direccion");
         Placeholders.configurarPlaceholder(txtCMP, "Ingrese CMP");       
-        Placeholders.configurarPlaceholder(txtDocIdentidad, "Ingrese su doc. de indentidad");
+        Placeholders.configurarPlaceholder(txtNunDoc, "Ingrese su doc. de indentidad");
+        Placeholders.configurarPlaceholder(txtUsuario, "Ingrese Usuario");
+        Placeholders.configurarPlaceholder(txtContraseña, "Ingrese Contraseña");
+        
     }
 
     /**
@@ -57,7 +88,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         txtNombre = new javax.swing.JTextField();
         txtAPaterno = new javax.swing.JTextField();
         txtAMaterno = new javax.swing.JTextField();
-        txtDocIdentidad = new javax.swing.JTextField();
+        txtNunDoc = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -99,7 +130,6 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jLabel14.setText("USUARIO");
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setText("Nombre de Usuario");
 
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
         txtContraseña.setText("Contraseña");
@@ -146,6 +176,11 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         btnRegistar.setText("Registrar");
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -203,9 +238,9 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         txtAMaterno.setText("Ingrese su apellido materno");
         jPanel5.add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 360, 30));
 
-        txtDocIdentidad.setForeground(new java.awt.Color(153, 153, 153));
-        txtDocIdentidad.setText("Ingrese su doc. de indentidad");
-        jPanel5.add(txtDocIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, 30));
+        txtNunDoc.setForeground(new java.awt.Color(153, 153, 153));
+        txtNunDoc.setText("Ingrese N° Documento");
+        jPanel5.add(txtNunDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Especialidad:");
@@ -282,6 +317,70 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
+        try{     
+        // Ingresar datos---------------------------------------------------------------------------
+        Date Fecha = dpFN.getDate();
+        LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
+    
+        //Ingresar datos propios del doctor---------------------------------------------------------
+     
+        int Index = cbEspecialidad.getSelectedIndex();
+        Especialidad EspecialidadesSleccionada = lista.get(Index);
+        ArrayList<Especialidad> ListaEspecialidadDoctor = new ArrayList();
+        ListaEspecialidadDoctor.add(EspecialidadesSleccionada);
+        
+        //Crear UsuarioTT
+        
+        String Usser = txtUsuario.getText();
+        String Password = txtContraseña.getText();      
+        Usuario newUsser = new Usuario(0,Usser, Password, "Doctor");
+        
+        ControladorUsuarios U = new ControladorUsuarios();
+        int IdUsuario = U.RegistrarUser(newUsser);
+        
+        if(IdUsuario!=-1){
+            
+            //Mandar ID
+            newUsser.setIdUsuario(IdUsuario);
+            
+            Doctor newdoc = new Doctor();
+            //Set clase persona
+            newdoc.setNombre(txtNombre.getText());
+            newdoc.setApellidoPaterno(txtAPaterno.getText());
+            newdoc.setApellidoMaterno(txtAMaterno.getText());
+            newdoc.setNumDoc(Integer.parseInt(txtNunDoc.getText()));                 
+            newdoc.setTipoDoc(determinarTipoDocumento(Integer.parseInt(txtNunDoc.getText())));
+            newdoc.setTelefono(txtTelefono.getText());
+            newdoc.setFechaNacimiento(FechaNacimiento);
+            newdoc.setGenero(cbGenero.getSelectedItem().toString());
+            newdoc.setCorreo(txtCorreo.getText());
+            newdoc.setDireccion(txtDireccion.getText());
+            
+            //Set clase doctor
+            newdoc.setEspecialidades(ListaEspecialidadDoctor);
+            newdoc.setCodigoColegiatura(txtCMP.getText());
+            newdoc.setUser(newUsser);
+            
+            //Agregar doctor
+            ControladorAdministrador A = new ControladorAdministrador(); 
+            
+            //Relacion Especialidad_doctor
+            int DoctorID = A.Agregar_Doctor(newdoc);
+            int EspecialdiadID = EspecialidadesSleccionada.getIdEspecialidad();
+            
+            ControladorDoctor CD = new ControladorDoctor();
+            CD.AsignarEspecialidad(DoctorID, EspecialdiadID);
+            
+            JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente");  
+        }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }  
+    }//GEN-LAST:event_btnRegistarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistar;
@@ -313,8 +412,8 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
     private javax.swing.JTextField txtContraseña;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDocIdentidad;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNunDoc;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

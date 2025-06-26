@@ -5,6 +5,7 @@
 package Clases;
 
 import java.time.LocalDate;
+
 /**
  *
  * @author apnil
@@ -19,9 +20,7 @@ public class Administrador extends Persona{
         this.user = user;
         this.nivelAcceso = validarNivelAcceso(nivelAcceso);
     }
-
-
-
+    
     public void setIdAdministrador(int IdAdministrador) {
         this.IdAdministrador = IdAdministrador;
     }

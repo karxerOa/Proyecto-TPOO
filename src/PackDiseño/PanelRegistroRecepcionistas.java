@@ -4,6 +4,16 @@
  */
 package PackDiseño;
 
+import Clases.Recepcionista;
+import Clases.Usuario;
+import Controladores.ControladorAdministrador;
+import static Controladores.ControladorAdministrador.determinarTipoDocumento;
+import Controladores.ControladorUsuarios;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USUARIO
@@ -55,7 +65,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         cbGenero = new javax.swing.JComboBox<>();
-        dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
+        dpFN = new org.jdesktop.swingx.JXDatePicker();
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -136,6 +146,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
 
         btnRegistar.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         btnRegistar.setText("Registrar");
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -224,7 +239,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbGenero.setSelectedIndex(-1);
         jPanel5.add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, 30));
-        jPanel5.add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
+        jPanel5.add(dpFN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -277,11 +292,60 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
+         try{     
+        // Ingresar datos---------------------------------------------------------------------------
+        Date Fecha = dpFN.getDate();
+        LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
+        
+        //Crear UsuarioTT
+        
+        String Usser = txtUsuario.getText();
+        String Password = txtContraseña.getText();      
+        Usuario newUsser = new Usuario(0,Usser, Password, "Recepcionista");
+        
+        ControladorUsuarios U = new ControladorUsuarios();
+        int IdUsuario = U.RegistrarUser(newUsser);
+        
+        if(IdUsuario!=-1){
+            
+            //Mandar ID
+            newUsser.setIdUsuario(IdUsuario);
+            
+            Recepcionista NewRecepcionista = new Recepcionista();
+            //Set clase persona
+            NewRecepcionista.setNombre(txtNombre.getText());
+            NewRecepcionista.setApellidoPaterno(txtAPaterno.getText());
+            NewRecepcionista.setApellidoMaterno(txtAMaterno.getText());
+            NewRecepcionista.setNumDoc(Integer.parseInt(txtDocIdentidad.getText()));                 
+            NewRecepcionista.setTipoDoc(determinarTipoDocumento(Integer.parseInt(txtDocIdentidad.getText())));
+            NewRecepcionista.setTelefono(txtTelefono.getText());
+            NewRecepcionista.setFechaNacimiento(FechaNacimiento);
+            NewRecepcionista.setGenero(cbGenero.getSelectedItem().toString());
+            NewRecepcionista.setCorreo(txtCorreo.getText());
+            NewRecepcionista.setDireccion(txtDireccion.getText());
+           
+            NewRecepcionista.setUser(newUsser);
+            
+            //Agregar doctor
+            ControladorAdministrador A = new ControladorAdministrador(); 
+             A.Agregar_Repcionista(NewRecepcionista);
+            JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente");  
+        }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }  
+        
+        
+    }//GEN-LAST:event_btnRegistarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistar;
     private javax.swing.JComboBox<String> cbGenero;
-    private org.jdesktop.swingx.JXDatePicker dpFechaNac;
+    private org.jdesktop.swingx.JXDatePicker dpFN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

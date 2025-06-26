@@ -23,6 +23,9 @@ public abstract class Persona {
     protected String correo;
     protected String direccion;
 
+    public Persona() {
+    }
+
     public Persona(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
         this.nombre = validarTexto(nombre, "El nombre");
         this.apellidoPaterno = validarTexto(apellidoPaterno, "El Apellido Paterno");
@@ -99,11 +102,11 @@ public abstract class Persona {
     //validaciones (srirven para seters y constructor)
     private int validarDoc(int doc) {
         int length = Integer.toString(doc).length();
-        if (length != 8 && length != 12) {
+       if (length == 8 || length == 12) {
             throw new IllegalArgumentException("Número de documento inválido. Debe tener 8 o 12 dígitos.");
         }
         return doc;
-    }
+     }
     
     private String validarCorreo(String correo) {
         if (correo == null || !correo.contains("@")) {
@@ -117,6 +120,34 @@ public abstract class Persona {
             throw new IllegalArgumentException("Fecha de nacimiento inválida.");
         }
         return fecha;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public void setNumDoc(int numDoc) {
+        this.numDoc = numDoc;
+    }
+
+    public void setTipoDoc(String tipoDoc) {
+        this.tipoDoc = tipoDoc;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
     
     public int verEdad(){

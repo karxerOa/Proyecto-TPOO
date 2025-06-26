@@ -44,6 +44,23 @@ public class ControladorDoctor {
         }
         return doctor;
     }
+    public void AsignarEspecialidad(int DoctorID,int EspecialidadID)throws Exception{
+        String sql = "INSERT INTO Doctor_Especialidad(DoctorID,EspecialidadID) VALUES (?,?)";
+         try {Connection conn = Conexion.getConexion();
+            PreparedStatement Estmt = conn.prepareStatement(sql);
+            Estmt.setInt(1, DoctorID);
+            Estmt.setInt(2, EspecialidadID);
+            Estmt.executeUpdate();       
+        
+        }
+        catch(SQLException e){
+            throw new Exception("Error al relacionar ID: "+e.getMessage());      
+        }      
+        
+    }
+    
+    
+    
     public int cantidadCitasPorAtender(int doctorId)throws Exception {
         int cantidad = 0;
         try {
@@ -61,6 +78,7 @@ public class ControladorDoctor {
         }
         return cantidad;
     }
+    
     public ContenedorGenerico TurnoActual(int doctorId)throws Exception {
         String inicio = "";
         String fin = "";

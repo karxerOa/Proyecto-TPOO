@@ -45,6 +45,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnGestionEspecialidad = new javax.swing.JButton();
         btnRegistrarDoc = new javax.swing.JButton();
         btnAsignarTurnos = new javax.swing.JButton();
+        btnRegistrarRecepcionista = new javax.swing.JButton();
         PanelTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         PanelHijo = new javax.swing.JPanel();
@@ -93,7 +94,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         PanelSuperiorLayout.setHorizontalGroup(
             PanelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSuperiorLayout.createSequentialGroup()
-                .addGap(0, 1200, Short.MAX_VALUE)
+                .addGap(0, 1250, Short.MAX_VALUE)
                 .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -104,7 +105,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
             .addComponent(btnMinimizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel1.add(PanelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 40));
+        jPanel1.add(PanelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 40));
 
         PanelMenu.setBackground(new java.awt.Color(0, 125, 118));
         PanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,13 +155,13 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnGestionEspecialidadActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnGestionEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, 80));
+        PanelMenu.add(btnGestionEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 360, 80));
 
         btnRegistrarDoc.setBackground(new java.awt.Color(0, 125, 118));
         btnRegistrarDoc.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         btnRegistrarDoc.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarDoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoDoctor.png"))); // NOI18N
-        btnRegistrarDoc.setText("Gestión de personal");
+        btnRegistrarDoc.setText("Registrar Doctor");
         btnRegistrarDoc.setBorder(null);
         btnRegistrarDoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrarDoc.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,7 +177,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnRegistrarDocActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnRegistrarDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 310, 80));
+        PanelMenu.add(btnRegistrarDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 360, 80));
 
         btnAsignarTurnos.setBackground(new java.awt.Color(0, 125, 118));
         btnAsignarTurnos.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
@@ -198,12 +199,35 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 btnAsignarTurnosActionPerformed(evt);
             }
         });
-        PanelMenu.add(btnAsignarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 310, 80));
+        PanelMenu.add(btnAsignarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 360, 80));
 
-        jPanel1.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 310, 730));
+        btnRegistrarRecepcionista.setBackground(new java.awt.Color(0, 125, 118));
+        btnRegistrarRecepcionista.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        btnRegistrarRecepcionista.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarRecepcionista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/IconoDoctor.png"))); // NOI18N
+        btnRegistrarRecepcionista.setText("Registrar Recepcionista");
+        btnRegistrarRecepcionista.setBorder(null);
+        btnRegistrarRecepcionista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegistrarRecepcionista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegistrarRecepcionistaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegistrarRecepcionistaMouseExited(evt);
+            }
+        });
+        btnRegistrarRecepcionista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarRecepcionistaActionPerformed(evt);
+            }
+        });
+        PanelMenu.add(btnRegistrarRecepcionista, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 360, 80));
+
+        jPanel1.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 360, 730));
 
         PanelTitulo.setBackground(new java.awt.Color(150, 177, 173));
 
+        lblTitulo.setBackground(new java.awt.Color(153, 153, 153));
         lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("MENU");
@@ -212,33 +236,30 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         PanelTitulo.setLayout(PanelTituloLayout);
         PanelTituloLayout.setHorizontalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 970, Short.MAX_VALUE)
-            .addGroup(PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTituloLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTituloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1014, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         PanelTituloLayout.setVerticalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-            .addGroup(PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelTituloLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTituloLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(PanelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 970, 60));
 
         PanelHijo.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(PanelHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 970, 620));
+        jPanel1.add(PanelHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 970, 620));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,6 +373,25 @@ private void EstablecerColor(JButton btn){
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarActionPerformed
 
+    private void btnRegistrarRecepcionistaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaMouseEntered
+        // TODO add your handling code here:
+          if (!(btnRegistrarRecepcionista.getBackground() == colorTemp)) {
+            btnRegistrarRecepcionista.setBackground(new Color(0,125,118));
+        }
+    }//GEN-LAST:event_btnRegistrarRecepcionistaMouseEntered
+
+    private void btnRegistrarRecepcionistaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaMouseExited
+        // TODO add your handling code here:
+          if (!(btnRegistrarRecepcionista.getBackground() == colorTemp)) {
+            btnRegistrarRecepcionista.setBackground(new Color(0,125,118));
+        }
+    }//GEN-LAST:event_btnRegistrarRecepcionistaMouseExited
+
+    private void btnRegistrarRecepcionistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaActionPerformed
+        // TODO add your handling code here:
+         MostrarPanelHijo.Mostrar(new PanelRegistroRecepcionistas(), PanelHijo, 970, 620);         
+    }//GEN-LAST:event_btnRegistrarRecepcionistaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -400,6 +440,7 @@ private void EstablecerColor(JButton btn){
     private javax.swing.JButton btnGestionEspecialidad;
     private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnRegistrarDoc;
+    private javax.swing.JButton btnRegistrarRecepcionista;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

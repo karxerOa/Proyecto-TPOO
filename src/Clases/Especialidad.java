@@ -21,6 +21,16 @@ public class Especialidad {
         return Nombre;
     }
 
+    public Especialidad(int IdEspecialidad, String Nombre) {
+        this.IdEspecialidad = IdEspecialidad;
+        this.Nombre = Nombre;
+    }
+
+    public Especialidad(String Nombre, String Descripcion) {
+        this.Nombre = Nombre;
+        this.Descripcion = Descripcion;
+    }
+
     public void setNombre(String Nombre)throws Exception {
         if (Nombre == null || Nombre.isBlank()) {
             throw new Exception("El nombre de la especialidad no puede estar vacío.");

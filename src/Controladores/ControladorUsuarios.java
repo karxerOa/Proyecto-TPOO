@@ -58,4 +58,32 @@ public class ControladorUsuarios {
         }
         return new ContenedorGenerico(false, null);
     }
+    
+    public int RegistrarUser(Usuario usuario) throws Exception{
+      
+        String sql = "INSERT INTO Usuario(NombreUsuario,Contraseña,Rol)VALUES(?,?,?)";
+        
+        try (Connection conn = Conexion.Conexion.getConexion();
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, usuario.getNombreUsuario());
+            pstmt.setString(2, usuario.getContraseña());
+            pstmt.setString(3, usuario.getRol());
+            
+            int filas = pstmt.executeUpdate();
+            
+            if(filas > 0){
+                ResultSet rs = pstmt.getGeneratedKeys();
+                
+                if(rs.next()){
+                    return rs.getInt(1);
+                }           
+            }                             
+                                  
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Error al validar login", e);
+        }
+        return -1;
+    }
 }

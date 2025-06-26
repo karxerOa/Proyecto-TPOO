@@ -4,6 +4,13 @@
  */
 package PackDiseño;
 
+import Clases.Especialidad;
+import Controladores.ControladorAdministrador;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author USUARIO
@@ -15,6 +22,21 @@ public class PanelEspecialidades extends javax.swing.JPanel {
      */
     public PanelEspecialidades() {
         initComponents();
+        cargarEspecialdiadesTabla();
+    }
+    public void cargarEspecialdiadesTabla(){
+        DefaultTableModel  modelo = new DefaultTableModel ();              
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        
+        ControladorAdministrador CA = new ControladorAdministrador();
+        ArrayList<Especialidad> Lista = CA.Obtener_Especilidad_Completo();
+        
+        for(Especialidad esp : Lista){
+            Object [] Fila = {esp.getNombre(),esp.getDescripcion()};
+            modelo.addRow(Fila);
+        }
+        TablaEspecialidades.setModel(modelo);
     }
 
     /**
@@ -31,7 +53,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txt_especialidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaEspecialidades = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         btn_agregarEspecialidad1 = new javax.swing.JButton();
         btn_agregarEspecialidad = new javax.swing.JButton();
@@ -48,8 +70,8 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ingrese nombre de la especialidad");
 
-        jTable1.setBackground(new java.awt.Color(153, 204, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaEspecialidades.setBackground(new java.awt.Color(153, 204, 255));
+        TablaEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -68,7 +90,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaEspecialidades);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -104,6 +126,11 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
 
         btn_agregarEspecialidad1.setText("Agregar");
+        btn_agregarEspecialidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarEspecialidad1ActionPerformed(evt);
+            }
+        });
 
         btn_agregarEspecialidad.setText("Actualizar");
 
@@ -172,8 +199,25 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_agregarEspecialidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarEspecialidad1ActionPerformed
+        try{
+            String Nombre = txt_ESPECIALIDAD.getText();
+            String Descripcion = txt_especialidadDescripcion.getText();
+
+            Especialidad RegistrarEspecialdiad = new Especialidad(Nombre,Descripcion);
+
+            ControladorAdministrador CA = new ControladorAdministrador();      
+            CA.Agregar_Especialidades(RegistrarEspecialdiad);
+            cargarEspecialdiadesTabla();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }     
+    }//GEN-LAST:event_btn_agregarEspecialidad1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaEspecialidades;
     private javax.swing.JButton btn_agregarEspecialidad;
     private javax.swing.JButton btn_agregarEspecialidad1;
     private javax.swing.JLabel jLabel2;
@@ -183,7 +227,6 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_ESPECIALIDAD;
     private javax.swing.JTextField txt_especialidad;
     private javax.swing.JTextField txt_especialidadDescripcion;
