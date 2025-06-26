@@ -5,13 +5,20 @@
 package PackDiseño;
 
 import Clases.ContenedorGenerico;
+import Controladores.ControladorDoctor;
 import Controladores.ControladorPaciente;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author apnil
@@ -25,39 +32,69 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
     public PanelAtenderPacientes(int IdDoctor) {
         initComponents();
         ObtenerDatos(IdDoctor);
+        ActualizarLabels(IdDoctor);
         ActualizarTabla();
         EventoTabla(IdDoctor);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
     }
     
     private void EventoTabla(int IdDoctor){
+        TablaAtencion.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender("Atender"));
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void Action(int row, String texto) {
-                int IdPaciente = (int)TablaAtencion.getValueAt(row, 0);
-                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true, IdPaciente, IdDoctor);
+                String Id = (String)TablaAtencion.getValueAt(row, 0);
+                int idPaciente = Integer.parseInt(Id.substring(3));
+                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true, idPaciente, IdDoctor);
                 a.setLocationRelativeTo(null);
                 a.setVisible(true);            
             }
         };
-        TablaAtencion.getColumnModel().getColumn(1).setCellRenderer(new TableActionCellRender());
-        TablaAtencion.getColumnModel().getColumn(1).setCellEditor(new TableActionCellEditor(event, "Atender"));
+        TablaAtencion.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event, "Atender"));
+        DefaultTableCellRenderer centrado = new DefaultTableCellRenderer();
+        centrado.setHorizontalAlignment(SwingConstants.CENTER);
+        TablaAtencion.getColumnModel().getColumn(0).setCellRenderer(centrado);
+        TablaAtencion.getColumnModel().getColumn(1).setCellRenderer(centrado);
     }
     
     private void ObtenerDatos(int IdDoctor){
-        ControladorPaciente controladorPaciente = new ControladorPaciente();
-        pacientes = controladorPaciente.ObtenerListaPacientesEnEspera(IdDoctor); 
+        try {
+            ControladorPaciente controladorPaciente = new ControladorPaciente();
+            pacientes = controladorPaciente.ObtenerListaPacientesEnEspera(IdDoctor); 
+        }catch (SQLServerException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
     }
     
     private void ActualizarTabla(){
         DefaultTableModel tab =  (DefaultTableModel)TablaAtencion.getModel();
         tab.setRowCount(0);
         for (ContenedorGenerico<Integer, String, Void, Void> pac : pacientes) {
+            String idFormateado = String.format("PAC%04d", pac.valor1);
             tab.addRow((new Object[]{
-            pac.valor1,
+            idFormateado,
             pac.valor2}));
         }
     }
+    
+    private void ActualizarLabels(int IdDoctor){
+        try {
+            ControladorDoctor controladorDoctor = new ControladorDoctor();
+            lblNombreDoc.setText(controladorDoctor.VerNombresDoctor(IdDoctor));
+            LocalDate fechaActual = LocalDate.now();
+            int dia = fechaActual.getDayOfMonth();
+            String mes = fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+            int año = fechaActual.getYear();
+            lblFecha.setText("Hoy es " + dia + " de " + mes + " del " + año);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,16 +116,17 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        TablaAtencion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TablaAtencion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                {null, null, null}
             },
             new String [] {
-                "Paciente", "Estado"
+                "IDPaciente", "Paciente", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -100,9 +138,10 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
         jScrollPane1.setViewportView(TablaAtencion);
         if (TablaAtencion.getColumnModel().getColumnCount() > 0) {
             TablaAtencion.getColumnModel().getColumn(0).setResizable(false);
-            TablaAtencion.getColumnModel().getColumn(0).setPreferredWidth(500);
             TablaAtencion.getColumnModel().getColumn(1).setResizable(false);
-            TablaAtencion.getColumnModel().getColumn(1).setPreferredWidth(120);
+            TablaAtencion.getColumnModel().getColumn(1).setPreferredWidth(500);
+            TablaAtencion.getColumnModel().getColumn(2).setResizable(false);
+            TablaAtencion.getColumnModel().getColumn(2).setPreferredWidth(120);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

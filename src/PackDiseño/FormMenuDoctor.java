@@ -73,7 +73,7 @@ public class FormMenuDoctor extends javax.swing.JFrame {
         btnCerrar.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 24)); // NOI18N
         btnCerrar.setText("x");
         btnCerrar.setBorder(null);
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -130,7 +130,7 @@ public class FormMenuDoctor extends javax.swing.JFrame {
         btnAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/SickInverted.png"))); // NOI18N
         btnAtender.setText("Atender Pacientes");
         btnAtender.setBorder(null);
-        btnAtender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAtender.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAtenderMouseEntered(evt);
@@ -152,15 +152,7 @@ public class FormMenuDoctor extends javax.swing.JFrame {
         btnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Search More.png"))); // NOI18N
         btnPerfil.setText("Perfil");
         btnPerfil.setBorder(null);
-        btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPerfilMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPerfilMouseExited(evt);
-            }
-        });
+        btnPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerfilActionPerformed(evt);
@@ -265,20 +257,6 @@ public class FormMenuDoctor extends javax.swing.JFrame {
             MostrarPanelHijo.Mostrar(new PanelAtenderPacientes(IdDoctor), PanelHijo, 970, 620);
         }
     }//GEN-LAST:event_btnAtenderActionPerformed
-
-    private void btnPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseEntered
-        // TODO add your handling code here:
-//        if (!(btnBuscarPaciente.getBackground() == colorTemp)) {
-//            btnBuscarPaciente.setBackground(new Color(51,75,73));
-//        }
-    }//GEN-LAST:event_btnPerfilMouseEntered
-
-    private void btnPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPerfilMouseExited
-        // TODO add your handling code here:
-//        if (!(btnBuscarPaciente.getBackground() == colorTemp)) {
-//            btnBuscarPaciente.setBackground(new Color(0,125,118));
-//        }
-    }//GEN-LAST:event_btnPerfilMouseExited
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:

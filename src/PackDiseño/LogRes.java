@@ -155,8 +155,7 @@ public class LogRes extends javax.swing.JFrame {
         try {
             ControladorUsuarios cUsuarios = new ControladorUsuarios();
             ContenedorGenerico<Boolean, Usuario, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
-            if (resultado != null) {
-                if (resultado.valor1) {
+            if (resultado.valor1) {
                     switch (resultado.valor2.getRol()) {
                         case "Administrador":
                             FormMenuAdmin a = new FormMenuAdmin();
@@ -176,7 +175,6 @@ public class LogRes extends javax.swing.JFrame {
                         default:
                             
                     }
-                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
