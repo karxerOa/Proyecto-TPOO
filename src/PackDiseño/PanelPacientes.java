@@ -4,11 +4,17 @@
  */
 package PackDiseño;
 
+import Clases.Paciente;
+import Controladores.ControladorPaciente;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,11 +28,13 @@ public class PanelPacientes extends javax.swing.JPanel {
     
     public PanelPacientes() {
         initComponents();
+        llenarTablaPacientes();
+        mostrarTotalPacientes();
         jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
-        jTable1.setRowHeight(30);
-        panelGradiante1.setGradientColorsAndRadius(Color.decode("#2A7B9B"), Color.decode("#EDDD53"), 40);
-        panelGradiante2.setGradientColorsAndRadius(Color.BLUE, Color.CYAN, 40);
-        panelGradiante3.setGradientColorsAndRadius(Color.decode("#D97038"), Color.decode("#89D439"), 40);
+        tablaPacientes.setRowHeight(30);
+//        panelGradiante1.setGradientColorsAndRadius(Color.decode("#2A7B9B"), Color.decode("#EDDD53"), 40);
+//        panelGradiante2.setGradientColorsAndRadius(Color.BLUE, Color.CYAN, 40);
+//        panelGradiante3.setGradientColorsAndRadius(Color.decode("#D97038"), Color.decode("#89D439"), 40);
         //REDONDEO
         try {
             UIManager.setLookAndFeel( new FlatLightLaf() );
@@ -50,20 +58,14 @@ public class PanelPacientes extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPacientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         txtBuscar = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        panelGradiante1 = new PackDiseño.PanelGradiante();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        panelGradiante2 = new PackDiseño.PanelGradiante();
-        jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        panelGradiante3 = new PackDiseño.PanelGradiante();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lblTotalPacientes = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -75,7 +77,7 @@ public class PanelPacientes extends javax.swing.JPanel {
 
         jScrollPane2.setBorder(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -94,7 +96,7 @@ public class PanelPacientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tablaPacientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,7 +108,7 @@ public class PanelPacientes extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,7 +121,7 @@ public class PanelPacientes extends javax.swing.JPanel {
                 .addGap(332, 332, 332))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 930, 330));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 930, 330));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,84 +138,29 @@ public class PanelPacientes extends javax.swing.JPanel {
                 txtBuscarMousePressed(evt);
             }
         });
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 6, 840, 38));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 930, 50));
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jLabel3.setText("Total de pacientes");
-
-        javax.swing.GroupLayout panelGradiante1Layout = new javax.swing.GroupLayout(panelGradiante1);
-        panelGradiante1.setLayout(panelGradiante1Layout);
-        panelGradiante1Layout.setHorizontalGroup(
-            panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGradiante1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
-        );
-        panelGradiante1Layout.setVerticalGroup(
-            panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante1Layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-        );
-
-        jPanel3.add(panelGradiante1, java.awt.BorderLayout.CENTER);
-
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 300, 180));
-
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        jLabel4.setText("Pacientes por edad");
-
-        javax.swing.GroupLayout panelGradiante2Layout = new javax.swing.GroupLayout(panelGradiante2);
-        panelGradiante2.setLayout(panelGradiante2Layout);
-        panelGradiante2Layout.setHorizontalGroup(
-            panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante2Layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
-        );
-        panelGradiante2Layout.setVerticalGroup(
-            panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante2Layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
-        );
-
-        jPanel4.add(panelGradiante2, java.awt.BorderLayout.CENTER);
-
-        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 290, 180));
-
         jPanel5.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setText("Pacietnes por genero");
-
-        javax.swing.GroupLayout panelGradiante3Layout = new javax.swing.GroupLayout(panelGradiante3);
-        panelGradiante3.setLayout(panelGradiante3Layout);
-        panelGradiante3Layout.setHorizontalGroup(
-            panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGradiante3Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
-        );
-        panelGradiante3Layout.setVerticalGroup(
-            panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante3Layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-        );
-
-        jPanel5.add(panelGradiante3, java.awt.BorderLayout.CENTER);
-
         add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 296, 180));
+
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTotalPacientes.setBackground(new java.awt.Color(0, 51, 51));
+        lblTotalPacientes.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        lblTotalPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalPacientes.setText("Total de");
+        lblTotalPacientes.setOpaque(true);
+        jPanel3.add(lblTotalPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 170, 160));
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 930, 220));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMousePressed
@@ -221,25 +168,73 @@ public class PanelPacientes extends javax.swing.JPanel {
         txtBuscar.setText("");
         txtBuscar.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtBuscarMousePressed
+    private void mostrarTotalPacientes() {
+    try {
+        ControladorPaciente controlador = new ControladorPaciente();
+        int total = controlador.contarPacientes();
+        lblTotalPacientes.setText("Total de pacientes: " + total);
+    } catch (Exception e) {
+        lblTotalPacientes.setText("Error al contar");
+        System.err.println("Error al obtener total de pacientes: " + e.getMessage());
+    }
+}
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void llenarTablaPacientes() {
+    try {
+        ControladorPaciente cp = new ControladorPaciente();
+        ArrayList<Paciente> lista = cp.mostrarPacientes(); // tu nuevo método desde BD
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellido Paterno");
+        modelo.addColumn("Apellido Materno");
+        modelo.addColumn("Doc Identidad");
+        modelo.addColumn("Tipo Doc");
+        modelo.addColumn("Fecha Nacimiento") ; 
+        modelo.addColumn("Edad");
+        modelo.addColumn("Género");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Dirección");
+
+        for (Paciente p : lista) {
+            modelo.addRow(new Object[]{
+                p.getNombre(),
+                p.getApellidoPaterno(),
+                p.getApellidoMaterno(),
+                p.getNumDoc(),
+                p.getTipoDoc(),
+                p.getFechaNacimiento(),
+                p.verEdad(),
+                p.getGenero(),
+                p.getTelefono(),
+                p.getCorreo(),
+                p.getDireccion()
+            });
+        }
+
+        tablaPacientes.setModel(modelo);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
+    }
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private PackDiseño.PanelGradiante panelGradiante1;
-    private PackDiseño.PanelGradiante panelGradiante2;
-    private PackDiseño.PanelGradiante panelGradiante3;
+    private javax.swing.JLabel lblTotalPacientes;
+    private javax.swing.JTable tablaPacientes;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,7 +18,7 @@ public class Doctor extends Persona{
     private ArrayList<Turno> Turnos;
     private Usuario user;
 
-    public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion, String CodigoColegiatura) {
+    public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion, String CodigoColegiatura) {
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.IdDoctor = IdDoctor;
         this.CodigoColegiatura = CodigoColegiatura;

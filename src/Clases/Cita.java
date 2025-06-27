@@ -18,6 +18,10 @@ public class Cita {
     private String EspecialidadSolicitada;
     private boolean Antendida;
 
+    public Cita() {
+    }
+
+    
     public Cita(LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
         this.FechaHora = FechaHora;
         this.pacienteSolicitante = pacienteSolicitante;

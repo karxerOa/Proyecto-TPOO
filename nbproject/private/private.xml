@@ -4,22 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Alergia.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Controladores/ControladorUsuarios.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Controladores/ControladorRecepcionista.java</file>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Recepcionista.java</file>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/PackDiseño/PanelRegistrarPaciente.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/ContenedorGenerico.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Administrador.java</file>
+            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/PackDiseño/PanelAgendarCita.java</file>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Controladores/ControladorPaciente.java</file>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Persona.java</file>
             <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Paciente.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Conexion/Conexion.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Controladores/ControladorDoctor.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Doctor.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Cita.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/Clases/Usuario.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/PackDiseño/PanelRegistroRecepcionistas.java</file>
-            <file>file:/C:/Users/USUARIO/OneDrive/Escritorio/CLONAR%20GIT/Proyecto-TPOO/src/PackDiseño/PanelRegistarDoctor.java</file>
         </group>
     </open-files>
 </project-private>

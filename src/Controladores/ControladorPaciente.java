@@ -40,7 +40,7 @@ public class ControladorPaciente {
     }
     public int registrar_paciente(Paciente paciente) throws Exception{
         String sql = """
-        INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumDocumento, TipoDocumento, 
+        INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumeroDocumento, TipoDocumento, 
                               Telefono, FechaNacimiento, Genero, Correo, Direccion, GrupoSanguineo)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
         try (Connection con = Conexion.getConexion();
@@ -48,7 +48,7 @@ public class ControladorPaciente {
             stmt.setString(1, paciente.getNombre());
             stmt.setString(2, paciente.getApellidoPaterno());
             stmt.setString(3, paciente.getApellidoMaterno());
-            stmt.setInt(4, paciente.getNumDoc());
+            stmt.setString(4, paciente.getNumDoc());
             stmt.setString(5, paciente.getTipoDoc());
             stmt.setString(6, paciente.getTelefono());
             stmt.setDate(7, Date.valueOf(paciente.getFechaNacimiento()));
@@ -69,6 +69,70 @@ public class ControladorPaciente {
             }
         } catch (SQLException e) {
             throw new Exception("Error al registrar paciente: " + e.getMessage());
+        }
+    }
+    public ArrayList<Paciente> mostrarPacientes() throws Exception {
+    ArrayList<Paciente> lista = new ArrayList<>();
+    String sql = "SELECT * FROM Paciente";
+
+    try (Connection con = Conexion.getConexion();
+         PreparedStatement stmt = con.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+                Paciente p = new Paciente();
+                p.setNombre(rs.getString("Nombre"));
+                p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+                p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                p.setNumDoc(rs.getString("NumeroDocumento"));
+                p.setTipoDoc(rs.getString("TipoDocumento"));
+                p.setTelefono(rs.getString("Telefono"));
+                p.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+                p.setGenero(rs.getString("Genero"));
+                p.setCorreo(rs.getString("Correo"));
+                p.setDireccion(rs.getString("Direccion"));
+                p.setGrupoSanguineo(rs.getString("GrupoSanguineo"));
+
+                lista.add(p);
+            }
+
+        } catch (SQLException e) {
+            throw new Exception("Error al mostrar pacientes: " + e.getMessage());
+        }
+
+        return lista;
+    }
+    public int contarPacientes() throws Exception {
+        String sql = "SELECT COUNT(*) FROM Paciente";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                throw new Exception("No se pudo contar los pacientes.");
+            }
+
+        } catch (SQLException e) {
+            throw new Exception("Error al contar pacientes: " + e.getMessage());
+        }
+    }
+    
+   public Paciente buscarPorDNI(String dni) throws Exception {
+        String sql = "SELECT * FROM Paciente WHERE NumeroDocumento = ?";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, dni);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Paciente p = new Paciente();
+                p.setNombre(rs.getString("Nombre"));
+                p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+                p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                // ... llena el resto de campos
+                return p;
+            }
+            return null;
         }
     }
 }
