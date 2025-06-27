@@ -13,6 +13,13 @@ public class Especialidad {
     private String Nombre;
     private String Descripcion;
 
+    public Especialidad() {
+    }
+
+    public void setIdEspecialidad(int IdEspecialidad) {
+        this.IdEspecialidad = IdEspecialidad;
+    }
+
     public int getIdEspecialidad() {
         return IdEspecialidad;
     }

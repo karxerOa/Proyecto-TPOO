@@ -4,6 +4,16 @@
  */
 package PackDiseño;
 
+import Clases.Doctor;
+import Clases.Turno;
+import Controladores.ControladorAdministrador;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author apnil
@@ -13,6 +23,7 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistrarTurnos
      */
+    ArrayList<Doctor>  ListaDoctor;
     public PanelRegistrarTurnos() {
         initComponents();
     }
@@ -49,7 +60,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         checkMiercoles = new javax.swing.JCheckBox();
@@ -59,13 +69,13 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         checkJueves = new javax.swing.JCheckBox();
         checkViernes = new javax.swing.JCheckBox();
         checkSabado = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        cbUbicacion = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel19 = new javax.swing.JLabel();
         cbDoctor = new javax.swing.JComboBox<>();
         dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
         jLabel20 = new javax.swing.JLabel();
+        btnRegistrarTurnos = new javax.swing.JButton();
+        cbHoraFinal = new javax.swing.JComboBox<>();
+        cbHoraInicio = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -280,11 +290,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         jLabel13.setText("Dias:");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, -1));
 
-        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
-        jLabel16.setText("Ubicacion:");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
-
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         jLabel17.setText("Fecha de Ingreso:");
@@ -323,16 +328,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         checkSabado.setText("Sabado");
         add(checkSabado, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6:00 a.m", "18:00 a.m" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 90, -1));
-
-        cbUbicacion.setForeground(new java.awt.Color(153, 153, 153));
-        cbUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cardiología – Consultorios externos, Piso 2, sector B", "Medicina general / Clínica médica – Consultorios externos, Piso 1, sector A", "Pediatría – Área pediátrica, Piso 1, sector C", "Traumatología / Ortopedia – Consultorios externos, Piso 2, sector D", "Neurología – Consultorios externos, Piso 3, sector B", "Dermatología – Consultorios externos, Piso 1, sector D", "Ginecología y Obstetricia – Área maternidad, Piso 3, sector A", "Urología – Consultorios externos, Piso 2, sector E", "Gastroenterología – Consultorios externos, Piso 3, sector C", "Neumonología – Consultorios externos, Piso 2, sector F", "Endocrinología – Consultorios externos, Piso 2, sector G", "Oncología – Área oncológica, Piso 4, sector A", "Otorrinolaringología – Consultorios externos, Piso 1, sector E", "Oftalmología – Consultorios externos, Piso 1, sector F", "Psiquiatría – Área de salud mental, Piso 3, sector D", "Psicología clínica – Área de salud mental, Piso 3, sector D", "Reumatología – Consultorios externos, Piso 3, sector E", "Nefrología – Unidad renal, Piso 4, sector B", "Cirugía general – Área quirúrgica, Piso 2, quirófanos centrales", "Urgencias / Guardia médica – Planta baja, acceso principal (Guardia)", "Terapia intensiva (UCI/UTI) – Piso 4, sector de cuidados intensivos", "Radiología / Diagnóstico por imagen – Subsuelo o Planta baja", "Laboratorio clínico – Subsuelo, Laboratorio central", "Rehabilitación / Kinesiología – Planta baja o anexo de rehabilitación" }));
-        add(cbUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 260, 20));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0:00 a.m", "12:00 a.m", "24:00 p.m" }));
-        add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 90, -1));
-
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
         jLabel19.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         jLabel19.setText("Hora de Ingreso:");
@@ -345,12 +340,67 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
         jLabel20.setText("Seleccion Doctor:");
         add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, -1, -1));
+
+        btnRegistrarTurnos.setBackground(new java.awt.Color(0, 153, 153));
+        btnRegistrarTurnos.setFont(new java.awt.Font("Myanmar Text", 1, 14)); // NOI18N
+        btnRegistrarTurnos.setText("Registrar Turno");
+        btnRegistrarTurnos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 51, 51), new java.awt.Color(0, 51, 51), new java.awt.Color(0, 51, 51), new java.awt.Color(0, 51, 51)));
+        btnRegistrarTurnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarTurnosActionPerformed(evt);
+            }
+        });
+        add(btnRegistrarTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, 160, 50));
+
+        cbHoraFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12:00 PM", "08:00 PM", "04:00 AM" }));
+        add(cbHoraFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 90, -1));
+
+        cbHoraInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00 AM", "04:00 PM", "12:00 PM" }));
+        add(cbHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTurnosActionPerformed
+        try{
+            int index = cbDoctor.getSelectedIndex();
+            Doctor DocSelecionado = ListaDoctor.get(index);
+            int IdDoctor = DocSelecionado.getIdDoctor();
+
+            DateTimeFormatter Formato = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+
+            LocalTime HoraInicio = LocalTime.parse(cbHoraInicio.getSelectedItem().toString(),Formato);
+            LocalTime HoraFin = LocalTime.parse(cbHoraFinal.getSelectedItem().toString(),Formato);
+
+            ArrayList<DayOfWeek> DiasSeleccionado = new ArrayList<>();
+            if(checkLunes.isSelected())DiasSeleccionado.add(DayOfWeek.MONDAY);
+            if(checkMartes.isSelected())DiasSeleccionado.add(DayOfWeek.TUESDAY);
+            if(checkMiercoles.isSelected())DiasSeleccionado.add(DayOfWeek.WEDNESDAY);
+            if(checkJueves.isSelected())DiasSeleccionado.add(DayOfWeek.THURSDAY);
+            if(checkViernes.isSelected())DiasSeleccionado.add(DayOfWeek.FRIDAY);
+            if(checkSabado.isSelected())DiasSeleccionado.add(DayOfWeek.SATURDAY);
+            if(checkDomingo.isSelected())DiasSeleccionado.add(DayOfWeek.SUNDAY);
+
+            Turno nuevoturno = new Turno();
+            nuevoturno.setHoraInicio(HoraInicio);
+            nuevoturno.setHoraFin(HoraFin);
+            nuevoturno.setDiasPorSemana(DiasSeleccionado);
+
+            ControladorAdministrador CA = new ControladorAdministrador();
+            CA.Asignar_Turnos(nuevoturno, IdDoctor);
+
+            JOptionPane.showMessageDialog(this, "Turno Registrado exitosamente");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro al registrar turno: "+e.getMessage());
+        }
+    }//GEN-LAST:event_btnRegistrarTurnosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarTurnos;
     private javax.swing.JComboBox<String> cbDoctor;
-    private javax.swing.JComboBox<String> cbUbicacion;
+    private javax.swing.JComboBox<String> cbHoraFinal;
+    private javax.swing.JComboBox<String> cbHoraInicio;
     private javax.swing.JCheckBox checkDomingo;
     private javax.swing.JCheckBox checkJueves;
     private javax.swing.JCheckBox checkLunes;
@@ -359,8 +409,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkSabado;
     private javax.swing.JCheckBox checkViernes;
     private org.jdesktop.swingx.JXDatePicker dpFechaNac;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -368,7 +416,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -388,7 +435,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import Clases.ContenedorGenerico;
 import Conexion.Conexion;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 /**
  *
  * @author apnil
@@ -58,9 +59,6 @@ public class ControladorDoctor {
         }      
         
     }
-    
-    
-
     public String VerNombresDoctor(int idDoc)throws Exception {
         String doctor = " ";
         try {
@@ -82,7 +80,6 @@ public class ControladorDoctor {
         }
         return doctor;
     }
-
     public int cantidadCitasPorAtender(int doctorId)throws Exception {
         int cantidad = 0;
         try {
@@ -99,8 +96,7 @@ public class ControladorDoctor {
             throw new SQLException("No se encontraron datos: " + e.getMessage());
         }
         return cantidad;
-    }
-    
+    }   
     public ContenedorGenerico TurnoActual(int doctorId)throws Exception {
         String inicio = "";
         String fin = "";
@@ -153,5 +149,29 @@ public class ControladorDoctor {
             throw new SQLException("No se encontraron datos");
         }
         return nombrePac;
+    }
+    public ArrayList<Doctor> ObtenerDoctor() throws Exception{
+        ArrayList<Doctor> ListaDoctor = new ArrayList();
+        
+        String sql = "SELECT DoctorID, Nombre,ApellidoPaterno,ApellidoMaterno From Doctor";
+        
+        try {
+            Connection conn = Conexion.getConexion();
+            PreparedStatement Astmt = conn.prepareStatement(sql);
+            ResultSet rs = Astmt.executeQuery();
+
+            while(rs.next()){
+                Doctor doc = new Doctor();
+                doc.setIdDoctor(rs.getInt("DoctorID"));
+                doc.setNombre(rs.getString("Nombre"));
+                doc.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+                doc.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                ListaDoctor.add(doc);                                   
+            }                                                                               
+        }
+        catch(SQLException e){
+            throw  new Exception("Error al obtener doctores:"+e.getMessage());
+        }     
+        return ListaDoctor;
     }
 }

@@ -7,9 +7,12 @@ package Controladores;
 import Clases.Doctor;
 import Clases.Especialidad;
 import Clases.Recepcionista;
+import Clases.Turno;
 import Conexion.Conexion;
 import java.sql.*;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
+
 
 /**
  *
@@ -50,14 +53,6 @@ public class ControladorAdministrador {
         }    
         return -1;
     }
-    
-    
-    
-    
-    
-    
-    
-    //Agregar Recepcionsita
     public void Agregar_Repcionista(Recepcionista recepcionista) throws Exception{
         String sql = "INSERT INTO Recepcionista(Nombre,ApellidoPaterno,ApellidoMaterno,NumeroDocumento,TipoDocumento,FechaNacimiento,Genero,Telefono,Correo,UsuarioID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try {Connection conn = Conexion.getConexion();
@@ -81,12 +76,38 @@ public class ControladorAdministrador {
             throw new Exception("Error al registrar doctor: "+e.getMessage());      
         }    
        
+    }    
+    public void Asignar_Turnos(Turno turno, int DoctorID)throws Exception{
+         String sql = "INSERT INTO Turno(HoraInicio,HoraFin) VALUES (?,?)";
+        String SqlRelacion = "INSERT INTO Doctor_Turno(DoctorID,TurnoID,NombreDia) VALUES (?,?,?)";
+        
+        try {Connection conn = Conexion.getConexion();
+        PreparedStatement Tstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+        Tstmt.setTime(1, Time.valueOf(turno.getHoraInicio()));
+        Tstmt.setTime(2, Time.valueOf(turno.getHoraFin()));                 
+        Tstmt.executeUpdate();    
+        
+        ResultSet rs = Tstmt.getGeneratedKeys();
+        
+        int turnoID = -1;
+        if(rs.next()){
+            turnoID = rs.getInt(1);
+        }
+        
+        for(DayOfWeek dia : turno.getDiasPorSemana()){
+            PreparedStatement PsRelacion = conn.prepareStatement(SqlRelacion);
+            PsRelacion.setInt(1, DoctorID);
+            PsRelacion.setInt(2, turnoID);
+            PsRelacion.setString(3, dia.toString());
+            PsRelacion.executeUpdate();
+        }
+     
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            throw new Exception("Error al registrar doctor: "+e.getMessage());      
+        }    
     }
-    //Gestionar Turnos
-    public void Gestionar_Turnos(){
-    
-    }
-    //Agregar Especialiada
     public void Agregar_Especialidades(Especialidad Especialidades)throws Exception{
         String sql = "INSERT INTO Especialidad(nombre,descripcion) VALUES(?,?)";
         try {Connection conn = Conexion.getConexion();
@@ -99,8 +120,7 @@ public class ControladorAdministrador {
         catch(SQLException e){
             throw new Exception("Error la insertar datos: "+e.getMessage());      
         }      
-    }
-    
+    }   
     public ArrayList<Especialidad> Obtener_Especilidad(){
         ArrayList<Especialidad> ListaEspecialidad = new ArrayList();
         
@@ -147,9 +167,7 @@ public class ControladorAdministrador {
         }     
         return ListaEspecialidad;
     
-    }
-    
-    
+    }   
     public  String determinarTipoDocumento(String numeroDocumento) throws Exception {
         String numero = String.valueOf(numeroDocumento);
         try{
@@ -169,7 +187,28 @@ public class ControladorAdministrador {
         }
         
     }
-
-
+    public Especialidad BuscarEspecialidad(String nombreBuscado) throws  Exception{
+         String sql = "SELECT * FROM Especialidad WHERE Nombre = ?";
     
+    try (Connection conn = Conexion.getConexion();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, nombreBuscado);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            Especialidad esp = new Especialidad();        
+            esp.setIdEspecialidad(rs.getInt("EspecialidadID")); 
+            esp.setNombre(rs.getString("nombre"));
+            esp.setDescripcion(rs.getString("descripcion"));
+            return esp;
+        } else {
+            return null; // No se encontró
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new Exception("Error al buscar especialidad: " + e.getMessage());
+    }
+    } 
+  
 }
