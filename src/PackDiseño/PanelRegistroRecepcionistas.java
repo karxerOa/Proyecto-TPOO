@@ -238,6 +238,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
 
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbGenero.setSelectedIndex(-1);
+        cbGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGeneroActionPerformed(evt);
+            }
+        });
         jPanel5.add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, 30));
         jPanel5.add(dpFN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
 
@@ -292,6 +297,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
          try{     
         // Ingresar datos---------------------------------------------------------------------------
@@ -340,6 +346,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnRegistarActionPerformed
+=======
+    private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGeneroActionPerformed
+>>>>>>> funRecep
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

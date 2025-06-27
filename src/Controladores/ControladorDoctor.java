@@ -29,7 +29,7 @@ public class ControladorDoctor {
                     rs.getString("Nombre"),
                     rs.getString("ApellidoPaterno"),
                     rs.getString("ApellidoMaterno"),
-                    rs.getInt("NumDoc"),
+                    rs.getString("NumDoc"),
                     rs.getString("TipoDoc"),
                     rs.getString("Telefono"),
                     rs.getDate("FechaNacimiento").toLocalDate(),

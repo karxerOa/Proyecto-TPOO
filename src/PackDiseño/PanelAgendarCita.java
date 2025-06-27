@@ -4,12 +4,17 @@
  */
 package PackDiseño;
 
+import Clases.Paciente;
+import Controladores.ControladorPaciente;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /**
  *
@@ -25,6 +30,14 @@ public class PanelAgendarCita extends javax.swing.JPanel {
         this.colortemp = colortemp;
         initComponents();
         inicializarPlaceholders();
+        //buscar
+        txtDNIPaciente.addActionListener(new java.awt.event.ActionListener() {
+         @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarDatosPaciente();  // <- esto llama a tu método
+            }
+        });
+
         lblFecha.setText(EstablecerFecha());
         btnRegistar.setBackground(colortemp);
         btnVerDoctores.setBackground(colortemp);
@@ -83,7 +96,7 @@ public class PanelAgendarCita extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
+        lblDatosPaciente = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtDNIPaciente = new javax.swing.JTextField();
@@ -124,7 +137,7 @@ public class PanelAgendarCita extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel17.setText("Datos Paciente ");
+        lblDatosPaciente.setText("Datos Paciente ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -132,14 +145,14 @@ public class PanelAgendarCita extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addComponent(jLabel17)
+                .addComponent(lblDatosPaciente)
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(142, 142, 142)
-                .addComponent(jLabel17)
+                .addComponent(lblDatosPaciente)
                 .addContainerGap(154, Short.MAX_VALUE))
         );
 
@@ -361,7 +374,7 @@ public class PanelAgendarCita extends javax.swing.JPanel {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -405,13 +418,36 @@ public class PanelAgendarCita extends javax.swing.JPanel {
         // TODO add your handling code here:
         ImgCheck.setIcon(new ImageIcon(getClass().getResource("/Recursos/Check Mark.png")));
     }//GEN-LAST:event_btnRegistarActionPerformed
+    private void buscarDatosPaciente() {
+        String dni = txtDNIPaciente.getText().trim();
+        if (dni.isEmpty()) {
+            lblDatosPaciente.setText("Ingrese un DNI");
+            return;
+        }
+
+        try {
+            ControladorPaciente controlador = new ControladorPaciente();
+            Paciente paciente = controlador.buscarPorDNI(dni); // Debes tener este método en tu controlador
+            if (paciente != null) {
+                lblDatosPaciente.setText("<html>"
+                + "Nombre: " + paciente.getNombre() + "<br>"
+                + "Apellidos: " + paciente.getApellidoPaterno() + " " + paciente.getApellidoMaterno()
+                + "</html>");
+
+            } else {
+                lblDatosPaciente.setText("Paciente no encontrado");
+            }
+
+        } catch (Exception e) {
+            lblDatosPaciente.setText("Error al buscar paciente");
+            e.printStackTrace();
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImgCheck;
     private javax.swing.JPanel PanelPaso1;
-    private javax.swing.JPanel PanelPaso2;
-    private javax.swing.JPanel PanelPaso3;
     private javax.swing.JPanel PanelPaso4;
     private javax.swing.JPanel PanelPaso5;
     private javax.swing.JPanel PanelPaso6;
@@ -426,34 +462,23 @@ public class PanelAgendarCita extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblDatosPaciente;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JPanel panelCheck;
     private javax.swing.JTextField txtDNIPaciente;

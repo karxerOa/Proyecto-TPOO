@@ -13,6 +13,9 @@ public class Alergia {
     private String Severidad;
     private String TipoAlergia;
 
+    public Alergia() {
+    }
+
     public Alergia(String NombreAlergia, String Severidad, String TipoAlergia) {
         this.NombreAlergia = NombreAlergia;
         this.Severidad = Severidad;

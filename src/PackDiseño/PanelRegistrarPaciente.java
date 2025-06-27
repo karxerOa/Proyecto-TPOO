@@ -4,10 +4,17 @@
  */
 package PackDiseño;
 
+import Clases.Alergia;
+import Clases.Paciente;
+import Controladores.ControladorPaciente;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -23,6 +30,10 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     public PanelRegistrarPaciente(Color col) {
         initComponents();
         inicializarPlaceholders();
+        //alergias
+        btgAlergias.add(rbAlergiaAlimentos);
+        btgAlergias.add(rbAlergiaMedicamentos);
+        btgAlergias.add(rbNoTieneAlergia);
         lblFecha.setText(EstablecerFecha());
         this.col = col;
         cbGenero.setSelectedIndex(-1);
@@ -47,8 +58,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     }
     private void EstablecerColor(){
         jSeparator1.setForeground(col);
-        jSeparator10.setForeground(col);
-        jSeparator3.setForeground(col);
+        jSeparator10.setForeground(col);    
         jSeparator4.setForeground(col);
         jSeparator5.setForeground(col);
         jSeparator6.setForeground(col);
@@ -67,6 +77,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btgAlergias = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -74,11 +85,8 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtEdad = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cbGenero = new javax.swing.JComboBox<>();
-        jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -101,7 +109,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        txtTipoSangre = new javax.swing.JTextField();
+        txtDescripciònAlergia = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         rbNoTieneAlergia = new javax.swing.JRadioButton();
         rbAlergiaAlimentos = new javax.swing.JRadioButton();
@@ -109,7 +117,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         txtTipoSangrePac = new javax.swing.JTextField();
         rbAlergiaMedicamentos = new javax.swing.JRadioButton();
         jLabel28 = new javax.swing.JLabel();
-        txtTipoSangre2 = new javax.swing.JTextField();
+        txtSeveridadAlerg = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(970, 620));
@@ -145,25 +153,15 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jLabel11.setText("Fecha Nacimiento");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 130, 30));
 
-        txtEdad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtEdad.setText("00");
-        txtEdad.setEnabled(false);
-        add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 80, 30));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Edad");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 80, 30));
-
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Genero");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, 30));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 80, 30));
 
         cbGenero.setBackground(new java.awt.Color(242, 242, 242));
         cbGenero.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
         cbGenero.setOpaque(true);
-        add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, 30));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 50, 10));
+        add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, 30));
         add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 160, 10));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -251,12 +249,12 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jLabel25.setText("Datos médicos");
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, 30));
 
-        txtTipoSangre.setBackground(new java.awt.Color(63, 154, 154));
-        txtTipoSangre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtTipoSangre.setForeground(new java.awt.Color(255, 255, 255));
-        txtTipoSangre.setText("Ingrese descripción solo si posee alguna alergia");
-        txtTipoSangre.setBorder(null);
-        jPanel1.add(txtTipoSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 280, 30));
+        txtDescripciònAlergia.setBackground(new java.awt.Color(63, 154, 154));
+        txtDescripciònAlergia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDescripciònAlergia.setForeground(new java.awt.Color(255, 255, 255));
+        txtDescripciònAlergia.setText("Ingrese descripción solo si posee alguna alergia");
+        txtDescripciònAlergia.setBorder(null);
+        jPanel1.add(txtDescripciònAlergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 280, 30));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
@@ -266,11 +264,21 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         rbNoTieneAlergia.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         rbNoTieneAlergia.setForeground(new java.awt.Color(255, 255, 255));
         rbNoTieneAlergia.setText("No posee alergias");
+        rbNoTieneAlergia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNoTieneAlergiaActionPerformed(evt);
+            }
+        });
         jPanel1.add(rbNoTieneAlergia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
 
         rbAlergiaAlimentos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         rbAlergiaAlimentos.setForeground(new java.awt.Color(255, 255, 255));
         rbAlergiaAlimentos.setText("Alimentos");
+        rbAlergiaAlimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAlergiaAlimentosActionPerformed(evt);
+            }
+        });
         jPanel1.add(rbAlergiaAlimentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -283,11 +291,21 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         txtTipoSangrePac.setForeground(new java.awt.Color(153, 153, 153));
         txtTipoSangrePac.setText("Ingrese el tipo de sangre");
         txtTipoSangrePac.setBorder(null);
+        txtTipoSangrePac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTipoSangrePacActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtTipoSangrePac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 190, 30));
 
         rbAlergiaMedicamentos.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         rbAlergiaMedicamentos.setForeground(new java.awt.Color(255, 255, 255));
         rbAlergiaMedicamentos.setText("Medicamentos");
+        rbAlergiaMedicamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbAlergiaMedicamentosActionPerformed(evt);
+            }
+        });
         jPanel1.add(rbAlergiaMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -295,21 +313,96 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         jLabel28.setText("Severidad");
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, 30));
 
-        txtTipoSangre2.setBackground(new java.awt.Color(63, 154, 154));
-        txtTipoSangre2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtTipoSangre2.setForeground(new java.awt.Color(255, 255, 255));
-        txtTipoSangre2.setText("Ingrese severidad de la alergia solo si posee alguna.");
-        txtTipoSangre2.setBorder(null);
-        jPanel1.add(txtTipoSangre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 280, 30));
+        txtSeveridadAlerg.setBackground(new java.awt.Color(63, 154, 154));
+        txtSeveridadAlerg.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSeveridadAlerg.setForeground(new java.awt.Color(255, 255, 255));
+        txtSeveridadAlerg.setText("Ingrese severidad de la alergia solo si posee alguna.");
+        txtSeveridadAlerg.setBorder(null);
+        jPanel1.add(txtSeveridadAlerg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 280, 30));
 
         btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setText("Registrar");
         btnRegistrar.setBorder(null);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 350, 50));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 430, 460));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTipoSangrePacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoSangrePacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoSangrePacActionPerformed
+    
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+       
+      try {
+        Paciente paciente = new Paciente();
+        Alergia alergia = new Alergia();
+        ControladorPaciente consPa = new ControladorPaciente();
+        
+        // Datos del paciente
+        paciente.setNombre(txtNombres.getText());
+        paciente.setApellidoPaterno(txtAPaterno.getText());
+        paciente.setApellidoMaterno(txtAMaterno.getText());
+        paciente.setGenero(cbGenero.getSelectedItem().toString());
+        paciente.setNumDoc(txtDocIdentidad.getText());
+        paciente.setTipoDoc("DNI");
+        paciente.setTelefono(txtTelefono.getText());       
+        paciente.setCorreo(txtCorreo.getText());
+        paciente.setDireccion(txtDireccion.getText());    
+        paciente.setGrupoSanguineo(txtTipoSangrePac.getText());
+        Date fecha = dpFechaNac.getDate();
+        LocalDate FechaNacimiento = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        paciente.setFechaNacimiento(FechaNacimiento);
+        // Alergia
+        ButtonModel selectedModel = btgAlergias.getSelection();
+        if (selectedModel != null) {
+            String tipoAlergia = "";
+
+            if (rbAlergiaAlimentos.isSelected()) {
+                tipoAlergia = "Alimentos";
+            } else if (rbAlergiaMedicamentos.isSelected()) {
+                tipoAlergia = "Medicamentos";
+            } else if (rbNoTieneAlergia.isSelected()) {
+                
+                tipoAlergia = "Ninguna";
+                
+            }
+            alergia.setTipoAlergia(tipoAlergia);
+            alergia.setNombreAlergia(tipoAlergia);                  
+            JOptionPane.showMessageDialog(this, "Registro exitoso");
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar un tipo de alergia.");
+            }
+            paciente.agregarAlergia(alergia);
+            consPa.registrar_paciente(paciente);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al registrar: " + e.getMessage());         
+        }
+        
+            //hacerlo con try
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void rbNoTieneAlergiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoTieneAlergiaActionPerformed
+       txtDescripciònAlergia.setEnabled(false);
+       txtSeveridadAlerg.setEnabled(false);
+    }//GEN-LAST:event_rbNoTieneAlergiaActionPerformed
+
+    private void rbAlergiaAlimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlergiaAlimentosActionPerformed
+       txtDescripciònAlergia.setEnabled(true);
+       txtSeveridadAlerg.setEnabled(true);
+    }//GEN-LAST:event_rbAlergiaAlimentosActionPerformed
+
+    private void rbAlergiaMedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbAlergiaMedicamentosActionPerformed
+       txtDescripciònAlergia.setEnabled(true);
+       txtSeveridadAlerg.setEnabled(true);
+    }//GEN-LAST:event_rbAlergiaMedicamentosActionPerformed
+  
     public void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtNombres, "Ingrese sus nombres");
         Placeholders.configurarPlaceholder(txtAPaterno, "Ingrese su Apellido Paterno");
@@ -318,14 +411,17 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         Placeholders.configurarPlaceholder(txtCorreo, "Ingrese su Correo");
         Placeholders.configurarPlaceholder(txtDireccion, "Ingrese su Direccion");
         Placeholders.configurarPlaceholder(txtDocIdentidad, "Ingrese el numero de su documento de identidad (DNI / CE");
+        Placeholders.configurarPlaceholder(txtTipoSangrePac, "Ingrese el tipo de sangre.");
+        Placeholders.configurarPlaceholder(txtDescripciònAlergia, "Ingrese descripciòn sol si posee alguna.");
+        Placeholders.configurarPlaceholder(txtSeveridadAlerg, "Ingrese severidad de la alergia solo si posee alguna.");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btgAlergias;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbGenero;
     private org.jdesktop.swingx.JXDatePicker dpFechaNac;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
@@ -343,7 +439,6 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
@@ -357,13 +452,12 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
     private javax.swing.JTextField txtAMaterno;
     private javax.swing.JTextField txtAPaterno;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDescripciònAlergia;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDocIdentidad;
-    private javax.swing.JLabel txtEdad;
     private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtSeveridadAlerg;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtTipoSangre;
-    private javax.swing.JTextField txtTipoSangre2;
     private javax.swing.JTextField txtTipoSangrePac;
     // End of variables declaration//GEN-END:variables
 }
