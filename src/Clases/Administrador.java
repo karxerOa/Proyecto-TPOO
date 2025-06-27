@@ -15,12 +15,7 @@ public class Administrador extends Persona{
     private Usuario user;
     private int nivelAcceso;
 
-    public Administrador(String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
-        this.user = user;
-        this.nivelAcceso = validarNivelAcceso(nivelAcceso);
-    }
-    
+ 
     public void setIdAdministrador(int IdAdministrador) {
         this.IdAdministrador = IdAdministrador;
     }

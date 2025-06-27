@@ -18,26 +18,22 @@ public class Doctor extends Persona{
     private ArrayList<Turno> Turnos;
     private Usuario user;
 
-<<<<<<< HEAD
+
     public Doctor() {
     }
 
-    public Doctor(String CodigoColegiatura, ArrayList<Especialidad> Especialidades, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
-        this.CodigoColegiatura = CodigoColegiatura;
-        this.Especialidades = Especialidades;
-        this.user = user;
-    }
+//    public Doctor(String CodigoColegiatura, ArrayList<Especialidad> Especialidades, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
+//        super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
+//        this.CodigoColegiatura = CodigoColegiatura;
+//        this.Especialidades = Especialidades;
+//        this.user = user;
+//    }
 
-    public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, int numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion, String CodigoColegiatura) {
-=======
     public Doctor(int IdDoctor, String nombre, String apellidoPaterno, String apellidoMaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion, String CodigoColegiatura) {
->>>>>>> funRecep
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.IdDoctor = IdDoctor;
         this.CodigoColegiatura = CodigoColegiatura;
     }
-
    
     public void setCodigoColegiatura(String CodigoColegiatura) {
         this.CodigoColegiatura = CodigoColegiatura;

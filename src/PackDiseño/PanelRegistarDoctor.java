@@ -8,11 +8,9 @@ import Clases.Doctor;
 import Clases.Especialidad;
 import Clases.Usuario;
 import Controladores.ControladorAdministrador;
-import static Controladores.ControladorAdministrador.determinarTipoDocumento;
 import Controladores.ControladorDoctor;
 import Controladores.ControladorUsuarios;
 import java.util.Date;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -343,14 +341,14 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
             
             //Mandar ID
             newUsser.setIdUsuario(IdUsuario);
-            
+            ControladorAdministrador A = new ControladorAdministrador(); 
             Doctor newdoc = new Doctor();
             //Set clase persona
             newdoc.setNombre(txtNombre.getText());
             newdoc.setApellidoPaterno(txtAPaterno.getText());
             newdoc.setApellidoMaterno(txtAMaterno.getText());
-            newdoc.setNumDoc(Integer.parseInt(txtNunDoc.getText()));                 
-            newdoc.setTipoDoc(determinarTipoDocumento(Integer.parseInt(txtNunDoc.getText())));
+            newdoc.setNumDoc(txtNunDoc.getText());     
+            newdoc.setTipoDoc(A.determinarTipoDocumento(txtNunDoc.getText()));
             newdoc.setTelefono(txtTelefono.getText());
             newdoc.setFechaNacimiento(FechaNacimiento);
             newdoc.setGenero(cbGenero.getSelectedItem().toString());
@@ -363,7 +361,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
             newdoc.setUser(newUsser);
             
             //Agregar doctor
-            ControladorAdministrador A = new ControladorAdministrador(); 
+          
             
             //Relacion Especialidad_doctor
             int DoctorID = A.Agregar_Doctor(newdoc);

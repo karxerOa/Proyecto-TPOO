@@ -7,7 +7,6 @@ package PackDiseño;
 import Clases.Recepcionista;
 import Clases.Usuario;
 import Controladores.ControladorAdministrador;
-import static Controladores.ControladorAdministrador.determinarTipoDocumento;
 import Controladores.ControladorUsuarios;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -297,7 +296,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
+
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
          try{     
         // Ingresar datos---------------------------------------------------------------------------
@@ -314,7 +313,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         int IdUsuario = U.RegistrarUser(newUsser);
         
         if(IdUsuario!=-1){
-            
+            ControladorAdministrador A = new ControladorAdministrador(); 
             //Mandar ID
             newUsser.setIdUsuario(IdUsuario);
             
@@ -323,8 +322,8 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
             NewRecepcionista.setNombre(txtNombre.getText());
             NewRecepcionista.setApellidoPaterno(txtAPaterno.getText());
             NewRecepcionista.setApellidoMaterno(txtAMaterno.getText());
-            NewRecepcionista.setNumDoc(Integer.parseInt(txtDocIdentidad.getText()));                 
-            NewRecepcionista.setTipoDoc(determinarTipoDocumento(Integer.parseInt(txtDocIdentidad.getText())));
+            NewRecepcionista.setNumDoc(txtDocIdentidad.getText());                 
+            NewRecepcionista.setTipoDoc(A.determinarTipoDocumento(txtDocIdentidad.getText()));
             NewRecepcionista.setTelefono(txtTelefono.getText());
             NewRecepcionista.setFechaNacimiento(FechaNacimiento);
             NewRecepcionista.setGenero(cbGenero.getSelectedItem().toString());
@@ -334,7 +333,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
             NewRecepcionista.setUser(newUsser);
             
             //Agregar doctor
-            ControladorAdministrador A = new ControladorAdministrador(); 
+          
              A.Agregar_Repcionista(NewRecepcionista);
             JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente");  
         }
@@ -346,11 +345,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnRegistarActionPerformed
-=======
+
     private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGeneroActionPerformed
->>>>>>> funRecep
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

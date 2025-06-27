@@ -10,8 +10,6 @@ import Clases.Recepcionista;
 import Conexion.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
-import javax.swing.FocusManager;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +25,7 @@ public class ControladorAdministrador {
         Dstmt.setString(1, doctor.getNombre());
         Dstmt.setString(2, doctor.getApellidoPaterno());
         Dstmt.setString(3, doctor.getApellidoMaterno());
-        Dstmt.setInt(4, doctor.getNumDoc());
+        Dstmt.setString(4, doctor.getNumDoc());
         Dstmt.setString(5, doctor.getTipoDoc());
         Dstmt.setDate(6, java.sql.Date.valueOf(doctor.getFechaNacimiento()));
         Dstmt.setString(7, doctor.getGenero());
@@ -67,7 +65,7 @@ public class ControladorAdministrador {
         Dstmt.setString(1, recepcionista.getNombre());
         Dstmt.setString(2, recepcionista.getApellidoPaterno());
         Dstmt.setString(3, recepcionista.getApellidoMaterno());
-        Dstmt.setInt(4, recepcionista.getNumDoc());
+        Dstmt.setString(4, recepcionista.getNumDoc());
         Dstmt.setString(5, recepcionista.getTipoDoc());
         Dstmt.setDate(6, java.sql.Date.valueOf(recepcionista.getFechaNacimiento()));
         Dstmt.setString(7, recepcionista.getGenero());
@@ -152,7 +150,7 @@ public class ControladorAdministrador {
     }
     
     
-    public static String determinarTipoDocumento(int numeroDocumento) throws Exception {
+    public  String determinarTipoDocumento(String numeroDocumento) throws Exception {
         String numero = String.valueOf(numeroDocumento);
         try{
             int longitud = numero.trim().length();

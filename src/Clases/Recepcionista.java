@@ -13,24 +13,19 @@ import java.time.LocalDate;
  * @author apnil
  */
 public class Recepcionista extends Persona{
+    
     private int IdRecepcionista;
     private Usuario user;
-
-<<<<<<< HEAD
 
     public Recepcionista() {
     }
         
-
-    public int getIdRecepcionista() {
-=======
     public Recepcionista(int IdRecepcionista, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.IdRecepcionista = IdRecepcionista;
         this.user = user;
     }    
      public int getIdRecepcionista() {
->>>>>>> funRecep
         return IdRecepcionista;
     }
 
@@ -44,10 +39,7 @@ public class Recepcionista extends Persona{
 
     public void setUser(Usuario user) {
         this.user = user;
-<<<<<<< HEAD
+
     }
-=======
-    } 
     
->>>>>>> funRecep
 }
