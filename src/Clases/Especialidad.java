@@ -16,6 +16,16 @@ public class Especialidad {
     public Especialidad() {
     }
 
+    public Especialidad(String Nombre, String Descripcion) {
+        this.Nombre = Nombre;
+        this.Descripcion = Descripcion;
+    }
+
+    public Especialidad(int IdEspecialidad, String Nombre) {
+        this.IdEspecialidad = IdEspecialidad;
+        this.Nombre = Nombre;
+    }
+
     public void setIdEspecialidad(int IdEspecialidad) {
         this.IdEspecialidad = IdEspecialidad;
     }
@@ -26,16 +36,6 @@ public class Especialidad {
 
     public String getNombre() {
         return Nombre;
-    }
-
-    public Especialidad(int IdEspecialidad, String Nombre) {
-        this.IdEspecialidad = IdEspecialidad;
-        this.Nombre = Nombre;
-    }
-
-    public Especialidad(String Nombre, String Descripcion) {
-        this.Nombre = Nombre;
-        this.Descripcion = Descripcion;
     }
 
     public void setNombre(String Nombre)throws Exception {
@@ -54,5 +54,9 @@ public class Especialidad {
             throw new Exception("La descripción de la especialidad no puede estar vacía.");
         }
         this.Descripcion = Descripcion;
+    }
+    
+    public String VerDatosCompletos(){
+        return this.Nombre + ": " + this.Descripcion;
     }
 }

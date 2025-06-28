@@ -13,14 +13,13 @@ import java.sql.*;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author William
  */
 public class ControladorAdministrador {
     
-    
+    //PorCorregir
     public int Agregar_Doctor(Doctor doctor) throws Exception{
         String sql = "INSERT INTO Doctor(Nombre,ApellidoPaterno,ApellidoMaterno,NumeroDocumento,TipoDocumento,FechaNacimiento,Genero,Telefono,Correo,Direccion,CodigoColegiatura,UsuarioID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {Connection conn = Conexion.getConexion();

@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Clases;
+
+import Util.Validador;
+
 /**
  *
  * @author apnil
@@ -15,6 +18,10 @@ public class Alergia {
 
     public Alergia() {
     }
+    
+    public Alergia(int idAlergia) {
+        this.IdAlergia = idAlergia;
+    }
 
     public Alergia(String NombreAlergia, String Severidad, String TipoAlergia) {
         this.NombreAlergia = NombreAlergia;
@@ -22,32 +29,39 @@ public class Alergia {
         this.TipoAlergia = TipoAlergia;
     }
 
-    public void setNombreAlergia(String NombreAlergia)throws Exception {
-        if (NombreAlergia == null || NombreAlergia.isBlank()) {
-            throw new Exception("El nombre de la alergia no puede estar vacío.");
-        }
-        this.NombreAlergia = NombreAlergia;
+    public void setIdAlergia(int IdAlergia) {
+        this.IdAlergia = IdAlergia;
+    }
+
+    public int getIdAlergia() {
+        return IdAlergia;
+    }
+    
+    public String getNombreAlergia() {
+        return NombreAlergia;
+    }
+    
+    public void setNombreAlergia(String NombreAlergia) {
+        this.NombreAlergia = Validador.validarTexto(NombreAlergia, "El nombre de la alergia");
     }
 
     public String getSeveridad() {
         return Severidad;
     }
 
-    public void setSeveridad(String severidad)throws Exception {
-        if (severidad == null || severidad.isBlank()) {
-            throw new Exception("La severidad no puede estar vacía.");
-        }
-        this.Severidad = severidad;
+    public void setSeveridad(String severidad){
+        this.Severidad = Validador.validarTexto(severidad, "La severidad");
     }
 
     public String getTipoAlergia() {
         return TipoAlergia;
     }
 
-    public void setTipoAlergia(String TipoAlergia)throws Exception {
-        if (TipoAlergia == null || TipoAlergia.isBlank()) {
-            throw new Exception("El tipo de alergia no puede estar vacío.");
-        }
-        this.TipoAlergia = TipoAlergia;
+    public void setTipoAlergia(String TipoAlergia) {
+        this.TipoAlergia = Validador.validarTexto(TipoAlergia, "La severidad");
+    }
+    
+    public String verAlergia(){
+        return this.NombreAlergia + "->  Severidad: " + this.Severidad + "|  Tipo: "  + this.TipoAlergia;
     }
 }

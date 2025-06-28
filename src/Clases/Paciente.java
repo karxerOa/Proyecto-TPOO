@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import Util.Validador;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -29,20 +30,38 @@ public class Paciente extends Persona{
         this.alergias = new ArrayList<>();
         this.HistorialMedico = new ArrayList<>();
     }
+    
     public int getIdPaciente() {
         return IdPaciente;
     }
-    
+
+    public void setIdPaciente(int IdPaciente) {
+        this.IdPaciente = IdPaciente;
+    }
+
+    public ArrayList<Alergia> getAlergias() {
+        return alergias;
+    }
+
+    public void setAlergias(ArrayList<Alergia> alergias) {
+        this.alergias = alergias;
+    }
+
+    public ArrayList<Atencion> getHistorialMedico() {
+        return HistorialMedico;
+    }
+
+    public void setHistorialMedico(ArrayList<Atencion> HistorialMedico) {
+        this.HistorialMedico = HistorialMedico;
+    }
+
     public String getGrupoSanguineo() {
         return grupoSanguineo;
     }
 
-    public void setGrupoSanguineo(String grupoSanguineo) throws Exception {
-        if (grupoSanguineo == null || grupoSanguineo.trim().isEmpty()) {
-            throw new Exception("El grupo sanguíneo no puede estar vacío.");
-        }
-        this.grupoSanguineo = grupoSanguineo;
-    }
+    public void setGrupoSanguineo(String grupoSanguineo) {
+        this.grupoSanguineo = Validador.validarTexto(grupoSanguineo, "El grupo sanguineo");
+    }    
     
     public void agregarAlergia(Alergia alergia) throws Exception {
         this.alergias.add(alergia);

@@ -4,8 +4,6 @@
  */
 package Clases;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author apnil
@@ -15,7 +13,9 @@ public class Administrador extends Persona{
     private Usuario user;
     private int nivelAcceso;
 
- 
+    public Administrador() {
+    }
+
     public void setIdAdministrador(int IdAdministrador) {
         this.IdAdministrador = IdAdministrador;
     }
@@ -28,10 +28,10 @@ public class Administrador extends Persona{
         return nivelAcceso;
     }
 
-    private int validarNivelAcceso(int nivel){
-        if (nivel < 1 || nivel > 3) {
-            throw new IllegalArgumentException("Numero invalido, debe de estar en el rango 1-3.");
-        }
-        return  nivel;
-    }
+//    private int validarNivelAcceso(int nivel){
+//        if (nivel < 1 || nivel > 3) {
+//            throw new IllegalArgumentException("Numero invalido, debe de estar en el rango 1-3.");
+//        }
+//        return  nivel;
+//    }
 }

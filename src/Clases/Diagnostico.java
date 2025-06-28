@@ -4,6 +4,8 @@
  */
 package Clases;
 
+import Util.Validador;
+
 /**
  *
  * @author apnil
@@ -14,18 +16,27 @@ public class Diagnostico {
     private Doctor doctor;
     private String sintomas;
     private String enfermedadDiagnosticada;
+    
+    public Diagnostico(String sintomas, String enfermedadDiagnosticada) {
+        this.sintomas = sintomas;
+        this.enfermedadDiagnosticada = enfermedadDiagnosticada;
+    }
 
     public int getIdDiagnostico() {
         return IdDiagnostico;
     }
-    
+
+    public void setIdDiagnostico(int IdDiagnostico) {
+        this.IdDiagnostico = IdDiagnostico;
+    }
+
     public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente)throws Exception {
+    public void setPaciente(Paciente paciente)throws Exception{
         if (paciente == null) {
-            throw new Exception("Debe asignar un paciente.");
+            throw new Exception("Debe asignar un Paciente");
         }
         this.paciente = paciente;
     }
@@ -34,9 +45,9 @@ public class Diagnostico {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor)throws Exception {
+    public void setDoctor(Doctor doctor)throws Exception{
         if (doctor == null) {
-            throw new Exception("Debe asignar un doctor.");
+            throw new Exception("Debe asignar un Doctor");
         }
         this.doctor = doctor;
     }
@@ -45,21 +56,15 @@ public class Diagnostico {
         return sintomas;
     }
 
-    public void setSintomas(String sintomas)throws Exception {
-         if (sintomas == null || sintomas.isBlank()) {
-            throw new Exception("Los síntomas no pueden estar vacíos.");
-        }
-        this.sintomas = sintomas;
+    public void setSintomas(String sintomas) {
+        this.sintomas = Validador.validarTexto(sintomas, "El sintoma");
     }
 
     public String getEnfermedadDiagnosticada() {
         return enfermedadDiagnosticada;
     }
 
-    public void setEnfermedadDiagnosticada(String enfermedadDiagnosticada)throws Exception {
-        if (enfermedadDiagnosticada == null || enfermedadDiagnosticada.isBlank()) {
-            throw new Exception("La enfermedad diagnosticada no puede estar vacía.");
-        }
-        this.enfermedadDiagnosticada = enfermedadDiagnosticada;
+    public void setEnfermedadDiagnosticada(String enfermedadDiagnosticada) {
+        this.enfermedadDiagnosticada = Validador.validarTexto(enfermedadDiagnosticada, "La enfermedad diagnosticada");
     }
 }

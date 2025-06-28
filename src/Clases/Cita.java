@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import Util.Validador;
 import java.time.LocalDateTime;
 
 /**
@@ -19,8 +20,8 @@ public class Cita {
     private boolean Antendida;
 
     public Cita() {
+        FechaHora = LocalDateTime.now();
     }
-
     
     public Cita(LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
         this.FechaHora = FechaHora;
@@ -34,12 +35,16 @@ public class Cita {
         return idCita;
     }
 
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
+    }
+
     public LocalDateTime getFechaHora() {
         return FechaHora;
     }
 
-    public void setFechaHora(LocalDateTime FechaHora)throws Exception {
-        this.FechaHora = FechaHora;
+    public void setFechaHora(LocalDateTime FechaHora) {
+        this.FechaHora = Validador.validarFechaHora(FechaHora);
     }
 
     public Paciente getPacienteSolicitante() {
@@ -48,7 +53,7 @@ public class Cita {
 
     public void setPacienteSolicitante(Paciente pacienteSolicitante)throws Exception {
         if (pacienteSolicitante == null) {
-            throw new Exception("Debe asignar un paciente solicitante.");
+            throw new Exception("Ocurrio un error inesperado con el paciente");
         }
         this.pacienteSolicitante = pacienteSolicitante;
     }
@@ -59,7 +64,7 @@ public class Cita {
 
     public void setDoctorSolicitado(Doctor doctorSolicitado)throws Exception {
         if (doctorSolicitado == null) {
-            throw new Exception("Debe asignar un doctor solicitado.");
+            throw new Exception("Ocurrio un error inesperado con el paciente");
         }
         this.doctorSolicitado = doctorSolicitado;
     }
@@ -68,14 +73,19 @@ public class Cita {
         return EspecialidadSolicitada;
     }
 
-    public void setEspecialidadSolicitada(String EspecialidadSolicitada)throws Exception {
-        if (EspecialidadSolicitada == null || EspecialidadSolicitada.isBlank()) {
-            throw new Exception("La especialidad solicitada no puede estar vacía.");
-        }
-        this.EspecialidadSolicitada = EspecialidadSolicitada;
+    public void setEspecialidadSolicitada(String EspecialidadSolicitada) {
+        this.EspecialidadSolicitada = Validador.validarTexto(EspecialidadSolicitada, "La especialidad solicitada");
     }
 
-    public void setAntendida(boolean Antendida){
+    public boolean isAntendida() {
+        return Antendida;
+    }
+    
+    public String isAntendidaTexto() {
+        return Antendida? "Atendida" : "Pendiente";
+    }
+
+    public void setAntendida(boolean Antendida) {
         this.Antendida = Antendida;
     }
 }

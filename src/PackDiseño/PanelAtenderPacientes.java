@@ -4,10 +4,9 @@
  */
 package PackDiseño;
 
-import Clases.ContenedorGenerico;
 import Controladores.ControladorDoctor;
 import Controladores.ControladorPaciente;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import DTO.PacienteResumenDTO;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -28,26 +27,33 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
     /**
      * Creates new form PanelAtenderPacientes
      */
-    private ArrayList<ContenedorGenerico<Integer, String, Void, Void>> pacientes;
+    private ArrayList<PacienteResumenDTO> pacientes;
     public PanelAtenderPacientes(int IdDoctor) {
         initComponents();
-        ObtenerDatos(IdDoctor);
-        ActualizarLabels(IdDoctor);
-        ActualizarTabla();
-        EventoTabla(IdDoctor);
+        try {
+            cargarDatos(IdDoctor); 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
+        }
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
     }
     
-    private void EventoTabla(int IdDoctor){
+    private void eventoTabla(int idDoctor){
         TablaAtencion.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender("Atender"));
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void Action(int row, String texto) {
                 String Id = (String)TablaAtencion.getValueAt(row, 0);
                 int idPaciente = Integer.parseInt(Id.substring(3));
-                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true, idPaciente, IdDoctor);
+                JDialogAtencion a = new JDialogAtencion((JFrame)SwingUtilities.getWindowAncestor(PanelAtenderPacientes.this), true, idPaciente, idDoctor);
                 a.setLocationRelativeTo(null);
-                a.setVisible(true);            
+                a.setVisible(true); 
+                try {
+                    pacientes = new ControladorPaciente().obtenerPacientesEnEspera(idDoctor);
+                    actualizarTabla();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
         };
         TablaAtencion.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event, "Atender"));
@@ -56,43 +62,31 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
         TablaAtencion.getColumnModel().getColumn(0).setCellRenderer(centrado);
         TablaAtencion.getColumnModel().getColumn(1).setCellRenderer(centrado);
     }
-    
-    private void ObtenerDatos(int IdDoctor){
-        try {
-            ControladorPaciente controladorPaciente = new ControladorPaciente();
-            pacientes = controladorPaciente.ObtenerListaPacientesEnEspera(IdDoctor); 
-        }catch (SQLServerException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        
+    private void cargarDatos(int idDoctor) throws Exception {
+        ControladorPaciente controlador = new ControladorPaciente();
+        pacientes = controlador.obtenerPacientesEnEspera(idDoctor);
+        actualizarTabla();
+        actualizarLabels(idDoctor);
+        eventoTabla(idDoctor);
     }
     
-    private void ActualizarTabla(){
-        DefaultTableModel tab =  (DefaultTableModel)TablaAtencion.getModel();
-        tab.setRowCount(0);
-        for (ContenedorGenerico<Integer, String, Void, Void> pac : pacientes) {
-            String idFormateado = String.format("PAC%04d", pac.valor1);
-            tab.addRow((new Object[]{
-            idFormateado,
-            pac.valor2}));
+    private void actualizarTabla() {
+        DefaultTableModel model = (DefaultTableModel) TablaAtencion.getModel();
+        model.setRowCount(0);
+        for (PacienteResumenDTO pac : pacientes) {
+            String idFormateado = String.format("PAC%04d", pac.getId());
+            model.addRow(new Object[]{ idFormateado, pac.getNombreCompleto() });
         }
     }
     
-    private void ActualizarLabels(int IdDoctor){
-        try {
-            ControladorDoctor controladorDoctor = new ControladorDoctor();
-            lblNombreDoc.setText(controladorDoctor.VerNombresDoctor(IdDoctor));
-            LocalDate fechaActual = LocalDate.now();
-            int dia = fechaActual.getDayOfMonth();
-            String mes = fechaActual.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
-            int año = fechaActual.getYear();
-            lblFecha.setText("Hoy es " + dia + " de " + mes + " del " + año);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+    private void actualizarLabels(int IdDoctor)throws Exception{
+        ControladorDoctor controladorDoctor = new ControladorDoctor();
+        lblNombreDoc.setText(controladorDoctor.obtenerNombreDoctor(IdDoctor));
+        LocalDate hoy = LocalDate.now();
+        String fechaFormateada = "Hoy es " + hoy.getDayOfMonth() + " de " +
+            hoy.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "ES")) +
+            " del " + hoy.getYear();
+        lblFecha.setText(fechaFormateada);
     }
 
     /**

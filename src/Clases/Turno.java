@@ -18,42 +18,45 @@ public class Turno {
     private LocalTime horaFin;
     private ArrayList<DayOfWeek> DiasPorSemana;
 
+    public Turno() {
+        DiasPorSemana = new ArrayList();
+    }
+
     public int getIdTurno() {
         return idTurno;
+    }
+
+    public void setIdTurno(int idTurno) {
+        this.idTurno = idTurno;
     }
 
     public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalTime horaInicio) throws Exception {
+    public void setHoraInicio(LocalTime horaInicio)throws Exception {
         if (horaInicio == null) {
             throw new Exception("La hora de inicio no puede ser nula.");
         }
         this.horaInicio = horaInicio;
-        validarHoras();
     }
 
     public LocalTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(LocalTime horaFin) throws Exception {
-        if (horaFin == null) {
+    public void setHoraFin(LocalTime horaFin)throws Exception {
+        if (horaInicio == null) {
             throw new Exception("La hora de fin no puede ser nula.");
         }
         this.horaFin = horaFin;
-        validarHoras();
     }
 
     public ArrayList<DayOfWeek> getDiasPorSemana() {
         return DiasPorSemana;
     }
 
-    public void setDiasPorSemana(ArrayList<DayOfWeek> DiasPorSemana)throws Exception {
-        if (DiasPorSemana == null || DiasPorSemana.isEmpty()) {
-            throw new Exception("Debe asignar al menos un día de la semana.");
-        }
+    public void setDiasPorSemana(ArrayList<DayOfWeek> DiasPorSemana) {
         this.DiasPorSemana = DiasPorSemana;
     }
 
@@ -66,11 +69,6 @@ public class Turno {
         }
         else{
             throw new Exception("Turno del dia ya registrado");
-        }
-    }
-    private void validarHoras() throws Exception {
-        if (horaInicio != null && horaFin != null && !horaFin.isAfter(horaInicio)) {
-            throw new Exception("La hora de fin debe ser posterior a la hora de inicio.");
         }
     }
 }

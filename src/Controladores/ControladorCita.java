@@ -14,6 +14,7 @@ import java.sql.*;
  * @author USUARIO
  */
 public class ControladorCita {
+    //corregir
      public int registrarCita(Cita cita) throws Exception {
         String sql = """
             INSERT INTO Cita (DoctorID, PacienteID, FechaHora, Especialidad, Estado)

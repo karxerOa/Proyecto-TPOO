@@ -4,26 +4,42 @@
  */
 package Clases;
 
+import Util.Validador;
+
 /**
  *
  * @author apnil
  */
 public class Receta {
-    private  int IdReceta;
+    private int IdReceta;
     private Paciente paciente;
     private Doctor doctor;
     private String medicamentosDosis;
     private String recomendaciones;
 
+    public Receta(String medicamentosDosis, String recomendaciones) {
+        this.paciente = new Paciente();
+        this.doctor = new Doctor();
+        this.medicamentosDosis = medicamentosDosis;
+        this.recomendaciones = recomendaciones;
+    }
+    
     public int getIdReceta() {
         return IdReceta;
     }
-    
+
+    public void setIdReceta(int idReceta) {
+        this.IdReceta = idReceta;
+    }
+
     public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(Paciente paciente) throws Exception {
+    public void setPaciente(Paciente paciente)throws Exception{
+        if (paciente == null) {
+            throw new Exception("Ingrese correctamente el paciente");
+        }
         this.paciente = paciente;
     }
 
@@ -31,7 +47,10 @@ public class Receta {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) throws Exception {
+    public void setDoctor(Doctor doctor)throws Exception {
+        if (paciente == null) {
+            throw new Exception("Ingrese correctamente el doctor");
+        }
         this.doctor = doctor;
     }
 
@@ -39,30 +58,15 @@ public class Receta {
         return medicamentosDosis;
     }
 
-    public void setMedicamentosDosis(String medicamentosDosis) throws Exception {
-        if (medicamentosDosis == null || medicamentosDosis.isBlank()) {
-            throw new Exception("Debe especificar los medicamentos y dosis.");
-        }
-        this.medicamentosDosis = medicamentosDosis;
+    public void setMedicamentosDosis(String medicamentosDosis) {
+        this.medicamentosDosis = Validador.validarTexto(medicamentosDosis, "Los mediamentos y dosis");
     }
 
     public String getRecomendaciones() {
         return recomendaciones;
     }
 
-    public void setRecomendaciones(String recomendaciones) throws Exception {
-        if (recomendaciones == null || recomendaciones.isBlank()) {
-            throw new Exception("Debe especificar las recomendaciones.");
-        }
-        this.recomendaciones = recomendaciones;
-    }
-
-    // === Método útil adicional ===
-    public String mostrarInfo() {
-        return "Receta médica:\n" +
-               "Paciente: " + paciente.verNombreCompleto() + "\n" +
-               "Doctor: " + doctor.verNombreCompleto() + "\n" +
-               "Medicamentos y dosis: " + medicamentosDosis + "\n" +
-               "Recomendaciones: " + recomendaciones;
+    public void setRecomendaciones(String recomendaciones) {
+        this.recomendaciones = Validador.validarTexto(recomendaciones, "Las recomendaciones");
     }
 }

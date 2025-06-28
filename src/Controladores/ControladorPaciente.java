@@ -4,9 +4,12 @@
  */
 package Controladores;
 
-import Clases.ContenedorGenerico;
+import Clases.Alergia;
 import Clases.Paciente;
 import Conexion.Conexion;
+import DAO.PacienteDAO;
+import DTO.PacienteDetalleDTO;
+import DTO.PacienteResumenDTO;
 import java.sql.*;
 import java.util.ArrayList;
 /**
@@ -14,30 +17,33 @@ import java.util.ArrayList;
  * @author apnil
  */
 public class ControladorPaciente {
-    public ArrayList<ContenedorGenerico<Integer, String, Void, Void>> ObtenerListaPacientesEnEspera(int IdDoc)throws Exception {
-        ArrayList<ContenedorGenerico<Integer, String, Void, Void>> pacientes = new ArrayList<>();
-        try {
-            Connection con = Conexion.getConexion();
-            String consulta = """
-                              SELECT D.Nombre, P.PacienteID ,P.Nombre + ' ' + P.ApellidoPaterno + ' ' + P.ApellidoMaterno AS Paciente
-                              FROM Paciente P
-                              JOIN Cita C ON C.PacienteID = P.PacienteID
-                              JOIN Doctor D ON D.DoctorID = C.DoctorID
-                              WHERE C.Estado = 'Pendiente' AND D.DoctorID = ?
-                              """;
-            PreparedStatement pstmt = con.prepareStatement(consulta);
-            pstmt.setInt(1, IdDoc);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int idPaciente = rs.getInt("PacienteID");
-                String nombrePaciente = rs.getString("Paciente");
-                pacientes.add(new ContenedorGenerico(idPaciente, nombrePaciente));
-            }
-        } catch (SQLException e) {
-            throw new Exception("Error al cargar los pacientes desde la base de datos");
-        }
-        return pacientes;
+    private final PacienteDAO pacienteDAO;
+    
+    public ControladorPaciente() {
+        this.pacienteDAO = new PacienteDAO();
     }
+    
+    public ArrayList<PacienteResumenDTO> obtenerPacientesEnEspera(int idDoctor) throws Exception {
+        return pacienteDAO.obtenerPacientesEnEspera(idDoctor);
+    }
+    
+    public PacienteDetalleDTO pacientePorIdBasico(int idPaciente) throws Exception{
+        return pacienteDAO.pacientePorIdBasico(idPaciente);
+    }
+    
+    public ArrayList<Alergia> obtenerAlergiasPaciente(int IdPaciente)throws Exception {
+        return pacienteDAO.obtenerAlergiasPaciente(IdPaciente);
+    }
+    
+    public void citaAtendida(int idPaciente)throws Exception {
+        pacienteDAO.citaAtendida(idPaciente);
+    }
+    
+    public String obtenerNombrePaciente(int idPaciente)throws Exception{
+        return pacienteDAO.obtenerNombrePaciente(idPaciente);
+    }
+    
+    //corregir
     public int registrar_paciente(Paciente paciente) throws Exception{
         String sql = """
         INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumeroDocumento, TipoDocumento, 

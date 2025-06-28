@@ -4,9 +4,10 @@
  */
 package PackDiseño;
 
-import Clases.ContenedorGenerico;
-import Clases.Usuario;
+import util.Placeholders;
 import Controladores.ControladorUsuarios;
+import DTO.IdentidadUsuarioDTO;
+import DTO.UsuarioDTO;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
@@ -146,45 +147,45 @@ public class LogRes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void inicializarPlaceholders(){
+    private void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtUser, "Ingrese su nombre de Usuario");
         Placeholders.configurarPlaceholder(txtPassword, "**********");
     }
+    
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        // TODO add your handling code here:
         try {
             ControladorUsuarios cUsuarios = new ControladorUsuarios();
-            ContenedorGenerico<Boolean, Usuario, Void, Void> resultado = cUsuarios.login(txtUser.getText(), new String(txtPassword.getPassword()));
-            if (resultado.valor1) {
-                    switch (resultado.valor2.getRol()) {
-                        case "Administrador":
-                            FormMenuAdmin a = new FormMenuAdmin();
-                            this.setVisible(false);
-                            a.setVisible(true);
-                            break;
-                        case "Recepcionista":
-                            FormMenuRecep b = new FormMenuRecep();
-                            this.setVisible(false);
-                            b.setVisible(true);
-                            break;
-                        case "Doctor":
-                            FormMenuDoctor c = new FormMenuDoctor(resultado.valor2);
-                            this.setVisible(false);
-                            c.setVisible(true);
-                            break;
-                        default:
-                            
-                    }
+            UsuarioDTO usuario = new UsuarioDTO(txtUser.getText(), new String(txtPassword.getPassword()));
+            IdentidadUsuarioDTO identUser = cUsuarios.validarLogin(usuario);
+            if (identUser != null) {
+                switch (identUser.getRol()) {
+                    case "Doctor":
+                        int idDoc = cUsuarios.obtenerIdDoctor(identUser.getIdUsuario());
+                        FormMenuDoctor c = new FormMenuDoctor(idDoc);
+                        this.setVisible(false);
+                        c.setVisible(true);
+                        break;
+                    case "Recepcionista":
+                        FormMenuRecep b = new FormMenuRecep();
+                        this.setVisible(false);
+                        b.setVisible(true);
+                        break;
+                    case "Administrador":
+                        FormMenuAdmin a = new FormMenuAdmin();
+                        this.setVisible(false);
+                        a.setVisible(true);
+                        break;
+                    default:
+                }
             }
             else{
-                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
