@@ -4,8 +4,10 @@
  */
 package Controladores;
 
-import Clases.ContenedorGenerico;
 import Clases.Usuario;
+import DAO.UsuarioDAO;
+import DTO.IdentidadUsuarioDTO;
+import DTO.UsuarioDTO;
 import java.sql.*;
 
 /**
@@ -14,50 +16,20 @@ import java.sql.*;
  */
 public class ControladorUsuarios {
 
+    private final UsuarioDAO usuarioDAO;
     public ControladorUsuarios() {
-
-//        LlenarLista();
+        usuarioDAO = new UsuarioDAO();
     }
     
-    
-//    private void LlenarLista() {
-//        String sql = "SELECT UsuarioID, NombreUsuario, Contraseña, Rol FROM Usuario";
-//        UsuariosRegistrados.clear();
-//        try (Connection conn = Conexion.Conexion.getConexion();
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet rs = pstmt.executeQuery()) {
-//
-//            while (rs.next()) {
-//                int id = rs.getInt("UsuarioID");
-//                String usuario = rs.getString("NombreUsuario");
-//                String contraseña = rs.getString("Contraseña");
-//                String rol = rs.getString("Rol");
-//                Usuario user = new Usuario(id, usuario, contraseña, rol);
-//                UsuariosRegistrados.add(user);
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error al cargar usuarios desde la base de datos", e);
-//        }
-//    }
-    
-    public ContenedorGenerico login(String nombreUsuario, String contraseña) {
-        String sql = "SELECT * FROM Usuario WHERE NombreUsuario = ? AND Contraseña = ?";
-        try (Connection conn = Conexion.Conexion.getConexion();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nombreUsuario);
-            pstmt.setString(2, contraseña);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("UsuarioID");
-                String rol = rs.getString("Rol");
-                Usuario user = new Usuario(id, nombreUsuario, contraseña, rol);
-                return new ContenedorGenerico(true, user);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al validar login");
-        }
-        return new ContenedorGenerico(false, null);
+    public IdentidadUsuarioDTO validarLogin(UsuarioDTO usuario)throws SQLException{
+        return usuarioDAO.validarLogin(usuario);
     }
+    
+    public int obtenerIdDoctor(int idUsuario)throws SQLException {
+        return usuarioDAO.obtenerIdDoctor(idUsuario);
+    }
+    
+// Corregir
     
     public int RegistrarUser(Usuario usuario) throws Exception{
       

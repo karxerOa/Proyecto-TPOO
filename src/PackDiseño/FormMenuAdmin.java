@@ -4,12 +4,13 @@
  */
 package PackDiseño;
 
+import Util.Colores;
+import Util.MostrarPanelHijo;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,12 +21,13 @@ public class FormMenuAdmin extends javax.swing.JFrame {
     /**
      * Creates new form FormMenuAdmin
      */
+    int xMouse, yMouse;
+    private Color colorTemp;
+    private Colores colores = new Colores(new Color(0,125,118));
+
     public FormMenuAdmin() {
         initComponents();
-        PanelMenu.putClientProperty(FlatClientProperties.STYLE, "arc: 20");
     }
-    int xMouse, yMouse;
-    Color colorTemp;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,14 +144,6 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnGestionEspecialidad.setText("Gestión de especialidades");
         btnGestionEspecialidad.setBorder(null);
         btnGestionEspecialidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGestionEspecialidad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGestionEspecialidadMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGestionEspecialidadMouseExited(evt);
-            }
-        });
         btnGestionEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionEspecialidadActionPerformed(evt);
@@ -164,14 +158,6 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnRegistrarDoc.setText("Registrar Doctor");
         btnRegistrarDoc.setBorder(null);
         btnRegistrarDoc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegistrarDoc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarDocMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistrarDocMouseExited(evt);
-            }
-        });
         btnRegistrarDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarDocActionPerformed(evt);
@@ -186,14 +172,6 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnAsignarTurnos.setText("Gestión de turnos");
         btnAsignarTurnos.setBorder(null);
         btnAsignarTurnos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnAsignarTurnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAsignarTurnosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAsignarTurnosMouseExited(evt);
-            }
-        });
         btnAsignarTurnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsignarTurnosActionPerformed(evt);
@@ -208,14 +186,6 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         btnRegistrarRecepcionista.setText("Registrar Recepcionista");
         btnRegistrarRecepcionista.setBorder(null);
         btnRegistrarRecepcionista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegistrarRecepcionista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarRecepcionistaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistrarRecepcionistaMouseExited(evt);
-            }
-        });
         btnRegistrarRecepcionista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarRecepcionistaActionPerformed(evt);
@@ -236,10 +206,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
         PanelTitulo.setLayout(PanelTituloLayout);
         PanelTituloLayout.setHorizontalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTituloLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1014, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
         );
         PanelTituloLayout.setVerticalGroup(
             PanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +215,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(PanelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 970, 60));
+        jPanel1.add(PanelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 970, 60));
 
         PanelHijo.setLayout(new java.awt.BorderLayout());
         jPanel1.add(PanelHijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 970, 620));
@@ -268,11 +235,22 @@ public class FormMenuAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void EstablecerColor(JButton btn){
-        colorTemp = Colores.generarColorAleatorio();
+
+    private void EstablecerColor(JButton btn){
+        colorTemp = colores.generarColorAleatorio();
         btn.setBackground(colorTemp);
         PanelTitulo.setBackground(colorTemp);
     }
+    private void cambiarVistaPanel(JButton botonSeleccionado, String titulo, JPanel panelMostrar) {
+        btnAsignarTurnos.setBackground(colores.colorPrincipal);
+        btnGestionEspecialidad.setBackground(colores.colorPrincipal);
+        btnRegistrarDoc.setBackground(colores.colorPrincipal);
+        btnRegistrarRecepcionista.setBackground(colores.colorPrincipal);
+        EstablecerColor(botonSeleccionado);
+        lblTitulo.setText(titulo);
+        MostrarPanelHijo.Mostrar(panelMostrar, PanelHijo, 970, 620);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         LogRes a = new LogRes();
@@ -293,143 +271,30 @@ private void EstablecerColor(JButton btn){
         yMouse = evt.getY();
     }//GEN-LAST:event_PanelSuperiorMouseMoved
 
-    private void btnGestionEspecialidadMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionEspecialidadMouseEntered
-        // TODO add your handling code here:
-        if (!(btnGestionEspecialidad.getBackground() == colorTemp)) {
-            btnGestionEspecialidad.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnGestionEspecialidadMouseEntered
-
-    private void btnGestionEspecialidadMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionEspecialidadMouseExited
-        // TODO add your handling code here:
-        if (!(btnGestionEspecialidad.getBackground() == colorTemp)) {
-            btnGestionEspecialidad.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnGestionEspecialidadMouseExited
-
     private void btnGestionEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionEspecialidadActionPerformed
-        // TODO add your handling code here:
-        if (!(btnGestionEspecialidad.getBackground() == colorTemp)) {
-            EstablecerColor(btnGestionEspecialidad);
-            btnRegistrarDoc.setBackground(new Color(0,125,118));
-            btnAsignarTurnos.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Especialidades");
-            MostrarPanelHijo.Mostrar(new PanelEspecialidades(), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnGestionEspecialidad, "Perfil", new PanelEspecialidades());
     }//GEN-LAST:event_btnGestionEspecialidadActionPerformed
 
-    private void btnRegistrarDocMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarDocMouseEntered
-        // TODO add your handling code here:
-        if (!(btnRegistrarDoc.getBackground() == colorTemp)) {
-            btnRegistrarDoc.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnRegistrarDocMouseEntered
-
-    private void btnRegistrarDocMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarDocMouseExited
-        // TODO add your handling code here:
-        if (!(btnRegistrarDoc.getBackground() == colorTemp)) {
-            btnRegistrarDoc.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnRegistrarDocMouseExited
-
     private void btnRegistrarDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDocActionPerformed
-        // TODO add your handling code here:
-        if (!(btnRegistrarDoc.getBackground() == colorTemp)) {
-            EstablecerColor(btnRegistrarDoc);
-            btnAsignarTurnos.setBackground(new Color(0,125,118));
-            btnGestionEspecialidad.setBackground(new Color(0,125,118));
-            lblTitulo.setText("GestionPersonal");
-            MostrarPanelHijo.Mostrar(new PanelRegistarDoctor(), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnRegistrarDoc, "Registrar Doctor", new PanelRegistarDoctor());
     }//GEN-LAST:event_btnRegistrarDocActionPerformed
 
-    private void btnAsignarTurnosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsignarTurnosMouseEntered
-        // TODO add your handling code here:
-        if (!(btnAsignarTurnos.getBackground() == colorTemp)) {
-            btnAsignarTurnos.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnAsignarTurnosMouseEntered
-
-    private void btnAsignarTurnosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsignarTurnosMouseExited
-        // TODO add your handling code here:
-        if (!(btnAsignarTurnos.getBackground() == colorTemp)) {
-            btnAsignarTurnos.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnAsignarTurnosMouseExited
-
     private void btnAsignarTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarTurnosActionPerformed
-        // TODO add your handling code here:
-        if (!(btnAsignarTurnos.getBackground() == colorTemp)) {
-            EstablecerColor(btnAsignarTurnos);
-            btnRegistrarDoc.setBackground(new Color(0,125,118));
-            btnGestionEspecialidad.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Turnos");
-            MostrarPanelHijo.Mostrar(new PanelRegistrarTurnos(), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnAsignarTurnos, "Turnos", new PanelRegistrarTurnos());
     }//GEN-LAST:event_btnAsignarTurnosActionPerformed
 
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
-        // TODO add your handling code here:
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarActionPerformed
 
-    private void btnRegistrarRecepcionistaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaMouseEntered
-        // TODO add your handling code here:
-          if (!(btnRegistrarRecepcionista.getBackground() == colorTemp)) {
-            btnRegistrarRecepcionista.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnRegistrarRecepcionistaMouseEntered
-
-    private void btnRegistrarRecepcionistaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaMouseExited
-        // TODO add your handling code here:
-          if (!(btnRegistrarRecepcionista.getBackground() == colorTemp)) {
-            btnRegistrarRecepcionista.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnRegistrarRecepcionistaMouseExited
-
     private void btnRegistrarRecepcionistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarRecepcionistaActionPerformed
-        // TODO add your handling code here:
-         MostrarPanelHijo.Mostrar(new PanelRegistroRecepcionistas(), PanelHijo, 970, 620);         
+        cambiarVistaPanel(btnRegistrarRecepcionista, "Registrar Recepcionista", new PanelRegistroRecepcionistas());
     }//GEN-LAST:event_btnRegistrarRecepcionistaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormMenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch(Exception ex ) {
-          System.err.println( "Failed to initialize LaF" );
-        }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormMenuAdmin().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelHijo;

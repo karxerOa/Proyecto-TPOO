@@ -4,6 +4,7 @@
  */
 package Clases;
 
+import Util.Validador;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -12,34 +13,6 @@ import java.time.Period;
  * @author USUARIO
  */
 public abstract class Persona {
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public void setNumDoc(String numDoc) {
-        this.numDoc = numDoc;
-    }
-
-    public void setTipoDoc(String tipoDoc) {
-        this.tipoDoc = tipoDoc;
-    }
-
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
     protected String nombre;
     protected String apellidoPaterno;
     protected String apellidoMaterno;
@@ -55,109 +28,97 @@ public abstract class Persona {
     }
 
     public Persona(String nombre, String apellidoPaterno, String apellidoMaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
-
-        this.nombre = validarTexto(nombre, "El nombre");
-        this.apellidoPaterno = validarTexto(apellidoPaterno, "El Apellido Paterno");
-        this.apellidoMaterno = validarTexto(apellidoMaterno, "El Apellido Materno");
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
         this.numDoc = numDoc;
         this.tipoDoc = tipoDoc;
         this.telefono = telefono;
-        this.fechaNacimiento = validarFecha(fechaNacimiento);
+        this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
-        this.correo = validarCorreo(correo);
+        this.correo = correo;
         this.direccion = direccion;
     }
-
+    
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = Validador.validarTexto(nombre, "El nombre");
     }
 
     public String getApellidoPaterno() {
         return apellidoPaterno;
     }
 
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = Validador.validarTexto(apellidoPaterno, "El apellido Paterno");
+    }
+
     public String getApellidoMaterno() {
         return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = Validador.validarTexto(apellidoMaterno, "El apellido Paterno");
     }
 
     public String getNumDoc() {
         return numDoc;
     }
 
+    public void setNumDoc(String numDoc) {
+        this.numDoc = numDoc;
+//                Validador.validardocIdentidad(numDoc, "El numero de documento");
+    }
+
     public String getTipoDoc() {
         return tipoDoc;
+    }
+
+    public void setTipoDoc(String tipoDoc) {
+        this.tipoDoc = Validador.validarTexto(tipoDoc, "El apellido Paterno");
     }
 
     public String getTelefono() {
         return telefono;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = Validador.validarTexto(telefono, "El numero de telefono");
+    }
+
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = Validador.validarFecha(fechaNacimiento);
     }
 
     public String getGenero() {
         return genero;
     }
 
+    public void setGenero(String genero) {
+        this.genero = Validador.validarTexto(genero, "El numero de telefono");
+    }
+
     public String getCorreo() {
         return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = Validador.validarCorreo(correo);
     }
 
     public String getDireccion() {
         return direccion;
     }
-    
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 
-    public void setCorreo(String correo) {
-        this.correo = validarCorreo(correo);
-    }
-
-    //sets usados solo para actualizar info?
     public void setDireccion(String direccion) {
-        this.direccion = validarTexto(direccion, "La direccion");
-    }
-    
-    private String validarTexto(String valor, String dato) {
-        if (valor == null || valor.trim().isEmpty()) {
-            throw new IllegalArgumentException(dato + " no puede estar vacío.");
-        }
-        return valor.trim();
-    }
-    
-    //validaciones (srirven para seters y constructor)
-    private int validarDoc(int doc) {
-        int length = Integer.toString(doc).length();
-       if (length == 8 || length == 12) {
-            throw new IllegalArgumentException("Número de documento inválido. Debe tener 8 o 12 dígitos.");
-        }
-        return doc;
-     }
-    
-//    private int validarDoc(int doc) {
-//        int length = Integer.toString(doc).length();
-//        if (length != 8 && length != 12) {
-//            throw new IllegalArgumentException("Número de documento inválido. Debe tener 8 o 12 dígitos.");
-//        }
-//        return doc;
-//    }
-
-    
-    private String validarCorreo(String correo) {
-        if (correo == null || !correo.contains("@")) {
-            throw new IllegalArgumentException("Correo inválido.");
-        }
-        return correo;
-    }
-    
-    private LocalDate validarFecha(LocalDate fecha) {
-        if (fecha == null || fecha.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Fecha de nacimiento inválida.");
-        }
-        return fecha;
+        this.direccion = Validador.validarTexto(direccion, "La direccion");
     }
    
     public int verEdad(){

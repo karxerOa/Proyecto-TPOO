@@ -4,8 +4,12 @@
  */
 package PackDiseño;
 
+
+import Util.Colores;
+import Util.MostrarPanelHijo;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,10 +20,10 @@ public class FormMenuRecep extends javax.swing.JFrame {
      * Creates new form FormMenuRecep
      */
     int xMouse, yMouse;
-    Color colorTemp;
+    private Color colorTemp;
+    private Colores colores = new Colores(new Color(0,125,118));
     public FormMenuRecep() {
         initComponents();
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,14 +126,6 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnAgendarCita.setText("Agendar Cita");
         btnAgendarCita.setBorder(null);
         btnAgendarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgendarCita.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAgendarCitaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAgendarCitaMouseExited(evt);
-            }
-        });
         btnAgendarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgendarCitaActionPerformed(evt);
@@ -144,14 +140,6 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnRegistrar.setText("Registar Paciente");
         btnRegistrar.setBorder(null);
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegistrarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegistrarMouseExited(evt);
-            }
-        });
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -166,14 +154,6 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnBuscarPaciente.setText("Pacientes");
         btnBuscarPaciente.setBorder(null);
         btnBuscarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarPacienteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarPacienteMouseExited(evt);
-            }
-        });
         btnBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarPacienteActionPerformed(evt);
@@ -234,48 +214,6 @@ public class FormMenuRecep extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgendarCitaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgendarCitaMouseEntered
-        // TODO add your handling code here:
-        if (!(btnAgendarCita.getBackground() == colorTemp)) {
-            btnAgendarCita.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnAgendarCitaMouseEntered
-
-    private void btnAgendarCitaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgendarCitaMouseExited
-        // TODO add your handling code here:
-        if (!(btnAgendarCita.getBackground() == colorTemp)) {
-            btnAgendarCita.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnAgendarCitaMouseExited
-
-    private void btnRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseEntered
-        // TODO add your handling code here:
-        if (!(btnRegistrar.getBackground() == colorTemp)) {
-            btnRegistrar.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnRegistrarMouseEntered
-
-    private void btnRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseExited
-        // TODO add your handling code here:
-        if (!(btnRegistrar.getBackground() == colorTemp)) {
-            btnRegistrar.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnRegistrarMouseExited
-
-    private void btnBuscarPacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPacienteMouseEntered
-        // TODO add your handling code here:
-        if (!(btnBuscarPaciente.getBackground() == colorTemp)) {
-            btnBuscarPaciente.setBackground(new Color(51,75,73));
-        }
-    }//GEN-LAST:event_btnBuscarPacienteMouseEntered
-
-    private void btnBuscarPacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPacienteMouseExited
-        // TODO add your handling code here:
-        if (!(btnBuscarPaciente.getBackground() == colorTemp)) {
-            btnBuscarPaciente.setBackground(new Color(0,125,118));
-        }
-    }//GEN-LAST:event_btnBuscarPacienteMouseExited
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         LogRes a = new LogRes();
@@ -284,36 +222,15 @@ public class FormMenuRecep extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-        if (!(btnRegistrar.getBackground() == colorTemp)) {
-            EstablecerColor(btnRegistrar);
-            btnBuscarPaciente.setBackground(new Color(0,125,118));
-            btnAgendarCita.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Registrar Paciente");
-            MostrarPanelHijo.Mostrar(new PanelRegistrarPaciente(colorTemp), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnRegistrar, "Registrar Paciente", new PanelRegistrarPaciente(colorTemp));
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
-        // TODO add your handling code here:
-        if (!(btnBuscarPaciente.getBackground() == colorTemp)) {
-            EstablecerColor(btnBuscarPaciente);
-            btnRegistrar.setBackground(new Color(0,125,118));
-            btnAgendarCita.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Pacientes");
-            MostrarPanelHijo.Mostrar(new PanelPacientes(), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnBuscarPaciente, "Pacientes", new PanelPacientes());
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void btnAgendarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarCitaActionPerformed
-        // TODO add your handling code here:
-        if (!(btnAgendarCita.getBackground() == colorTemp)) {
-            EstablecerColor(btnAgendarCita);
-            btnRegistrar.setBackground(new Color(0,125,118));
-            btnBuscarPaciente.setBackground(new Color(0,125,118));
-            lblTitulo.setText("Agendar Cita");
-            MostrarPanelHijo.Mostrar(new PanelAgendarCita(colorTemp), PanelHijo, 970, 620);
-        }
+        cambiarVistaPanel(btnAgendarCita, "Agendar Cita", new PanelAgendarCita(colorTemp));
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
     private void PanelSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelSuperiorMouseDragged
@@ -330,44 +247,52 @@ public class FormMenuRecep extends javax.swing.JFrame {
     }//GEN-LAST:event_PanelSuperiorMouseMoved
     
     private void EstablecerColor(JButton btn){
-        colorTemp = Colores.generarColorAleatorio();
+        colorTemp = colores.generarColorAleatorio();
         btn.setBackground(colorTemp);
         PanelTitulo.setBackground(colorTemp);
+    }
+    private void cambiarVistaPanel(JButton botonSeleccionado, String titulo, JPanel panelMostrar) {
+        btnRegistrar.setBackground(colores.colorPrincipal);
+        btnAgendarCita.setBackground(colores.colorPrincipal);
+        btnBuscarPaciente.setBackground(colores.colorPrincipal);
+        EstablecerColor(botonSeleccionado);
+        lblTitulo.setText(titulo);
+        MostrarPanelHijo.Mostrar(panelMostrar, PanelHijo, 970, 620);
     }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormMenuRecep().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(FormMenuRecep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new FormMenuRecep().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelHijo;

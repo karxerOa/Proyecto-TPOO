@@ -4,7 +4,8 @@
  */
 package Clases;
 
-import java.time.LocalDateTime;
+import Util.Validador;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,9 +15,12 @@ public class Atencion {
     private int IdAtencion;
     private Diagnostico diagnostico;
     private Receta receta;
-    private LocalDateTime fecha;
-    private boolean estado;
+    private LocalDate fecha;
 
+    public Atencion() {
+        fecha = LocalDate.now();
+    }
+    
     public int getIdAtencion() {
         return IdAtencion;
     }
@@ -25,7 +29,10 @@ public class Atencion {
         return diagnostico;
     }
 
-    public void setDiagnostico(Diagnostico diagnostico) throws Exception {
+    public void setDiagnostico(Diagnostico diagnostico)throws Exception{
+        if (diagnostico == null) {
+            throw new Exception("Ocurrio un error inesperado con el Diagnostico");
+        }
         this.diagnostico = diagnostico;
     }
 
@@ -34,29 +41,17 @@ public class Atencion {
     }
 
     public void setReceta(Receta receta) throws Exception {
+        if (receta == null) {
+            throw new Exception("Ocurrio un error inesperado con la Receta");
+        }
         this.receta = receta;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) throws Exception {
-        if (fecha == null) {
-            throw new Exception("Debe asignar una fecha.");
-        }
-        if (fecha.isAfter(LocalDateTime.now())) {
-            throw new Exception("La fecha no puede estar en el futuro.");
-        }
-        this.fecha = fecha;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-    
+    public void setFecha(LocalDate fecha) throws Exception {
+        this.fecha = Validador.validarFecha(fecha);
+    } 
 }

@@ -4,9 +4,10 @@
  */
 package PackDiseño;
 
-import Clases.ContenedorGenerico;
 import Controladores.ControladorDoctor;
+import DTO.TurnoDTO;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
  * @author apnil
@@ -16,25 +17,35 @@ public class PanelInicioDoc extends javax.swing.JPanel {
     /**
      * Creates new form PanelInicioDoc
      */
-    private ControladorDoctor ConntroladorDoc = new ControladorDoctor();
+    private final ControladorDoctor controlador = new ControladorDoctor();
+    private final int idDoc;
     public PanelInicioDoc(int idDoc) {
         initComponents();
-        try {
-            lbCitasPorAtender.setText(Integer.toString(ConntroladorDoc.cantidadCitasPorAtender(idDoc)));
-            ContenedorGenerico<String, String, Void, Void> resultado = ConntroladorDoc.TurnoActual(idDoc);
-            lbHoraInicio.setText(resultado.valor1);
-            lbHoraFin.setText(resultado.valor2);
-            lbPoximaAntecion.setText(ConntroladorDoc.PacienteEnEspera(idDoc));
-            lblNombreDoc.setText(ConntroladorDoc.VerNombresDoctor(idDoc));
-        } catch (Exception e) {
-            
-        }
+        this.idDoc = idDoc;
+        configurarGradientes();
+        cargarInformacionInicial();
+    }
+    private void configurarGradientes() {
         panelGradiante1.setGradientColorsAndRadius(Color.decode("#1976D2"), Color.decode("#42A5F5"), 40);
         panelGradiante2.setGradientColorsAndRadius(Color.decode("#90CAF9"), Color.decode("#E3F2FD"), 40);
         panelGradiante3.setGradientColorsAndRadius(Color.decode("#4CAF50"), Color.decode("#A5D6A7"), 40);
-        
     }
-
+    
+    private void cargarInformacionInicial() {
+        try {
+            int citasPendientes = controlador.obtenerCantidadCitasPendientes(idDoc);
+            TurnoDTO turno = controlador.obtenerTurnoActual(idDoc);
+            String proximoPaciente = controlador.obtenerNombreProximoPaciente(idDoc);
+            String nombreDoctor = controlador.obtenerNombreDoctor(idDoc);
+            lbCitasPorAtender.setText(String.valueOf(citasPendientes));
+            lbHoraInicio.setText(turno.getHoraInicio());
+            lbHoraFin.setText(turno.getHoraFin());
+            lbPoximaAntecion.setText(proximoPaciente);
+            lblNombreDoc.setText(nombreDoctor);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

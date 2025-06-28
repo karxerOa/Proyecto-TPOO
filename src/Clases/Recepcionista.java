@@ -4,8 +4,6 @@
  */
 package Clases;
 
-
-import Clases.Usuario;
 import java.time.LocalDate;
 
 /**
@@ -19,13 +17,14 @@ public class Recepcionista extends Persona{
 
     public Recepcionista() {
     }
-        
+   
     public Recepcionista(int IdRecepcionista, Usuario user, String nombre, String apellidoPaterno, String apellidoMaterno, String numDoc, String tipoDoc, String telefono, LocalDate fechaNacimiento, String genero, String correo, String direccion) {
         super(nombre, apellidoPaterno, apellidoMaterno, numDoc, tipoDoc, telefono, fechaNacimiento, genero, correo, direccion);
         this.IdRecepcionista = IdRecepcionista;
         this.user = user;
     }    
-     public int getIdRecepcionista() {
+
+    public int getIdRecepcionista() {
         return IdRecepcionista;
     }
 
@@ -37,9 +36,11 @@ public class Recepcionista extends Persona{
         return user;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(Usuario user)throws Exception{
+        if (user == null) {
+            throw new Exception("Asignar usuario");
+        }
         this.user = user;
-
     }
     
 }
