@@ -5,9 +5,11 @@
 package DAO;
 
 import Clases.Alergia;
+import Clases.Paciente;
 import java.sql.*;
 import Conexion.Conexion;
 import DTO.PacienteDetalleDTO;
+import DTO.PacienteDniDTO;
 import DTO.PacienteResumenDTO;
 import java.time.LocalDate;
 import java.time.Period;
@@ -135,5 +137,47 @@ public class PacienteDAO {
             }
         }
         return doctor;
+    }
+    
+    public ArrayList<PacienteDniDTO> ObtenerPacientes()throws SQLException{
+        ArrayList<PacienteDniDTO> pacientes = new ArrayList();
+        String constulta = """
+                        SELECT PacienteID , NumeroDocumento, Nombre + ' ' + ApellidoPaterno + ' ' + ApellidoMaterno AS Nombre
+                        FROM Paciente
+                        """;
+        try(Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(constulta)){
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PacienteDniDTO pac = new PacienteDniDTO(rs.getInt("PacienteID"), rs.getString("NumeroDocumento") ,rs.getString("Nombre"));
+                pacientes.add(pac);
+            }
+        }
+        return pacientes;
+    }
+    
+    public ArrayList<Paciente> obtenerPacientesDni()throws SQLException{
+        ArrayList<Paciente> pacientes = new ArrayList();
+        String sql = "SELECT * FROM Paciente";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Paciente p = new Paciente();
+                p.setNombre(rs.getString("Nombre"));
+                p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+                p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                p.setNumDoc(rs.getString("NumeroDocumento"));
+                p.setTipoDoc(rs.getString("TipoDocumento"));
+                p.setTelefono(rs.getString("Telefono"));
+                p.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+                p.setGenero(rs.getString("Genero"));
+                p.setCorreo(rs.getString("Correo"));
+                p.setDireccion(rs.getString("Direccion"));
+                p.setGrupoSanguineo(rs.getString("GrupoSanguineo"));
+                pacientes.add(p);
+            }
+        }
+        return pacientes;
     }
 }

@@ -7,9 +7,11 @@ package DAO;
 import java.sql.*;
 import Conexion.Conexion;
 import DTO.DoctorDTO;
+import DTO.DoctorSimpleDTO;
 import DTO.EspecialidadDTO;
 import DTO.TurnoDTO;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 /**
@@ -139,7 +141,6 @@ public class DoctorDAO {
         return especialidades;
     }
 
-    
     public void actualizarDatos(int id, String correo, String telefono, String direccion) throws SQLException {
         String consulta = """
             UPDATE Doctor
@@ -154,5 +155,22 @@ public class DoctorDAO {
             stmt.setInt(4, id);
             stmt.executeUpdate();
         }
+    }
+    
+    public ArrayList<DoctorSimpleDTO> DoctoresPorFechaHora(LocalDateTime fechaHora, String Especialidad)throws SQLException{
+        ArrayList<DoctorSimpleDTO> doctores = new ArrayList<>();
+        String procedimiento = "{CALL ObtenerDoctoresPorFechaHoraYEspecialidad(?, ?, ?)}";
+        try (Connection con = Conexion.getConexion();
+            CallableStatement stmt = con.prepareCall(procedimiento)) {
+            stmt.setDate(1, Date.valueOf(fechaHora.toLocalDate()));
+            stmt.setTime(2, Time.valueOf(fechaHora.toLocalTime()));
+            stmt.setString(3, Especialidad);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                DoctorSimpleDTO doc = new DoctorSimpleDTO(rs.getInt("DoctorID"), rs.getString("nombres"));
+                doctores.add(doc);
+            }
+        }
+        return doctores;
     }
 }

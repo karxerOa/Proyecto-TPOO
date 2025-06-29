@@ -9,6 +9,7 @@ import Clases.Paciente;
 import Conexion.Conexion;
 import DAO.PacienteDAO;
 import DTO.PacienteDetalleDTO;
+import DTO.PacienteDniDTO;
 import DTO.PacienteResumenDTO;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  */
 public class ControladorPaciente {
     private final PacienteDAO pacienteDAO;
+    public ArrayList<Paciente> listaPacientes = new ArrayList();
+    private ArrayList<PacienteDniDTO> pacientesDniDTO = new ArrayList();
     
     public ControladorPaciente() {
         this.pacienteDAO = new PacienteDAO();
@@ -42,8 +45,32 @@ public class ControladorPaciente {
     public String obtenerNombrePaciente(int idPaciente)throws Exception{
         return pacienteDAO.obtenerNombrePaciente(idPaciente);
     }
+    public void ObternerPacientes()throws Exception{
+        pacientesDniDTO = pacienteDAO.ObtenerPacientes();
+    }
+    public PacienteDniDTO buscarPorDniDTO(String docIdentidad) {
+        for (PacienteDniDTO p : pacientesDniDTO) {
+            if (p.getDocIdentidad().equals(docIdentidad)) {
+                return p;
+            }
+        }
+        return null;
+    }
     
-    //corregir
+    public void obtenerPacientesDni()throws Exception{
+        listaPacientes = pacienteDAO.obtenerPacientesDni();
+    }
+    
+    public ArrayList<Paciente> FiltrarPacientes(String filtro) {
+    ArrayList<Paciente> resultados = new ArrayList<>();
+    for (Paciente p : listaPacientes) {
+        if (p.getNumDoc().contains(filtro)) {
+            resultados.add(p);
+        }
+    }
+    return resultados;
+}
+    
     public int registrar_paciente(Paciente paciente) throws Exception{
         String sql = """
         INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumeroDocumento, TipoDocumento, 
@@ -77,36 +104,7 @@ public class ControladorPaciente {
             throw new Exception("Error al registrar paciente: " + e.getMessage());
         }
     }
-    public ArrayList<Paciente> mostrarPacientes() throws Exception {
-    ArrayList<Paciente> lista = new ArrayList<>();
-    String sql = "SELECT * FROM Paciente";
 
-    try (Connection con = Conexion.getConexion();
-         PreparedStatement stmt = con.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-        while (rs.next()) {
-                Paciente p = new Paciente();
-                p.setNombre(rs.getString("Nombre"));
-                p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
-                p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
-                p.setNumDoc(rs.getString("NumeroDocumento"));
-                p.setTipoDoc(rs.getString("TipoDocumento"));
-                p.setTelefono(rs.getString("Telefono"));
-                p.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
-                p.setGenero(rs.getString("Genero"));
-                p.setCorreo(rs.getString("Correo"));
-                p.setDireccion(rs.getString("Direccion"));
-                p.setGrupoSanguineo(rs.getString("GrupoSanguineo"));
-
-                lista.add(p);
-            }
-
-        } catch (SQLException e) {
-            throw new Exception("Error al mostrar pacientes: " + e.getMessage());
-        }
-
-        return lista;
-    }
     public int contarPacientes() throws Exception {
         String sql = "SELECT COUNT(*) FROM Paciente";
         try (Connection con = Conexion.getConexion();
@@ -124,21 +122,4 @@ public class ControladorPaciente {
         }
     }
     
-   public Paciente buscarPorDNI(String dni) throws Exception {
-        String sql = "SELECT * FROM Paciente WHERE NumeroDocumento = ?";
-        try (Connection con = Conexion.getConexion();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, dni);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                Paciente p = new Paciente();
-                p.setNombre(rs.getString("Nombre"));
-                p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
-                p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
-                // ... llena el resto de campos
-                return p;
-            }
-            return null;
-        }
-    }
 }

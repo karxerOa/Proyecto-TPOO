@@ -20,7 +20,8 @@ public class Cita {
     private boolean Antendida;
 
     public Cita() {
-        FechaHora = LocalDateTime.now();
+        this.pacienteSolicitante = new Paciente();
+        this.doctorSolicitado = new Doctor();
     }
     
     public Cita(LocalDateTime FechaHora, Paciente pacienteSolicitante, Doctor doctorSolicitado, String EspecialidadSolicitada, boolean Antendida) {
@@ -44,7 +45,7 @@ public class Cita {
     }
 
     public void setFechaHora(LocalDateTime FechaHora) {
-        this.FechaHora = Validador.validarFechaHora(FechaHora);
+        this.FechaHora = Validador.validarFechaHoraNoPasada(FechaHora);
     }
 
     public Paciente getPacienteSolicitante() {

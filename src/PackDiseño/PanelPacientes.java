@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import util.Placeholders;
 
@@ -25,17 +26,27 @@ public class PanelPacientes extends javax.swing.JPanel {
     /**
      * Creates new form PanelPacientes
      */
-    
+    private ArrayList<Paciente> pacientesOriginal = new ArrayList();
+    private ControladorPaciente cp = new ControladorPaciente();
     public PanelPacientes() {
         initComponents();
-        llenarTablaPacientes();
-        mostrarTotalPacientes();
+        try {
+            cp.obtenerPacientesDni();
+            pacientesOriginal = cp.listaPacientes;
+            AplicarEstilos();
+            Eventotxt();
+            llenarTablaPacientes(pacientesOriginal);
+        } catch (Exception e) {
+        }
+
+    }
+    
+    private void AplicarEstilos(){
         jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
         tablaPacientes.setRowHeight(30);
-//        panelGradiante1.setGradientColorsAndRadius(Color.decode("#2A7B9B"), Color.decode("#EDDD53"), 40);
-//        panelGradiante2.setGradientColorsAndRadius(Color.BLUE, Color.CYAN, 40);
-//        panelGradiante3.setGradientColorsAndRadius(Color.decode("#D97038"), Color.decode("#89D439"), 40);
-        //REDONDEO
+        panelGradiante1.setGradientColorsAndRadius(Color.decode("#2A7B9B"), Color.decode("#EDDD53"), 40);
+        panelGradiante2.setGradientColorsAndRadius(Color.BLUE, Color.CYAN, 40);
+        panelGradiante3.setGradientColorsAndRadius(Color.decode("#D97038"), Color.decode("#89D439"), 40);
         try {
             UIManager.setLookAndFeel( new FlatLightLaf() );
         } catch(Exception ex ) {
@@ -45,7 +56,6 @@ public class PanelPacientes extends javax.swing.JPanel {
         jPanel2.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
         Placeholders.configurarPlaceholder(txtBuscar, "Ingrese el nombre o documento de identidad del paciente a buscar");
     }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,8 +74,9 @@ public class PanelPacientes extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         txtBuscar = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        lblTotalPacientes = new javax.swing.JLabel();
+        panelGradiante1 = new PackDiseño.PanelGradiante();
+        panelGradiante2 = new PackDiseño.PanelGradiante();
+        panelGradiante3 = new PackDiseño.PanelGradiante();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,7 +132,7 @@ public class PanelPacientes extends javax.swing.JPanel {
                 .addGap(332, 332, 332))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 930, 330));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 930, 330));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,29 +149,52 @@ public class PanelPacientes extends javax.swing.JPanel {
                 txtBuscarMousePressed(evt);
             }
         });
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
         jPanel2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 6, 840, 38));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 930, 50));
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 930, 50));
 
         jPanel5.setLayout(new java.awt.BorderLayout());
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 296, 180));
 
-        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        javax.swing.GroupLayout panelGradiante1Layout = new javax.swing.GroupLayout(panelGradiante1);
+        panelGradiante1.setLayout(panelGradiante1Layout);
+        panelGradiante1Layout.setHorizontalGroup(
+            panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelGradiante1Layout.setVerticalGroup(
+            panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
 
-        lblTotalPacientes.setBackground(new java.awt.Color(0, 51, 51));
-        lblTotalPacientes.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
-        lblTotalPacientes.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotalPacientes.setText("Total de");
-        lblTotalPacientes.setOpaque(true);
-        jPanel3.add(lblTotalPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 170, 160));
+        jPanel5.add(panelGradiante1, java.awt.BorderLayout.CENTER);
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 930, 220));
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 300, 180));
+
+        javax.swing.GroupLayout panelGradiante2Layout = new javax.swing.GroupLayout(panelGradiante2);
+        panelGradiante2.setLayout(panelGradiante2Layout);
+        panelGradiante2Layout.setHorizontalGroup(
+            panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 310, Short.MAX_VALUE)
+        );
+        panelGradiante2Layout.setVerticalGroup(
+            panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        add(panelGradiante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 310, -1));
+
+        javax.swing.GroupLayout panelGradiante3Layout = new javax.swing.GroupLayout(panelGradiante3);
+        panelGradiante3.setLayout(panelGradiante3Layout);
+        panelGradiante3Layout.setHorizontalGroup(
+            panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelGradiante3Layout.setVerticalGroup(
+            panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        add(panelGradiante3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMousePressed
@@ -168,26 +202,39 @@ public class PanelPacientes extends javax.swing.JPanel {
         txtBuscar.setText("");
         txtBuscar.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtBuscarMousePressed
-    private void mostrarTotalPacientes() {
-    try {
-        ControladorPaciente controlador = new ControladorPaciente();
-        int total = controlador.contarPacientes();
-        lblTotalPacientes.setText("Total de pacientes: " + total);
-    } catch (Exception e) {
-        lblTotalPacientes.setText("Error al contar");
-        System.err.println("Error al obtener total de pacientes: " + e.getMessage());
+
+    
+    private void Eventotxt(){
+        txtBuscar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               Mostrar();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                Mostrar();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+             
+            }
+        });
+
     }
-}
-
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
-    private void llenarTablaPacientes() {
+    
+    private void Mostrar(){
+        if (txtBuscar.getText().trim().isEmpty()) {
+            llenarTablaPacientes(pacientesOriginal);
+        }
+        else{
+            llenarTablaPacientes(cp.FiltrarPacientes(txtBuscar.getText()));
+        }
+    }
+    
+    private void llenarTablaPacientes(ArrayList<Paciente> lista) {
     try {
-        ControladorPaciente cp = new ControladorPaciente();
-        ArrayList<Paciente> lista = cp.mostrarPacientes(); // tu nuevo método desde BD
-
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombres");
         modelo.addColumn("Apellido Paterno");
@@ -223,17 +270,17 @@ public class PanelPacientes extends javax.swing.JPanel {
     }
 }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblTotalPacientes;
+    private PackDiseño.PanelGradiante panelGradiante1;
+    private PackDiseño.PanelGradiante panelGradiante2;
+    private PackDiseño.PanelGradiante panelGradiante3;
     private javax.swing.JTable tablaPacientes;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

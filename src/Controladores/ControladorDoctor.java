@@ -9,8 +9,11 @@ import Conexion.Conexion;
 import DAO.DoctorDAO;
 import DAO.PacienteDAO;
 import DTO.DoctorDTO;
+import DTO.DoctorSimpleDTO;
 import DTO.TurnoDTO;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -47,6 +50,10 @@ public class ControladorDoctor {
     
     public void actualizarDatosDoctor(String correo, String telefono, String direccion, int idDoctor) throws Exception {
         doctorDAO.actualizarDatos(idDoctor, correo, telefono, direccion);
+    }
+    
+    public ArrayList<DoctorSimpleDTO> DoctoresPorFechaHora(LocalDateTime fechaHora, String Especialidad)throws SQLException{
+        return doctorDAO.DoctoresPorFechaHora(fechaHora, Especialidad);
     }
     
     public void AsignarEspecialidad(int DoctorID,int EspecialidadID)throws Exception{

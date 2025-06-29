@@ -71,7 +71,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         checkSabado = new javax.swing.JCheckBox();
         jLabel19 = new javax.swing.JLabel();
         cbDoctor = new javax.swing.JComboBox<>();
-        dpFechaNac = new org.jdesktop.swingx.JXDatePicker();
         jLabel20 = new javax.swing.JLabel();
         btnRegistrarTurnos = new javax.swing.JButton();
         cbHoraFinal = new javax.swing.JComboBox<>();
@@ -334,7 +333,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
         add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, -1, -1));
 
         add(cbDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 220, -1));
-        add(dpFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 430, 210, 20));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Myanmar Text", 1, 12)); // NOI18N
@@ -408,7 +406,6 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkMiercoles;
     private javax.swing.JCheckBox checkSabado;
     private javax.swing.JCheckBox checkViernes;
-    private org.jdesktop.swingx.JXDatePicker dpFechaNac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

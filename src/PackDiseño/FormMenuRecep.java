@@ -222,14 +222,17 @@ public class FormMenuRecep extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        EstablecerColor(btnRegistrar); 
         cambiarVistaPanel(btnRegistrar, "Registrar Paciente", new PanelRegistrarPaciente(colorTemp));
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPacienteActionPerformed
+        EstablecerColor(btnBuscarPaciente);
         cambiarVistaPanel(btnBuscarPaciente, "Pacientes", new PanelPacientes());
     }//GEN-LAST:event_btnBuscarPacienteActionPerformed
 
     private void btnAgendarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarCitaActionPerformed
+        EstablecerColor(btnAgendarCita);
         cambiarVistaPanel(btnAgendarCita, "Agendar Cita", new PanelAgendarCita(colorTemp));
     }//GEN-LAST:event_btnAgendarCitaActionPerformed
 
@@ -255,7 +258,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnRegistrar.setBackground(colores.colorPrincipal);
         btnAgendarCita.setBackground(colores.colorPrincipal);
         btnBuscarPaciente.setBackground(colores.colorPrincipal);
-        EstablecerColor(botonSeleccionado);
+        botonSeleccionado.setBackground(colorTemp);
         lblTitulo.setText(titulo);
         MostrarPanelHijo.Mostrar(panelMostrar, PanelHijo, 970, 620);
     }

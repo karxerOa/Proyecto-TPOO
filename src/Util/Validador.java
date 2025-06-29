@@ -43,4 +43,10 @@ public class Validador {
         }
         return fechaHora;
     }
+    public static LocalDateTime validarFechaHoraNoPasada(LocalDateTime fechaHora) {
+        if (fechaHora == null || fechaHora.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("No se permiten fechas y horas pasadas.");
+        }
+    return fechaHora;
+}
 }

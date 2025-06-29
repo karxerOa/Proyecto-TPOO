@@ -5,8 +5,7 @@
 package Controladores;
 
 import Clases.Cita;
-import java.sql.Statement;
-import Conexion.Conexion;
+import DAO.CitaDAO;
 import java.sql.*;
 
 /**
@@ -15,39 +14,12 @@ import java.sql.*;
  */
 public class ControladorCita {
     //corregir
-     public int registrarCita(Cita cita) throws Exception {
-        String sql = """
-            INSERT INTO Cita (DoctorID, PacienteID, FechaHora, Especialidad, Estado)
-            VALUES (?, ?, ?, ?, ?)""";
-
-        try (Connection con = Conexion.getConexion();
-             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-            stmt.setInt(1, cita.getDoctorSolicitado().getIdDoctor());
-            stmt.setInt(2, cita.getPacienteSolicitante().getIdPaciente());
-            stmt.setTimestamp(3, Timestamp.valueOf(cita.getFechaHora()));
-            stmt.setString(4, cita.getEspecialidadSolicitada());
-            stmt.setString(5, "Pendiente");
-
-            stmt.executeUpdate();
-
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1); // Retorna el ID generado de la cita
-            } else {
-                throw new Exception("No se pudo obtener el ID generado.");
-            }
-
-        } catch (SQLException e) {
-            throw new Exception("Error al registrar la cita: " + e.getMessage());
-        }
-    }   
-    public boolean marcarCitaComoAtendida(int idCita) throws Exception {
-        String sql = "UPDATE Cita SET Estado = 'Atendida' WHERE CitaID = ?";
-        try (Connection con = Conexion.getConexion();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, idCita);
-            return stmt.executeUpdate() > 0;
-        }
+     private CitaDAO citaDAO;
+    public ControladorCita() {
+        citaDAO = new CitaDAO();
     }
+    
+    public void registrarCitaSinConflicto(Cita cita) throws SQLException {
+        citaDAO.registrarCitaSinConflicto(cita);
+    } 
 }
