@@ -45,7 +45,7 @@ public abstract class Persona {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = Validador.validarTexto(nombre, "El nombre");
+        this.nombre = Validador.validarTextoPlaceHolder(nombre, "Ingrese sus nombres", "El nombre");
     }
 
     public String getApellidoPaterno() {
@@ -53,7 +53,7 @@ public abstract class Persona {
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = Validador.validarTexto(apellidoPaterno, "El apellido Paterno");
+        this.apellidoPaterno = Validador.validarTextoPlaceHolder(apellidoPaterno, "Ingrese su Apellido Paterno" ,"El apellido Paterno");
     }
 
     public String getApellidoMaterno() {
@@ -61,7 +61,7 @@ public abstract class Persona {
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = Validador.validarTexto(apellidoMaterno, "El apellido Paterno");
+        this.apellidoMaterno = Validador.validarTextoPlaceHolder(apellidoMaterno, "Ingrese su Apellido Materno" ,"El apellido Paterno");
     }
 
     public String getNumDoc() {
@@ -69,8 +69,16 @@ public abstract class Persona {
     }
 
     public void setNumDoc(String numDoc) {
-        this.numDoc = numDoc;
-//                Validador.validardocIdentidad(numDoc, "El numero de documento");
+        this.numDoc = Validador.validardocIdentidad(numDoc, "Ingrese su doc. de indentidad");
+        if (numDoc != null) {
+            if (numDoc.matches("\\d{8}")) {
+                this.tipoDoc = "DNI";
+            } else if (numDoc.matches("\\d{20}")) {
+                this.tipoDoc = "CE";
+            } else {
+                throw new IllegalArgumentException("Número de documento inválido: debe tener 8 dígitos (DNI) o 20 dígitos (CE).");
+            }
+        }
     }
 
     public String getTipoDoc() {
@@ -78,7 +86,7 @@ public abstract class Persona {
     }
 
     public void setTipoDoc(String tipoDoc) {
-        this.tipoDoc = Validador.validarTexto(tipoDoc, "El apellido Paterno");
+        this.tipoDoc = tipoDoc;
     }
 
     public String getTelefono() {
@@ -86,7 +94,7 @@ public abstract class Persona {
     }
 
     public void setTelefono(String telefono) {
-        this.telefono = Validador.validarTexto(telefono, "El numero de telefono");
+        this.telefono = Validador.validarTextoPlaceHolder(telefono, "Ingrese su Numero de Telefono", "El numero de telefono");
     }
 
     public LocalDate getFechaNacimiento() {
@@ -102,7 +110,7 @@ public abstract class Persona {
     }
 
     public void setGenero(String genero) {
-        this.genero = Validador.validarTexto(genero, "El numero de telefono");
+        this.genero = Validador.validarTexto(genero, "El genero");
     }
 
     public String getCorreo() {
@@ -118,7 +126,7 @@ public abstract class Persona {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = Validador.validarTexto(direccion, "La direccion");
+        this.direccion = Validador.validarTextoPlaceHolder(direccion, "Ingrese su Direccion" ,"La direccion");
     }
    
     public int verEdad(){

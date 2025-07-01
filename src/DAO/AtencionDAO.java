@@ -14,13 +14,35 @@ import java.sql.*;
  * @author apnil
  */
 public class AtencionDAO {
+    
+    public void Registrar( int idPaciente, int idDiagnostico, int idReceta)throws Exception{
+        try {
+            Connection con = Conexion.getConexion();
+            String consulta = """
+                INSERT INTO Atencion (PacienteID, DiagnosticoID, RecetaID, Fecha)
+                VALUES (?, ?, ?, CAST(GETDATE() AS DATE))
+            """;
+            PreparedStatement pstmt = con.prepareStatement(consulta);
+            pstmt.setInt(1, idPaciente);
+            pstmt.setInt(2, idDiagnostico);
+            pstmt.setInt(3, idReceta);
+
+            pstmt.executeUpdate();
+
+            con.close();
+        } catch (SQLException e) {
+            throw new Exception("Error al registrar los datos: " + e.getMessage());
+        }
+    }
+    
     public ListaCircularDoble<HistorialMedicoDTO> ObtenerHistorial(int idPaciente) throws SQLException{
         ListaCircularDoble<HistorialMedicoDTO> historial = new ListaCircularDoble();
         String consulta = """
                           EXEC GenerarHistorialMedico @idPaciente = ?
                           """;
-        try(Connection con = Conexion.getConexion();
-            PreparedStatement pstmt = con.prepareStatement(consulta)){
+        try {
+            Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(consulta);
             pstmt.setInt(1, idPaciente);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -34,7 +56,9 @@ public class AtencionDAO {
                 hist.setMedicamentosDosis("MedicamentosDosis");
                 hist.setFecha("Fecha");
                 historial.agregarFinal(hist);
-            }
+            }            
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener los datos del historial: " + e.getMessage());
         }
         return historial;
     }

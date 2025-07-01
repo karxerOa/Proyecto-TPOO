@@ -27,8 +27,9 @@ public class PacienteDAO {
                        JOIN Cita C ON C.PacienteID = P.PacienteID
                        WHERE C.Estado = 'Pendiente' AND C.DoctorID = ?
                        """;
-        try (Connection con = Conexion.getConexion();
-            PreparedStatement pstmt = con.prepareStatement(query)) {
+        try{
+            Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setInt(1, idDoctor);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -36,6 +37,8 @@ public class PacienteDAO {
             } else {
                 return "Sin pacientes";
             }
+        }catch(SQLException e){
+            throw new SQLException("No se pudo cargar el paciente en espera: " + e.getMessage());
         }
     }
     public ArrayList<PacienteResumenDTO> obtenerPacientesEnEspera(int idDoctor) throws SQLException {
@@ -46,13 +49,16 @@ public class PacienteDAO {
                      JOIN Cita C ON P.PacienteID = C.PacienteID
                      WHERE C.Estado = 'Pendiente' AND C.DoctorID = ?
                      """;
-        try (Connection con = Conexion.getConexion();
-            PreparedStatement pstmt = con.prepareStatement(sql)) {
+        try {
+            Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, idDoctor);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 pacientes.add(new PacienteResumenDTO(rs.getInt("PacienteID"), rs.getString("Nombre")));
             }
+        } catch (SQLException e) {
+            throw new SQLException("Error al cargar los pacientes: " + e.getMessage());
         }
         return pacientes;
     }
@@ -164,6 +170,7 @@ public class PacienteDAO {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Paciente p = new Paciente();
+                p.setIdPaciente(rs.getInt("PacienteID"));
                 p.setNombre(rs.getString("Nombre"));
                 p.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 p.setApellidoMaterno(rs.getString("ApellidoMaterno"));
@@ -179,5 +186,111 @@ public class PacienteDAO {
             }
         }
         return pacientes;
+    }
+    
+    public int registrar_paciente(Paciente paciente) throws Exception{
+        String sql = """
+        INSERT INTO Paciente (Nombre, ApellidoPaterno, ApellidoMaterno, NumeroDocumento, TipoDocumento, 
+                              Telefono, FechaNacimiento, Genero, Correo, Direccion, GrupoSanguineo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+        int idPaciente;
+        try (Connection con = Conexion.getConexion();
+        PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, paciente.getNombre());
+            stmt.setString(2, paciente.getApellidoPaterno());
+            stmt.setString(3, paciente.getApellidoMaterno());
+            stmt.setString(4, paciente.getNumDoc());
+            stmt.setString(5, paciente.getTipoDoc());
+            stmt.setString(6, paciente.getTelefono());
+            stmt.setDate(7, Date.valueOf(paciente.getFechaNacimiento()));
+            stmt.setString(8, paciente.getGenero());
+            stmt.setString(9, paciente.getCorreo());
+            stmt.setString(10, paciente.getDireccion());
+            stmt.setString(11, paciente.getGrupoSanguineo());
+            stmt.executeUpdate();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    idPaciente = rs.getInt(1);
+                } else {
+                    throw new Exception("No se pudo obtener el ID del paciente insertado.");
+                }
+            }
+            if (!paciente.getAlergias().isEmpty()) {
+                for (Alergia alergia : paciente.getAlergias()) {
+                    AgregarAlergia(idPaciente, alergia);
+                }
+            }
+            return idPaciente;
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 2627) {
+                throw new SQLException("Error: El documento de indentidad ya está registrado");
+            } else {
+                throw new SQLException("Error al registrar paciente: " + e.getMessage());
+            }
+        }
+    }
+    
+    public int contarPacientes() throws Exception {
+        String sql = "SELECT COUNT(*) FROM Paciente";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                throw new Exception("No se pudo contar los pacientes.");
+            }
+        } catch (SQLException e) {
+            throw new Exception("Error al contar pacientes: " + e.getMessage());
+        }
+    }
+    
+    public void Eliminar(int idPaciente) throws SQLException{
+        String consulta = """
+                          DELETE FROM Paciente
+                          WHERE PacienteID = ?
+                          """;
+        try {
+            Connection con = Conexion.getConexion();
+            PreparedStatement stmt = con.prepareStatement(consulta);
+            stmt.setInt(1, idPaciente);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Error al eliminar al paciente: " + e.getMessage());
+        }
+    }
+    
+    public void ActualizarDatos(int idPaciente, String correo, String telefono, String direccion)throws SQLException {
+        String consulta = """
+                            UPDATE Paciente
+                            SET Telefono = ?, Correo = ?, Direccion = ?
+                            WHERE PacienteID = ?
+                          """;
+        try{
+            Connection con = Conexion.getConexion();
+            PreparedStatement stmt = con.prepareStatement(consulta);
+            stmt.setString(1, telefono);
+            stmt.setString(2, correo);
+            stmt.setString(3, direccion);
+            stmt.setInt(4, idPaciente);
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            throw new SQLException("Error al actualizar datos: " + e.getMessage());
+        }
+    }
+    public void AgregarAlergia(int idPaciente, Alergia alergia)throws SQLException {
+        String sql = "{CALL AgregarAlergiaAPaciente(?, ?, ?, ?)}";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement pstmt = con.prepareCall(sql)) {
+            pstmt.setInt(1, idPaciente);
+            pstmt.setString(2, alergia.getNombreAlergia());
+            pstmt.setString(3, alergia.getTipoAlergia());
+            pstmt.setString(4, alergia.getSeveridad());
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new SQLException("Error al agregar alergia al paciente: " + e.getMessage());
+        }
     }
 }

@@ -50,7 +50,7 @@ public class Alergia {
     }
 
     public void setSeveridad(String severidad){
-        this.Severidad = Validador.validarTexto(severidad, "La severidad");
+        this.Severidad = Validador.validarTextoPlaceHolder(severidad, "Ingrese descripción", "La severidad");
     }
 
     public String getTipoAlergia() {
@@ -58,7 +58,7 @@ public class Alergia {
     }
 
     public void setTipoAlergia(String TipoAlergia) {
-        this.TipoAlergia = Validador.validarTexto(TipoAlergia, "La severidad");
+        this.TipoAlergia = Validador.validarTextoPlaceHolder(TipoAlergia, "Ingrese severidad", "La severidad");
     }
     
     public String verAlergia(){

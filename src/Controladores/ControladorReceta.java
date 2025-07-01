@@ -5,39 +5,21 @@
 package Controladores;
 
 import Clases.Receta;
-import Conexion.Conexion;
-import java.sql.*;
+import DAO.RecetaDAO;
+
 
 /**
  *
  * @author apnil
  */
 public class ControladorReceta {
-    public int RegistrarReceta(Receta res, int IdDoctor, int idPaciente)throws Exception{
-        int recetaId = -1;
-        try {
-            Connection con = Conexion.getConexion();
-            String consulta = """
-                                INSERT INTO Receta (PacienteID, DoctorID, MedicamentosDosis, Recomendaciones)
-                                VALUES (?, ?, ?, ?)
-                              """;
-            PreparedStatement pstmt = con.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, idPaciente);
-            pstmt.setInt(2, IdDoctor);
-            pstmt.setString(3, res.getMedicamentosDosis());
-            pstmt.setString(4, res.getRecomendaciones());
+    private final RecetaDAO recetaDAO;
 
-            pstmt.executeUpdate();
-            ResultSet rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                recetaId = rs.getInt(1);
-            }
-            rs.close();
-            pstmt.close();
-            con.close();
-        } catch (SQLException e) {
-            throw new Exception("Error al registrar los datos de la receta");
-        }
-        return recetaId;
+    public ControladorReceta() {
+        recetaDAO = new RecetaDAO();
+    }
+    
+    public int RegistrarReceta(Receta res, int IdDoctor, int idPaciente)throws Exception{
+        return recetaDAO.RegistrarReceta(res, IdDoctor, idPaciente);
     }
 }

@@ -17,9 +17,7 @@ public class Diagnostico {
     private String sintomas;
     private String enfermedadDiagnosticada;
     
-    public Diagnostico(String sintomas, String enfermedadDiagnosticada) {
-        this.sintomas = sintomas;
-        this.enfermedadDiagnosticada = enfermedadDiagnosticada;
+    public Diagnostico() {
     }
 
     public int getIdDiagnostico() {

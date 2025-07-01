@@ -7,16 +7,13 @@ package PackDiseño;
 import Clases.Paciente;
 import Controladores.ControladorPaciente;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import util.Placeholders;
-
 /**
  *
  * @author apnil
@@ -38,7 +35,6 @@ public class PanelPacientes extends javax.swing.JPanel {
             llenarTablaPacientes(pacientesOriginal);
         } catch (Exception e) {
         }
-
     }
     
     private void AplicarEstilos(){
@@ -47,14 +43,9 @@ public class PanelPacientes extends javax.swing.JPanel {
         panelGradiante1.setGradientColorsAndRadius(Color.decode("#2A7B9B"), Color.decode("#EDDD53"), 40);
         panelGradiante2.setGradientColorsAndRadius(Color.BLUE, Color.CYAN, 40);
         panelGradiante3.setGradientColorsAndRadius(Color.decode("#D97038"), Color.decode("#89D439"), 40);
-        try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch(Exception ex ) {
-          System.err.println( "Failed to initialize LaF" );
-        }
         jPanel1.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
         jPanel2.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
-        Placeholders.configurarPlaceholder(txtBuscar, "Ingrese el nombre o documento de identidad del paciente a buscar");
+        Placeholders.configurarPlaceholder(txtBuscar, "Ingrese el documento de identidad del paciente a buscar");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,7 +133,7 @@ public class PanelPacientes extends javax.swing.JPanel {
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 840, 10));
 
         txtBuscar.setForeground(new java.awt.Color(153, 153, 153));
-        txtBuscar.setText("Ingrese el nombre o documento de identidad del paciente a buscar");
+        txtBuscar.setText("Ingrese el documento de identidad del paciente a buscar");
         txtBuscar.setBorder(null);
         txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -234,42 +225,41 @@ public class PanelPacientes extends javax.swing.JPanel {
     }
     
     private void llenarTablaPacientes(ArrayList<Paciente> lista) {
-    try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellido Paterno");
-        modelo.addColumn("Apellido Materno");
-        modelo.addColumn("Doc Identidad");
-        modelo.addColumn("Tipo Doc");
-        modelo.addColumn("Fecha Nacimiento") ; 
-        modelo.addColumn("Edad");
-        modelo.addColumn("Género");
-        modelo.addColumn("Teléfono");
-        modelo.addColumn("Correo");
-        modelo.addColumn("Dirección");
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Nombres");
+            modelo.addColumn("Apellido Paterno");
+            modelo.addColumn("Apellido Materno");
+            modelo.addColumn("Doc Identidad");
+            modelo.addColumn("Tipo Doc");
+            modelo.addColumn("Fecha Nacimiento") ; 
+            modelo.addColumn("Edad");
+            modelo.addColumn("Género");
+            modelo.addColumn("Teléfono");
+            modelo.addColumn("Correo");
+            modelo.addColumn("Dirección");
 
-        for (Paciente p : lista) {
-            modelo.addRow(new Object[]{
-                p.getNombre(),
-                p.getApellidoPaterno(),
-                p.getApellidoMaterno(),
-                p.getNumDoc(),
-                p.getTipoDoc(),
-                p.getFechaNacimiento(),
-                p.verEdad(),
-                p.getGenero(),
-                p.getTelefono(),
-                p.getCorreo(),
-                p.getDireccion()
-            });
+            for (Paciente p : lista) {
+                modelo.addRow(new Object[]{
+                    p.getNombre(),
+                    p.getApellidoPaterno(),
+                    p.getApellidoMaterno(),
+                    p.getNumDoc(),
+                    p.getTipoDoc(),
+                    p.getFechaNacimiento(),
+                    p.verEdad(),
+                    p.getGenero(),
+                    p.getTelefono(),
+                    p.getCorreo(),
+                    p.getDireccion()
+                });
+            }
+
+            tablaPacientes.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
         }
-
-        tablaPacientes.setModel(modelo);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
     }
-}
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

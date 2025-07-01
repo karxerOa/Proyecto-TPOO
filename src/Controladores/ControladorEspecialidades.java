@@ -4,6 +4,7 @@
  */
 package Controladores;
 
+import Clases.Especialidad;
 import DAO.EspecialidadDAO;
 import DTO.EspecialidadBasicoDTO;
 import java.sql.SQLException;
@@ -23,5 +24,17 @@ public class ControladorEspecialidades {
     
     public void ObtenerEspecialidadesBasicas()throws SQLException {
         especialidadBasicoDTOs = especialidadDAO.obtnerEspecialides();
+    }
+    
+    public ArrayList<Especialidad> ObtenerEspecialidadesC()throws Exception {
+        return especialidadDAO.obtnerEspecialidesC();
+    }
+    
+    public void Agregar_Especialidades(Especialidad Especialidades)throws Exception{
+        especialidadDAO.Agregar_Especialidades(Especialidades);
+    }
+    
+    public Especialidad BuscarEspecialidad(String nombreBuscado) throws  Exception{
+        return especialidadDAO.BuscarEspecialidad(nombreBuscado);
     }
 }

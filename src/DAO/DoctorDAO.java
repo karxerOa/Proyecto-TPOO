@@ -4,12 +4,16 @@
  */
 package DAO;
 
+import Clases.Doctor;
+import Clases.Turno;
 import java.sql.*;
 import Conexion.Conexion;
 import DTO.DoctorDTO;
 import DTO.DoctorSimpleDTO;
 import DTO.EspecialidadDTO;
 import DTO.TurnoDTO;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -25,8 +29,9 @@ public class DoctorDAO {
                        FROM Cita
                        WHERE Estado = 'Pendiente' AND DoctorID = ?
                        """;
-        try (Connection con = Conexion.getConexion();
-            PreparedStatement pstmt = con.prepareStatement(consulta)) {
+        try {
+            Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(consulta);
             pstmt.setInt(1, idDoctor);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -34,18 +39,23 @@ public class DoctorDAO {
             } else {
                 return 0;
             }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener la cantidad de citas pendientes: " + e.getMessage());
         }
     }
 
     public TurnoDTO obtenerTurnoActual(int idDoctor) throws SQLException {
         String consulta = """
-                       SELECT T.HoraInicio, T.HoraFin
+                       SELECT 
+                           T.HoraInicio,
+                           T.HoraFin
                        FROM Doctor D
                        JOIN Doctor_Turno DT ON D.DoctorID = DT.DoctorID
                        JOIN Turno T ON DT.TurnoID = T.TurnoID
                        WHERE D.DoctorID = ?
-                       AND DT.NombreDia = DATENAME(WEEKDAY, DATEADD(HOUR, -5, GETUTCDATE()))
-                       AND CAST(DATEADD(HOUR, -5, GETUTCDATE()) AS TIME) BETWEEN T.HoraInicio AND T.HoraFin;
+                         AND UPPER(DT.NombreDia) = UPPER(DATENAME(WEEKDAY, DATEADD(HOUR, -5, GETUTCDATE())))
+                         AND CONVERT(TIME, DATEADD(HOUR, -5, GETUTCDATE())) 
+                             BETWEEN T.HoraInicio AND T.HoraFin;
                        """;
 
         try (Connection con = Conexion.getConexion();
@@ -53,12 +63,16 @@ public class DoctorDAO {
             pstmt.setInt(1, idDoctor);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                String inicio = rs.getString("HoraInicio");
-                String fin = rs.getString("HoraFin");
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                String inicio = sdf.format(rs.getTime("HoraInicio"));
+                String fin = sdf.format(rs.getTime("HoraFin"));
                 return new TurnoDTO(inicio, fin);
             } else {
                 return new TurnoDTO("N/A", "N/A");
             }
+        }
+        catch (SQLException e) {
+            throw new SQLException("Error al obtener el turno actual: " + e.getMessage());
         }
     }
 
@@ -77,6 +91,9 @@ public class DoctorDAO {
             } else {
                 return "Desconocido";
             }
+        }
+        catch(SQLException e) {
+            throw new SQLException("Error al obtener los datos: " + e.getMessage());
         }
     }
     
@@ -117,6 +134,8 @@ public class DoctorDAO {
                 doc.setEspecialidades(especialidades);
                 return doc;
             }
+        }catch (SQLException e) {
+            throw new SQLException("Error al buscar los datos del paciente" + e.getMessage());
         }
         return null;
     }
@@ -137,6 +156,8 @@ public class DoctorDAO {
                 String descripcion = rs.getString("descripcion");
                 especialidades.add(new EspecialidadDTO(nombre, descripcion));
             }
+        }catch (SQLException e) {
+            throw new SQLException("Error al obtener las especialidades: " + e.getMessage());
         }
         return especialidades;
     }
@@ -154,6 +175,8 @@ public class DoctorDAO {
             stmt.setString(3, direccion);
             stmt.setInt(4, id);
             stmt.executeUpdate();
+        }catch (SQLException e){
+            throw new SQLException("Error al actualizar los datos: " + e.getMessage());
         }
     }
     
@@ -170,7 +193,104 @@ public class DoctorDAO {
                 DoctorSimpleDTO doc = new DoctorSimpleDTO(rs.getInt("DoctorID"), rs.getString("nombres"));
                 doctores.add(doc);
             }
+        }catch (SQLException e){
+            throw new SQLException("Error al mostrar los doctore" + e.getMessage());
         }
         return doctores;
+    }
+    
+    public int Agregar_Doctor(Doctor doctor) throws SQLException {
+        String sql = "INSERT INTO Doctor(Nombre,ApellidoPaterno,ApellidoMaterno,NumeroDocumento,TipoDocumento,FechaNacimiento,Genero,Telefono,Correo,Direccion,CodigoColegiatura,UsuarioID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {Connection conn = Conexion.getConexion();
+            PreparedStatement Dstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            Dstmt.setString(1, doctor.getNombre());
+            Dstmt.setString(2, doctor.getApellidoPaterno());
+            Dstmt.setString(3, doctor.getApellidoMaterno());
+            Dstmt.setString(4, doctor.getNumDoc());
+            Dstmt.setString(5, doctor.getTipoDoc());
+            Dstmt.setDate(6, java.sql.Date.valueOf(doctor.getFechaNacimiento()));
+            Dstmt.setString(7, doctor.getGenero());
+            Dstmt.setString(8, doctor.getTelefono());
+            Dstmt.setString(9, doctor.getCorreo());
+            Dstmt.setString(10, doctor.getDireccion());
+            Dstmt.setString(11, doctor.getCodigoColegiatura());                
+            Dstmt.setInt(12, doctor.getUser().getIdUsuario());
+            int filas = Dstmt.executeUpdate();
+            if(filas>0){
+                ResultSet rs = Dstmt.getGeneratedKeys();
+                if(rs.next()){
+                    return rs.getInt(1);
+                }
+            }
+        }
+        catch(SQLException e){
+            if (e.getErrorCode() == 2627) {
+                throw new SQLException("Error: El documento de indentidad ya está registrado");
+            } else {
+                throw new SQLException("Error al registrar un nuevo Doctor: " + e.getMessage());
+            }
+        }    
+        return -1;
+    }
+    
+    public void AsignarEspecialidad(int DoctorID,int EspecialidadID)throws Exception{
+        String sql = "INSERT INTO Doctor_Especialidad(DoctorID,EspecialidadID) VALUES (?,?)";
+         try {Connection conn = Conexion.getConexion();
+            PreparedStatement Estmt = conn.prepareStatement(sql);
+            Estmt.setInt(1, DoctorID);
+            Estmt.setInt(2, EspecialidadID);
+            Estmt.executeUpdate();       
+        }
+        catch(SQLException e){
+            throw new Exception("Error al relacionar ID: "+e.getMessage());      
+        }      
+    }
+    
+    public void Asignar_Turnos(Turno turno, int DoctorID)throws SQLException{
+        String sql = "INSERT INTO Turno(HoraInicio,HoraFin) VALUES (?,?)";
+        String SqlRelacion = "INSERT INTO Doctor_Turno(DoctorID,TurnoID,NombreDia) VALUES (?,?,?)";
+        
+        try {
+            Connection conn = Conexion.getConexion();
+            PreparedStatement Tstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            Tstmt.setTime(1, Time.valueOf(turno.getHoraInicio()));
+            Tstmt.setTime(2, Time.valueOf(turno.getHoraFin()));                 
+            Tstmt.executeUpdate();    
+            ResultSet rs = Tstmt.getGeneratedKeys();
+            int turnoID = -1;
+            if(rs.next()){
+                turnoID = rs.getInt(1);
+            }
+
+            for(DayOfWeek dia : turno.getDiasPorSemana()){
+                PreparedStatement PsRelacion = conn.prepareStatement(SqlRelacion);
+                PsRelacion.setInt(1, DoctorID);
+                PsRelacion.setInt(2, turnoID);
+                PsRelacion.setString(3, dia.toString());
+                PsRelacion.executeUpdate();
+            }
+        }
+        catch(SQLException e){
+            throw new SQLException("Error al registrar turno de doctor: " + e.getMessage());      
+        }    
+    }
+    public ArrayList<DoctorSimpleDTO> ObtenerDoctor() throws SQLException{
+        ArrayList<DoctorSimpleDTO> ListaDoctor = new ArrayList();
+        
+        String sql = "SELECT DoctorID, Nombre + ' ' + ApellidoPaterno + ' ' +ApellidoMaterno AS Nombre From Doctor";
+        try {
+            Connection conn = Conexion.getConexion();
+            PreparedStatement Astmt = conn.prepareStatement(sql);
+            ResultSet rs = Astmt.executeQuery();
+
+            while(rs.next()){
+                DoctorSimpleDTO doc = new DoctorSimpleDTO(rs.getInt("DoctorID"), rs.getString("Nombre"));
+                ListaDoctor.add(doc);                                   
+            }                                                                               
+        }
+        catch(SQLException e){
+            throw  new SQLException("Error al obtener doctores:"+e.getMessage());
+        }     
+        return ListaDoctor;
     }
 }

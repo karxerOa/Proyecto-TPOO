@@ -60,7 +60,7 @@ public class Paciente extends Persona{
     }
 
     public void setGrupoSanguineo(String grupoSanguineo) {
-        this.grupoSanguineo = Validador.validarTexto(grupoSanguineo, "El grupo sanguineo");
+        this.grupoSanguineo = Validador.validarTextoPlaceHolder(grupoSanguineo, "Ingrese el tipo de sangre", "El tipo de sangre");
     }    
     
     public void agregarAlergia(Alergia alergia) throws Exception {
@@ -70,4 +70,10 @@ public class Paciente extends Persona{
     public void agregarHistoriaMedico(Atencion atencion) throws Exception {
         this.HistorialMedico.add(atencion);
     }
+
+    @Override
+    public String toString() {
+        return this.nombre + " " + this.apellidoPaterno + " " + this.apellidoMaterno;
+    }
+    
 }

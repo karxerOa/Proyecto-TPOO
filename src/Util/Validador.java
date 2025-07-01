@@ -12,18 +12,29 @@ import java.time.LocalDateTime;
  * @author apnil
  */
 public class Validador {
+    
     public static String validarTexto(String valor, String campo) {
         if (valor == null || valor.trim().isEmpty()) {
+            throw new IllegalArgumentException(campo + " no puede estar vacío.");
+        }
+        return valor;
+    }
+    
+    public static String validarTextoPlaceHolder(String valor, String placeholder, String campo) {
+        if (valor == null || valor.trim().isEmpty() || valor.equals(placeholder)) {
             throw new IllegalArgumentException( campo + " no puede estar vacío.");
         }
         return valor;
     }
-//    public static String validardocIdentidad(String doc, String campo) {
-//        if (doc.length() != 8 || doc.length() != 12) {
-//            throw new IllegalArgumentException(campo + " debe tener 8 o 20 digitos digitos.");
-//        }
-//        return doc;
-//    }
+    public static String validardocIdentidad(String doc, String placeholder) {
+        if (doc.equals(placeholder)) {
+            throw new IllegalArgumentException("El documento de indentidad no puede ir vacio");
+        }
+        if (doc.length() != 8 && doc.length() != 12) {
+            throw new IllegalArgumentException("El documento de indentidad debe tener 8 o 20 digitos digitos.");
+        }
+        return doc;
+    }
     public static String validarCorreo(String correo) {
         if (correo == null || !correo.contains("@")) {
             throw new IllegalArgumentException("Correo inválido.");

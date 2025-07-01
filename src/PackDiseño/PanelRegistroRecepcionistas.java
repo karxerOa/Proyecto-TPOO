@@ -6,12 +6,15 @@ package PackDiseño;
 
 import Clases.Recepcionista;
 import Clases.Usuario;
-import Controladores.ControladorAdministrador;
+import Controladores.ControladorRecepcionista;
 import Controladores.ControladorUsuarios;
+import com.formdev.flatlaf.FlatClientProperties;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import util.Placeholders;
 
 /**
  *
@@ -24,6 +27,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
      */
     public PanelRegistroRecepcionistas() {
         initComponents();
+        aplicarDiseño();
+        inicializarPlaceholders();
+        eventotxtNombre();
+        eventotxtApellidoMaterno();
+        eventotxtApellidoPaterno();
     }
 
     /**
@@ -97,7 +105,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jLabel14.setText("USUARIO");
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setText("Nombre de Usuario");
+        txtUsuario.setEnabled(false);
 
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
         txtContraseña.setText("Contraseña");
@@ -172,7 +180,7 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCorreo.setForeground(new java.awt.Color(153, 153, 153));
-        txtCorreo.setText("Ingrese su correo electronico");
+        txtCorreo.setText("Ingrese su Correo");
         jPanel5.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 360, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -196,15 +204,15 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
 
         txtNombre.setForeground(new java.awt.Color(153, 153, 153));
-        txtNombre.setText("Ingrese sus nombre");
+        txtNombre.setText("Ingrese sus nombres");
         jPanel5.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 360, 30));
 
         txtAPaterno.setForeground(new java.awt.Color(153, 153, 153));
-        txtAPaterno.setText("Ingrese su apellido paterno");
+        txtAPaterno.setText("Ingrese su Apellido Paterno");
         jPanel5.add(txtAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 360, 30));
 
         txtAMaterno.setForeground(new java.awt.Color(153, 153, 153));
-        txtAMaterno.setText("Ingrese su apellido materno");
+        txtAMaterno.setText("Ingrese su Apellido Materno");
         jPanel5.add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 360, 30));
 
         txtDocIdentidad.setForeground(new java.awt.Color(153, 153, 153));
@@ -220,11 +228,11 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, 30));
 
         txtDireccion.setForeground(new java.awt.Color(153, 153, 153));
-        txtDireccion.setText("Ingrese su direccion");
+        txtDireccion.setText("Ingrese su Direccion");
         jPanel5.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 360, 30));
 
         txtTelefono.setForeground(new java.awt.Color(153, 153, 153));
-        txtTelefono.setText("Ingrese su numero de telefono");
+        txtTelefono.setText("Ingrese su Numero de Telefono");
         jPanel5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 360, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -237,11 +245,6 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
 
         cbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino" }));
         cbGenero.setSelectedIndex(-1);
-        cbGenero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGeneroActionPerformed(evt);
-            }
-        });
         jPanel5.add(cbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 120, 30));
         jPanel5.add(dpFN, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 130, 30));
 
@@ -296,59 +299,150 @@ public class PanelRegistroRecepcionistas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inicializarPlaceholders(){
+        Placeholders.configurarPlaceholder(txtNombre, "Ingrese sus nombres");
+        Placeholders.configurarPlaceholder(txtAPaterno, "Ingrese su Apellido Paterno");
+        Placeholders.configurarPlaceholder(txtAMaterno, "Ingrese su Apellido Materno");
+        Placeholders.configurarPlaceholder(txtTelefono, "Ingrese su Numero de Telefono");
+        Placeholders.configurarPlaceholder(txtCorreo, "Ingrese su Correo");
+        Placeholders.configurarPlaceholder(txtDireccion, "Ingrese su Direccion");
+        Placeholders.configurarPlaceholder(txtContraseña, "Contraseña");
+        Placeholders.configurarPlaceholder(txtDocIdentidad, "Ingrese su doc. de indentidad");
+    }
+    
+    private void aplicarDiseño(){
+        jPanel1.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel3.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel4.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel5.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+    }
+    
+    private void LimpiarCampos(){
+        txtNombre.setText("");
+        txtAPaterno.setText("");
+        txtAMaterno.setText("");
+        txtDocIdentidad.setText("");
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        txtContraseña.setText("");
+        cbGenero.setSelectedIndex(-1);
+        dpFN.setDate(null);
+        inicializarPlaceholders();
+    }
+    
+    private void GenerarUsuario(){
+        String usuario = "";
+        for (String palabra : txtNombre.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        for (String palabra : txtAPaterno.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        for (String palabra : txtAMaterno.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        txtUsuario.setText(usuario);
+    }
+    
+    private void eventotxtNombre(){
+        txtNombre.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+        });
+    }
+    private void eventotxtApellidoPaterno(){
+        txtAPaterno.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
+    private void eventotxtApellidoMaterno(){
+        txtAMaterno.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-         try{     
-        // Ingresar datos---------------------------------------------------------------------------
-        Date Fecha = dpFN.getDate();
-        LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
-        
-        //Crear UsuarioTT
-        
-        String Usser = txtUsuario.getText();
-        String Password = txtContraseña.getText();      
-        Usuario newUsser = new Usuario(0,Usser, Password, "Recepcionista");
-        
-        ControladorUsuarios U = new ControladorUsuarios();
-        int IdUsuario = U.RegistrarUser(newUsser);
-        
-        if(IdUsuario!=-1){
-            ControladorAdministrador A = new ControladorAdministrador(); 
-            //Mandar ID
-            newUsser.setIdUsuario(IdUsuario);
-            
+        try{     
+            // Ingresar datos---------------------------------------------------------------------------
+            Date Fecha = dpFN.getDate();
+            LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
+            //Crear UsuarioTT
+
+            String Usser = txtUsuario.getText();
+            String Password = txtContraseña.getText();    
+            Usuario newUsser = new Usuario();
+            newUsser.setNombreUsuario(Usser);
+            newUsser.setContraseña(Password);
+            newUsser.setRol("Recepcionista");
             Recepcionista NewRecepcionista = new Recepcionista();
-            //Set clase persona
             NewRecepcionista.setNombre(txtNombre.getText());
             NewRecepcionista.setApellidoPaterno(txtAPaterno.getText());
             NewRecepcionista.setApellidoMaterno(txtAMaterno.getText());
             NewRecepcionista.setNumDoc(txtDocIdentidad.getText());                 
-            NewRecepcionista.setTipoDoc(A.determinarTipoDocumento(txtDocIdentidad.getText()));
             NewRecepcionista.setTelefono(txtTelefono.getText());
             NewRecepcionista.setFechaNacimiento(FechaNacimiento);
             NewRecepcionista.setGenero(cbGenero.getSelectedItem().toString());
             NewRecepcionista.setCorreo(txtCorreo.getText());
             NewRecepcionista.setDireccion(txtDireccion.getText());
-           
             NewRecepcionista.setUser(newUsser);
-            
-            //Agregar doctor
-          
-             A.Agregar_Repcionista(NewRecepcionista);
-            JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente");  
-        }
+
+            ControladorUsuarios U = new ControladorUsuarios();
+            int IdUsuario = U.RegistrarUser(newUsser);
+
+            if(IdUsuario!=-1){
+                ControladorRecepcionista controladorRecepcionista = new ControladorRecepcionista();
+                //Mandar ID
+                newUsser.setIdUsuario(IdUsuario);
+                controladorRecepcionista.Agregar_Repcionista(NewRecepcionista);
+                JOptionPane.showMessageDialog(this, "Registro de recepcionista exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                LimpiarCampos();
+            }
         }
         catch(Exception e){
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }  
-        
-        
     }//GEN-LAST:event_btnRegistarActionPerformed
-
-    private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbGeneroActionPerformed
 
 
 

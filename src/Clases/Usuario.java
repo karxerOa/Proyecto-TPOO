@@ -16,6 +16,9 @@ public class Usuario{
     private String contraseña;
     private String rol;
 
+    public Usuario() {
+    }
+
     public Usuario(String nombreUsuario, String contraseña, String rol) {
         this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
@@ -52,19 +55,16 @@ public class Usuario{
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = Validador.validarTexto(nombreUsuario, "El nombre de usuario");
     }
-
+    
     public void setRol(String rol) {
         this.rol = Validador.validarTexto(rol, "El rol");
     }
 
     public void setContraseña(String contraseña) throws Exception {
-        if (contraseña == null || contraseña.isBlank()) {
-            throw new Exception("La contraseña no puede estar vacía.");
-        }
         if (contraseña.length() < 8) {
-            throw new Exception("La contraseña debe tener al menos 6 caracteres.");
+            throw new Exception("La contraseña debe tener al menos 8 caracteres.");
         }
-        this.contraseña = contraseña;
+        this.contraseña = Validador.validarTextoPlaceHolder(contraseña,"Contraseña" , "La contraseña");
     }
 }
 

@@ -7,14 +7,16 @@ package PackDiseño;
 import Clases.Doctor;
 import Clases.Especialidad;
 import Clases.Usuario;
-import Controladores.ControladorAdministrador;
 import Controladores.ControladorDoctor;
+import Controladores.ControladorEspecialidades;
 import Controladores.ControladorUsuarios;
+import com.formdev.flatlaf.FlatClientProperties;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
 import util.Placeholders;
 /**
  *
@@ -25,44 +27,138 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
     /**
      * Creates new form PanelRegistarDoctor
      */
+    private ArrayList<Especialidad> ListaEspecialidadDoctor = new ArrayList();
     private ArrayList<Especialidad> lista;
     public PanelRegistarDoctor() {
         initComponents();
+        aplicarDiseño();
         inicializarPlaceholders();
         cargarCombobox();
-       
+        eventotxtNombre();
+        eventotxtApellidoPaterno();
+        eventotxtApellidoMaterno();
     }
-    public void cargarCombobox(){
-        lista = new ArrayList();
-        
-        ControladorAdministrador admin = new ControladorAdministrador();
-        lista = admin.Obtener_Especilidad();
-        
-        cbEspecialidad.removeAllItems();
-        
-        for (Especialidad esp : lista){
-            cbEspecialidad.addItem(esp.getNombre());
+    
+    private void cargarCombobox(){
+        try {
+            lista = new ArrayList();
+            ControladorEspecialidades controladorEspecialidades = new ControladorEspecialidades();
+            lista = controladorEspecialidades.ObtenerEspecialidadesC();
+            cbEspecialidad.removeAllItems();
+            for (Especialidad esp : lista){
+                cbEspecialidad.addItem(esp.getNombre());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
-    public void inicializarPlaceholders(){
+    
+    private void aplicarDiseño(){
+        jPanel1.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel3.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel4.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+        jPanel5.putClientProperty(FlatClientProperties.STYLE, "arc: 50");
+    }
+    
+    private void inicializarPlaceholders(){
         Placeholders.configurarPlaceholder(txtNombre, "Ingrese sus nombres");
-        Placeholders.configurarPlaceholder(txtAPaterno, "Ingrese su apellido aterno");
-        Placeholders.configurarPlaceholder(txtAMaterno, "Ingrese su apellido materno");
-        Placeholders.configurarPlaceholder(txtTelefono, "Ingrese su numero de telefono");
-        Placeholders.configurarPlaceholder(txtCorreo, "Ingrese su correo electronico");
-        Placeholders.configurarPlaceholder(txtDireccion, "Ingrese su direccion");
+        Placeholders.configurarPlaceholder(txtAPaterno, "Ingrese su Apellido Paterno");
+        Placeholders.configurarPlaceholder(txtAMaterno, "Ingrese su Apellido Materno");
+        Placeholders.configurarPlaceholder(txtTelefono, "Ingrese su Numero de Telefono");
+        Placeholders.configurarPlaceholder(txtCorreo, "Ingrese su Correo");
+        Placeholders.configurarPlaceholder(txtDireccion, "Ingrese su Direccion");
         Placeholders.configurarPlaceholder(txtCMP, "Ingrese CMP");       
         Placeholders.configurarPlaceholder(txtNunDoc, "Ingrese su doc. de indentidad");
-        Placeholders.configurarPlaceholder(txtUsuario, "Ingrese Usuario");
-        Placeholders.configurarPlaceholder(txtContraseña, "Ingrese Contraseña");
-        
+        Placeholders.configurarPlaceholder(txtContraseña, "Contraseña");
+    }
+    private void GenerarUsuario(){
+        String usuario = "";
+        for (String palabra : txtNombre.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        for (String palabra : txtAPaterno.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        for (String palabra : txtAMaterno.getText().toLowerCase().split(" ")) {
+            if (!palabra.isBlank()) {
+                usuario += palabra.charAt(0);
+            }
+        }
+        txtUsuario.setText(usuario);
+    }
+    
+    private void eventotxtNombre(){
+        txtNombre.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+        });
+    }
+    private void eventotxtApellidoPaterno(){
+        txtAPaterno.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
+    private void eventotxtApellidoMaterno(){
+        txtAMaterno.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                GenerarUsuario();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    private void limpiarCampos(){
+        txtNombre.setText("");
+        txtAPaterno.setText("");
+        txtAMaterno.setText("");
+        txtNunDoc.setText("");
+        cbEspecialidad.setSelectedIndex(-1);
+        txtCMP.setText("");
+        dpFN.setDate(null);
+        txtTelefono.setText("");
+        txtCorreo.setText("");
+        txtDireccion.setText("");
+        cbGenero.setSelectedIndex(-1);
+        txtUsuario.setText("");
+        txtContraseña.setText("");
+        inicializarPlaceholders();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -100,6 +196,8 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         dpFN = new org.jdesktop.swingx.JXDatePicker();
         cbEspecialidad = new javax.swing.JComboBox<>();
+        bntAgregarEspecialidad = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -129,6 +227,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jLabel14.setText("USUARIO");
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
+        txtUsuario.setEnabled(false);
 
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
         txtContraseña.setText("Contraseña");
@@ -202,7 +301,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCorreo.setForeground(new java.awt.Color(153, 153, 153));
-        txtCorreo.setText("Ingrese su correo electronico");
+        txtCorreo.setText("Ingrese su Correo");
         jPanel5.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 360, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -226,19 +325,19 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
 
         txtNombre.setForeground(new java.awt.Color(153, 153, 153));
-        txtNombre.setText("Ingrese sus nombre");
+        txtNombre.setText("Ingrese sus nombres");
         jPanel5.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 360, 30));
 
         txtAPaterno.setForeground(new java.awt.Color(153, 153, 153));
-        txtAPaterno.setText("Ingrese su apellido paterno");
+        txtAPaterno.setText("Ingrese su Apellido Paterno");
         jPanel5.add(txtAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 360, 30));
 
         txtAMaterno.setForeground(new java.awt.Color(153, 153, 153));
-        txtAMaterno.setText("Ingrese su apellido materno");
+        txtAMaterno.setText("Ingrese su Apellido Materno");
         jPanel5.add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 360, 30));
 
         txtNunDoc.setForeground(new java.awt.Color(153, 153, 153));
-        txtNunDoc.setText("Ingrese N° Documento");
+        txtNunDoc.setText("Ingrese su doc. de indentidad");
         jPanel5.add(txtNunDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -258,11 +357,11 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jPanel5.add(txtCMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 110, 30));
 
         txtDireccion.setForeground(new java.awt.Color(153, 153, 153));
-        txtDireccion.setText("Ingrese su direccion");
+        txtDireccion.setText("Ingrese su Direccion");
         jPanel5.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 360, 30));
 
         txtTelefono.setForeground(new java.awt.Color(153, 153, 153));
-        txtTelefono.setText("Ingrese su numero de telefono");
+        txtTelefono.setText("Ingrese su Numero de Telefono");
         jPanel5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 360, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -285,6 +384,18 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         cbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Medico General", "Cardiología  ", "Neurología  ", "Pediatría  ", "Ginecología  ", "Dermatología  ", "Urología  ", "Oftalmología  ", "Otorrinolaringología  ", "Neumología  ", "Reumatología  ", "Gastroenterología  ", "Psiquiatría  ", "Cirugía General  ", "Obstetricia" }));
         cbEspecialidad.setSelectedIndex(-1);
         jPanel5.add(cbEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 180, 30));
+
+        bntAgregarEspecialidad.setText("Agregar Especialidad");
+        bntAgregarEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAgregarEspecialidadActionPerformed(evt);
+            }
+        });
+        jPanel5.add(bntAgregarEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 150, 30));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 8)); // NOI18N
+        jLabel16.setText("*Seleccione la especialidad y agregue");
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -318,70 +429,65 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
 
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
         try{     
-        // Ingresar datos---------------------------------------------------------------------------
-        Date Fecha = dpFN.getDate();
-        LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
-    
-        //Ingresar datos propios del doctor---------------------------------------------------------
-     
-        int Index = cbEspecialidad.getSelectedIndex();
-        Especialidad EspecialidadesSleccionada = lista.get(Index);
-        ArrayList<Especialidad> ListaEspecialidadDoctor = new ArrayList();
-        ListaEspecialidadDoctor.add(EspecialidadesSleccionada);
-        
-        //Crear UsuarioTT
-        
-        String Usser = txtUsuario.getText();
-        String Password = txtContraseña.getText();      
-        Usuario newUsser = new Usuario(0,Usser, Password, "Doctor");
-        
-        ControladorUsuarios U = new ControladorUsuarios();
-        int IdUsuario = U.RegistrarUser(newUsser);
-        
-        if(IdUsuario!=-1){
-            
-            //Mandar ID
-            newUsser.setIdUsuario(IdUsuario);
-            ControladorAdministrador A = new ControladorAdministrador(); 
+            ControladorUsuarios U = new ControladorUsuarios();
+            // Ingresar datos---------------------------------------------------------------------------
+            Date Fecha = dpFN.getDate();
+            LocalDate FechaNacimiento = Fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();      
+            String Usser = txtUsuario.getText();
+            String Password = txtContraseña.getText();      
+            Usuario newUsser = new Usuario();
+            newUsser.setNombreUsuario(Usser);
+            newUsser.setContraseña(Password);
+            newUsser.setRol("Doctor");
             Doctor newdoc = new Doctor();
-            //Set clase persona
             newdoc.setNombre(txtNombre.getText());
             newdoc.setApellidoPaterno(txtAPaterno.getText());
             newdoc.setApellidoMaterno(txtAMaterno.getText());
             newdoc.setNumDoc(txtNunDoc.getText());     
-            newdoc.setTipoDoc(A.determinarTipoDocumento(txtNunDoc.getText()));
             newdoc.setTelefono(txtTelefono.getText());
             newdoc.setFechaNacimiento(FechaNacimiento);
             newdoc.setGenero(cbGenero.getSelectedItem().toString());
             newdoc.setCorreo(txtCorreo.getText());
             newdoc.setDireccion(txtDireccion.getText());
-            
-            //Set clase doctor
             newdoc.setEspecialidades(ListaEspecialidadDoctor);
             newdoc.setCodigoColegiatura(txtCMP.getText());
             newdoc.setUser(newUsser);
-            
-            //Agregar doctor
-          
-            
-            //Relacion Especialidad_doctor
-            int DoctorID = A.Agregar_Doctor(newdoc);
-            int EspecialdiadID = EspecialidadesSleccionada.getIdEspecialidad();
-            
-            ControladorDoctor CD = new ControladorDoctor();
-            CD.AsignarEspecialidad(DoctorID, EspecialdiadID);
-            
-            JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente");  
-        }
+            if (ListaEspecialidadDoctor.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Error: El doctor debe poseer minimo 1 especialidad", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int IdUsuario = U.RegistrarUser(newUsser);
+            if(IdUsuario!=-1){
+
+                //Mandar ID
+                newUsser.setIdUsuario(IdUsuario);
+                ControladorDoctor controladorDoctor = new ControladorDoctor();
+                //Agregar doctor
+
+                //Relacion Especialidad_doctor
+                int DoctorID = controladorDoctor.Agregar_Doctor(newdoc);
+                ControladorDoctor CD = new ControladorDoctor();
+                for (Especialidad esp : ListaEspecialidadDoctor) {
+                    CD.AsignarEspecialidad(DoctorID, esp.getIdEspecialidad());
+                }
+                JOptionPane.showMessageDialog(this, "Doctor registrado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCampos();
+            }
         }
         catch(Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }  
     }//GEN-LAST:event_btnRegistarActionPerformed
 
+    private void bntAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAgregarEspecialidadActionPerformed
+        int Index = cbEspecialidad.getSelectedIndex();
+        Especialidad EspecialidadesSleccionada = lista.get(Index);
+        ListaEspecialidadDoctor.add(EspecialidadesSleccionada);
+    }//GEN-LAST:event_bntAgregarEspecialidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAgregarEspecialidad;
     private javax.swing.JButton btnRegistar;
     private javax.swing.JComboBox<String> cbEspecialidad;
     private javax.swing.JComboBox<String> cbGenero;
@@ -393,6 +499,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

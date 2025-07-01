@@ -16,6 +16,12 @@ public class Especialidad {
     public Especialidad() {
     }
 
+    public Especialidad(int IdEspecialidad, String Nombre, String Descripcion) {
+        this.IdEspecialidad = IdEspecialidad;
+        this.Nombre = Nombre;
+        this.Descripcion = Descripcion;
+    }
+
     public Especialidad(String Nombre, String Descripcion) {
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
@@ -55,8 +61,11 @@ public class Especialidad {
         }
         this.Descripcion = Descripcion;
     }
-    
-    public String VerDatosCompletos(){
-        return this.Nombre + ": " + this.Descripcion;
+
+    @Override
+    public String toString() {
+        return  Nombre;
     }
+    
+    
 }

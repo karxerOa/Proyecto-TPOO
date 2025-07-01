@@ -7,7 +7,6 @@ package Controladores;
 import Clases.Diagnostico;
 import Conexion.Conexion;
 import java.sql.*;
-
 /**
  *
  * @author apnil

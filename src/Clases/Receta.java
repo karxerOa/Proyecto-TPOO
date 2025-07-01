@@ -17,11 +17,9 @@ public class Receta {
     private String medicamentosDosis;
     private String recomendaciones;
 
-    public Receta(String medicamentosDosis, String recomendaciones) {
+    public Receta() {
         this.paciente = new Paciente();
         this.doctor = new Doctor();
-        this.medicamentosDosis = medicamentosDosis;
-        this.recomendaciones = recomendaciones;
     }
     
     public int getIdReceta() {

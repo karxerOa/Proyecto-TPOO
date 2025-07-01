@@ -5,13 +5,13 @@
 package Controladores;
 
 
-import Conexion.Conexion;
+import Clases.Doctor;
+import Clases.Turno;
 import DAO.DoctorDAO;
 import DAO.PacienteDAO;
 import DTO.DoctorDTO;
 import DTO.DoctorSimpleDTO;
 import DTO.TurnoDTO;
-import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -22,6 +22,10 @@ import java.util.ArrayList;
 public class ControladorDoctor {
     private final DoctorDAO doctorDAO;
     private final PacienteDAO pacienteDAO;
+    
+    public int Agregar_Doctor(Doctor doctor) throws Exception{
+        return doctorDAO.Agregar_Doctor(doctor);
+    }
     
     public ControladorDoctor() {
         this.doctorDAO = new DoctorDAO();
@@ -52,22 +56,19 @@ public class ControladorDoctor {
         doctorDAO.actualizarDatos(idDoctor, correo, telefono, direccion);
     }
     
-    public ArrayList<DoctorSimpleDTO> DoctoresPorFechaHora(LocalDateTime fechaHora, String Especialidad)throws SQLException{
+    public ArrayList<DoctorSimpleDTO> DoctoresPorFechaHora(LocalDateTime fechaHora, String Especialidad)throws Exception{
         return doctorDAO.DoctoresPorFechaHora(fechaHora, Especialidad);
     }
     
-    public void AsignarEspecialidad(int DoctorID,int EspecialidadID)throws Exception{
-        String sql = "INSERT INTO Doctor_Especialidad(DoctorID,EspecialidadID) VALUES (?,?)";
-         try {Connection conn = Conexion.getConexion();
-            PreparedStatement Estmt = conn.prepareStatement(sql);
-            Estmt.setInt(1, DoctorID);
-            Estmt.setInt(2, EspecialidadID);
-            Estmt.executeUpdate();       
-        
-        }
-        catch(SQLException e){
-            throw new Exception("Error al relacionar ID: "+e.getMessage());      
-        }      
-        
+    public void AsignarEspecialidad(int DoctorID,int EspecialidadID)throws Exception {
+        doctorDAO.AsignarEspecialidad(DoctorID, EspecialidadID);
+    }
+    
+    public void Asignar_Turnos(Turno turno, int DoctorID)throws Exception {
+        doctorDAO.Asignar_Turnos(turno, DoctorID);
+    }
+    
+    public ArrayList<DoctorSimpleDTO> ObtenerDoctor() throws Exception{
+        return doctorDAO.ObtenerDoctor();
     }
 }

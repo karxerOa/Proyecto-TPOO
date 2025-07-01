@@ -42,7 +42,7 @@ public class Doctor extends Persona{
     }
 
     public void setCodigoColegiatura(String CodigoColegiatura) {
-        this.CodigoColegiatura = Validador.validarTexto(CodigoColegiatura, "El codigo de colegiatura");
+        this.CodigoColegiatura = Validador.validarTextoPlaceHolder(CodigoColegiatura,"Ingrese CMP" , "El codigo de colegiatura");
     }
 
     public ArrayList<Especialidad> getEspecialidades() {

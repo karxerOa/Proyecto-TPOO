@@ -51,8 +51,11 @@ public class CitaDAO {
                 }
             }
             else{
-                throw new SQLException("Cita ya registrada en ese bloque, intente en otra hora");
+                throw new SQLException("Cita ya registrada en ese bloque, intente en otra hora: ");
             }
+        }
+        catch (SQLException e){
+            throw new SQLException("Error al registrar la cita: " + e.getMessage());
         }
     } 
 }
