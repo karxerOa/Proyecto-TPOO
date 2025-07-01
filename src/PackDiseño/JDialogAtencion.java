@@ -14,13 +14,11 @@ import Controladores.ControladorPaciente;
 import Controladores.ControladorReceta;
 import DTO.PacienteDetalleDTO;
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import java.io.File;
 import java.io.FileOutputStream;
-import javax.swing.UnsupportedLookAndFeelException;
 /**
  *
  * @author apnil
@@ -50,11 +48,6 @@ public class JDialogAtencion extends javax.swing.JDialog {
     }
     
     private void AplicarEstilos(){
-        try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch(UnsupportedLookAndFeelException ex ) {
-            JOptionPane.showMessageDialog(null, "No se pudo inicializar el estilo visual.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
         jPanel1.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
         jPanel2.putClientProperty(FlatClientProperties.STYLE, "arc: 30"); 
         jPanel3.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
@@ -90,12 +83,11 @@ public class JDialogAtencion extends javax.swing.JDialog {
         try {
             String doc = controladorDoctor.obtenerNombreDoctor(idDoctor);
             String pac = controladorPaciente.obtenerNombrePaciente(idPaciente);
-            
-            
+            String fechaHora = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
+            String nombreArchivo = "recetas/receta_paciente_" + idPaciente + "_" + fechaHora + ".pdf";
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("informe_medico.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(nombreArchivo));
             document.open();
-
             Font tituloFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
             Paragraph titulo = new Paragraph("Receta Médica", tituloFont);
             titulo.setAlignment(Element.ALIGN_CENTER);
@@ -138,12 +130,14 @@ public class JDialogAtencion extends javax.swing.JDialog {
 
             document.add(table);
             document.close();
-            System.out.println("PDF generado correctamente.");
-            
+
+            JOptionPane.showMessageDialog(this, "Receta PDF generada exitosamente:\n" + nombreArchivo, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al generar el PDF:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -435,13 +429,13 @@ public class JDialogAtencion extends javax.swing.JDialog {
                 GenerarReceta();
                 Atendida();
                 JOptionPane.showMessageDialog(rootPane, "Receta generada, atencion terminada", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
             }
             else if(opcion == JOptionPane.NO_OPTION){
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        dispose();
     }//GEN-LAST:event_btnTerminarActionPerformed
 
     private void btnVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerHistorialActionPerformed
@@ -454,6 +448,7 @@ public class JDialogAtencion extends javax.swing.JDialog {
         JDialogAgregarAleriga a = new JDialogAgregarAleriga(this, true, idPaciente);
         a.setLocationRelativeTo(null);
         a.setVisible(true); 
+        MostrarDatosPaciente();
     }//GEN-LAST:event_txtAgregarAlergiaActionPerformed
     /**
      * @param args the command line arguments

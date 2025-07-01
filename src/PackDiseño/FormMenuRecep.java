@@ -24,6 +24,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
     private Colores colores = new Colores(new Color(0,125,118));
     public FormMenuRecep() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +70,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 24)); // NOI18N
         jButton1.setText("x");
         jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -125,7 +126,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnAgendarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Task Planning50px.png"))); // NOI18N
         btnAgendarCita.setText("Agendar Cita");
         btnAgendarCita.setBorder(null);
-        btnAgendarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgendarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAgendarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgendarCitaActionPerformed(evt);
@@ -139,7 +140,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/SickInverted.png"))); // NOI18N
         btnRegistrar.setText("Registar Paciente");
         btnRegistrar.setBorder(null);
-        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -153,7 +154,7 @@ public class FormMenuRecep extends javax.swing.JFrame {
         btnBuscarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Search More.png"))); // NOI18N
         btnBuscarPaciente.setText("Pacientes");
         btnBuscarPaciente.setBorder(null);
-        btnBuscarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarPacienteActionPerformed(evt);

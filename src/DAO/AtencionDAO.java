@@ -50,11 +50,11 @@ public class AtencionDAO {
                 hist.setAtencionID(rs.getInt("AtencionID"));
                 hist.setNombrePaciente(rs.getString("NombrePaciente"));
                 hist.setNombreDoctor(rs.getString("NombreDoctor"));
-                hist.setSintomas("Sintomas");
-                hist.setEnfermedadDiagnosticada("EnfermedadDiagnostica");
-                hist.setRecomendaciones("Recomendaciones");
-                hist.setMedicamentosDosis("MedicamentosDosis");
-                hist.setFecha("Fecha");
+                hist.setSintomas(rs.getString("Sintomas"));
+                hist.setEnfermedadDiagnosticada(rs.getString("EnfermedadDiagnostica"));
+                hist.setRecomendaciones(rs.getString("Recomendaciones"));
+                hist.setMedicamentosDosis(rs.getString("MedicamentosDosis"));
+                hist.setFecha(rs.getString("Fecha"));
                 historial.agregarFinal(hist);
             }            
         } catch (SQLException e) {

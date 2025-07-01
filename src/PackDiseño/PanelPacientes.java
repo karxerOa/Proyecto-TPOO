@@ -31,6 +31,7 @@ public class PanelPacientes extends javax.swing.JPanel {
             cp.obtenerPacientesDni();
             pacientesOriginal = cp.listaPacientes;
             AplicarEstilos();
+            mostrarDatosEstadisticos();
             Eventotxt();
             llenarTablaPacientes(pacientesOriginal);
         } catch (Exception e) {
@@ -47,6 +48,19 @@ public class PanelPacientes extends javax.swing.JPanel {
         jPanel2.putClientProperty(FlatClientProperties.STYLE, "arc: 30");
         Placeholders.configurarPlaceholder(txtBuscar, "Ingrese el documento de identidad del paciente a buscar");
     }
+    private void mostrarDatosEstadisticos(){
+        try {
+            lblTotalPacientes.setText(Integer.toString(cp.obtenerCantidadPacientes()));
+            lbEdadPromedio.setText(Double.toString(cp.obtenerEdadPromedioPacientes()));
+            int[] act = cp.obtenerPacientesActivosInactivos();
+            lbActivos.setText(Integer.toString(act[0]));
+            lbInactivos.setText(Integer.toString(act[1]));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(PanelPacientes.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,14 +74,23 @@ public class PanelPacientes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaPacientes = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         txtBuscar = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         panelGradiante1 = new PackDiseño.PanelGradiante();
+        lbInactivos = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lbActivos = new javax.swing.JLabel();
         panelGradiante2 = new PackDiseño.PanelGradiante();
+        jLabel4 = new javax.swing.JLabel();
+        lbEdadPromedio = new javax.swing.JLabel();
         panelGradiante3 = new PackDiseño.PanelGradiante();
+        lblTotalPacientes = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,6 +123,10 @@ public class PanelPacientes extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tablaPacientes);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("*Solo se mostraran pacientes activos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -107,17 +134,20 @@ public class PanelPacientes extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(332, 332, 332))
@@ -146,43 +176,129 @@ public class PanelPacientes extends javax.swing.JPanel {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        lbInactivos.setFont(new java.awt.Font("Showcard Gothic", 1, 36)); // NOI18N
+        lbInactivos.setForeground(new java.awt.Color(255, 255, 255));
+        lbInactivos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbInactivos.setText("00000");
+
+        jLabel6.setFont(new java.awt.Font("Showcard Gothic", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Pacientes INACTIVOS:");
+
+        jLabel7.setFont(new java.awt.Font("Showcard Gothic", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Pacientes ACTIVOS:");
+
+        lbActivos.setFont(new java.awt.Font("Showcard Gothic", 1, 36)); // NOI18N
+        lbActivos.setForeground(new java.awt.Color(255, 255, 255));
+        lbActivos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbActivos.setText("00000");
+
         javax.swing.GroupLayout panelGradiante1Layout = new javax.swing.GroupLayout(panelGradiante1);
         panelGradiante1.setLayout(panelGradiante1Layout);
         panelGradiante1Layout.setHorizontalGroup(
             panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(panelGradiante1Layout.createSequentialGroup()
+                .addGroup(panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGradiante1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(lbInactivos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGradiante1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbActivos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGradiante1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelGradiante1Layout.setVerticalGroup(
             panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(lbActivos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbInactivos)
+                .addContainerGap())
+            .addGroup(panelGradiante1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGradiante1Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel7)
+                    .addContainerGap(135, Short.MAX_VALUE)))
         );
 
         jPanel5.add(panelGradiante1, java.awt.BorderLayout.CENTER);
 
         add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 300, 180));
 
+        jLabel4.setFont(new java.awt.Font("Showcard Gothic", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("eDAD PROMEDIO");
+
+        lbEdadPromedio.setFont(new java.awt.Font("Showcard Gothic", 1, 48)); // NOI18N
+        lbEdadPromedio.setForeground(new java.awt.Color(255, 255, 255));
+        lbEdadPromedio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbEdadPromedio.setText("00000");
+
         javax.swing.GroupLayout panelGradiante2Layout = new javax.swing.GroupLayout(panelGradiante2);
         panelGradiante2.setLayout(panelGradiante2Layout);
         panelGradiante2Layout.setHorizontalGroup(
             panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGroup(panelGradiante2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbEdadPromedio, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelGradiante2Layout.setVerticalGroup(
             panelGradiante2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(panelGradiante2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbEdadPromedio)
+                .addGap(36, 36, 36))
         );
 
         add(panelGradiante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 310, -1));
+
+        lblTotalPacientes.setFont(new java.awt.Font("Showcard Gothic", 1, 48)); // NOI18N
+        lblTotalPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalPacientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalPacientes.setText("00000");
+
+        jLabel3.setFont(new java.awt.Font("Showcard Gothic", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("TOTAL PACIENTES:");
 
         javax.swing.GroupLayout panelGradiante3Layout = new javax.swing.GroupLayout(panelGradiante3);
         panelGradiante3.setLayout(panelGradiante3Layout);
         panelGradiante3Layout.setHorizontalGroup(
             panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTotalPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
         panelGradiante3Layout.setVerticalGroup(
             panelGradiante3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGradiante3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotalPacientes)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         add(panelGradiante3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
@@ -257,17 +373,26 @@ public class PanelPacientes extends javax.swing.JPanel {
 
             tablaPacientes.setModel(modelo);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error al cargar pacientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbActivos;
+    private javax.swing.JLabel lbEdadPromedio;
+    private javax.swing.JLabel lbInactivos;
+    private javax.swing.JLabel lblTotalPacientes;
     private PackDiseño.PanelGradiante panelGradiante1;
     private PackDiseño.PanelGradiante panelGradiante2;
     private PackDiseño.PanelGradiante panelGradiante3;

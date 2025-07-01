@@ -33,7 +33,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
             ControladorPaciente controladorPaciente = new ControladorPaciente();
             alergias =  controladorPaciente.obtenerAlergiasPaciente(pac.getIdPaciente());
             String aler = "";
-            for (Alergia a : pac.getAlergias()) {
+            for (Alergia a : alergias) {
                 aler += a.verAlergia()+ "\n";
             }
             txtAlergias.setText(aler);
@@ -44,6 +44,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
             txtEdad.setText(Integer.toString(pac.verEdad()));
             txtTelefono.setText(pac.getTelefono());
             txtGenero.setText(pac.getGenero());
+            txtTipoSangre.setText(pac.getGrupoSanguineo());
             inicializarPlaceholders(pac.getCorreo(), pac.getDireccion(), pac.getTelefono());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
@@ -62,6 +63,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
@@ -95,6 +97,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAlergias = new javax.swing.JTextArea();
         btnActualizar = new javax.swing.JButton();
+        txtHistorial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,18 +105,26 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/pacienteimg.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 350, 500));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 360, 500));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -238,6 +249,14 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
         });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, 560, 50));
 
+        txtHistorial.setText("Ver Historial");
+        txtHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHistorialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 540, 350, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,7 +265,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
 
         pack();
@@ -263,8 +282,15 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
         ObtenerDatosMostrar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void txtHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHistorialActionPerformed
+        JDialogHistorialMedico a = new JDialogHistorialMedico(this, true, pac.getIdPaciente());
+        a.setLocationRelativeTo(null);
+        a.setVisible(true); 
+    }//GEN-LAST:event_txtHistorialActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -296,6 +322,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
     private javax.swing.JLabel txtEdad;
     private javax.swing.JLabel txtEspecialidades;
     private javax.swing.JLabel txtGenero;
+    private javax.swing.JButton txtHistorial;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTipoSangre;

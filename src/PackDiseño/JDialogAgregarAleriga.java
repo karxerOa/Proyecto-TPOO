@@ -20,8 +20,8 @@ public class JDialogAgregarAleriga extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAgregarAleriga.class.getName());
 
-    private ButtonGroup btgAlergias = new ButtonGroup();
-    private int idPaciente;
+    private final ButtonGroup btgAlergias = new ButtonGroup();
+    private final int idPaciente;
     
     public JDialogAgregarAleriga(java.awt.Dialog parent, boolean modal, int idPaciente) {
         super(parent, modal);
@@ -155,7 +155,8 @@ public class JDialogAgregarAleriga extends javax.swing.JDialog {
                 }
                 Alergia alergia = new Alergia();
                 alergia.setTipoAlergia(tipoAlergia);
-                alergia.setNombreAlergia(tipoAlergia);
+                alergia.setNombreAlergia(txtDescripciònAlergia.getText());
+                alergia.setSeveridad(txtSeveridadAlerg.getText());
                 ControladorPaciente controladorPaciente = new ControladorPaciente();
                 controladorPaciente.AgregarEspecialdiad(idPaciente, alergia);
                 JOptionPane.showMessageDialog(this, "Registro exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);

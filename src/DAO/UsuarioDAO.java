@@ -51,6 +51,8 @@ public class UsuarioDAO {
             if (rs.next()) {
                 idDoc = rs.getInt("DoctorID");
             }
+        }catch(SQLException e){
+            throw new SQLException("Error al identificar al propietario de la cuenta");
         }
         return idDoc;
     }

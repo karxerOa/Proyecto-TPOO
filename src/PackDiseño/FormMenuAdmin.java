@@ -6,7 +6,6 @@ package PackDiseño;
 
 import Util.Colores;
 import Util.MostrarPanelHijo;
-import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +26,7 @@ public class FormMenuAdmin extends javax.swing.JFrame {
 
     public FormMenuAdmin() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.

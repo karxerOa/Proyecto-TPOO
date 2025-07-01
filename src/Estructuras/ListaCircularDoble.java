@@ -24,13 +24,13 @@ public class ListaCircularDoble <T> {
             head.setNext(head);
             head.setPrev(head);
         } else {
-            tail.setNext(nuevoNodo);
             nuevoNodo.setPrev(tail);
-            tail.setNext(head);
             nuevoNodo.setNext(head);
-            head.setPrev(tail);
+            tail.setNext(nuevoNodo);
+            head.setPrev(nuevoNodo);
+            tail = nuevoNodo;
         }
-    }
+}
 
     public Nodo<T> getHead() {
         return head;

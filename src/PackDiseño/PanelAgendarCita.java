@@ -96,6 +96,7 @@ public class PanelAgendarCita extends javax.swing.JPanel {
         jPanel7.putClientProperty(FlatClientProperties.STYLE, "arc: 40");
         jPanel3.putClientProperty(FlatClientProperties.STYLE, "arc: 40");
         jPanel8.putClientProperty(FlatClientProperties.STYLE, "arc: 40");
+        jPanel13.putClientProperty(FlatClientProperties.STYLE, "arc: 40");
         btnVerDoctores.putClientProperty(FlatClientProperties.STYLE, "arc: 25");
         btnRegistar.putClientProperty(FlatClientProperties.STYLE, "arc: 25");
         jPanel12.putClientProperty(FlatClientProperties.STYLE, "arc: 40");

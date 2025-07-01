@@ -9,10 +9,8 @@ import Controladores.ControladorPaciente;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelPacientesDoctor extends javax.swing.JPanel {
     private ArrayList<Paciente> pacientesOriginal = new ArrayList();
-    private ControladorPaciente cp = new ControladorPaciente();
+    private ControladorPaciente controlPac = new ControladorPaciente();
     
     public PanelPacientesDoctor() {
         initComponents();
@@ -30,31 +28,33 @@ public class PanelPacientesDoctor extends javax.swing.JPanel {
     
     private void inicializarDatos(){
         try {
-            cp.obtenerPacientesDni();
-            pacientesOriginal = cp.listaPacientes;
+            controlPac.obtenerPacientesDni();
+            pacientesOriginal = controlPac.listaPacientes;
             eventoTabla();
             eventoTabla2();
             eventoTextField();
             llenarTablaPacientes(pacientesOriginal);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }       
-    
     private void eventoTabla(){
         
-        tablaPacientes.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender("Ver"));
+        tablaPacientes.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender("Ver y Actualizar"));
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void Action(int row, String texto) {
                 try {
                     Paciente pac = (Paciente)tablaPacientes.getValueAt(row, 1);
-                    JDialogActualizarPaciente a = new JDialogActualizarPaciente((JFrame)SwingUtilities.getWindowAncestor(PanelPacientesDoctor.this),true,pac);
+                   JDialogActualizarPaciente a = new JDialogActualizarPaciente((JFrame)SwingUtilities.getWindowAncestor(PanelPacientesDoctor.this),true,pac);
+                   a.setLocationRelativeTo(null);
+                   a.setVisible(true);
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(jPanel1, e.getMessage());
+                    JOptionPane.showMessageDialog(jPanel1, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         };
+        tablaPacientes.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event, "Ver y Actualizar"));
     }
     
     private void eventoTabla2(){
@@ -63,11 +63,11 @@ public class PanelPacientesDoctor extends javax.swing.JPanel {
             @Override
             public void Action(int row, String texto) {
                 try {
-                    int idPaciente = Integer.parseInt(tablaPacientes.getValueAt(row, 1).toString());
+                    int idPaciente = Integer.parseInt(tablaPacientes.getValueAt(row, 0).toString());
                     ControladorPaciente controladorPaciente = new ControladorPaciente();
                     controladorPaciente.EliminarPaciente(idPaciente);
-                    cp.obtenerPacientesDni();
-                    pacientesOriginal = cp.listaPacientes;
+                    controlPac.obtenerPacientesDni();
+                    pacientesOriginal = controlPac.listaPacientes;
                     llenarTablaPacientes(pacientesOriginal);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(jPanel1, e.getMessage());
@@ -100,7 +100,7 @@ public class PanelPacientesDoctor extends javax.swing.JPanel {
             llenarTablaPacientes(pacientesOriginal);
         }
         else{
-            llenarTablaPacientes(cp.FiltrarPacientes(txtBuscar.getText()));
+            llenarTablaPacientes(controlPac.FiltrarPacientes(txtBuscar.getText()));
         }
     }
     
@@ -111,7 +111,7 @@ public class PanelPacientesDoctor extends javax.swing.JPanel {
                 modelo.addRow(new Object[]{
                     p.getIdPaciente(),
                     p,
-                    p.getNumDoc()
+                    p.getNumDoc(),
                 });
             }
     }

@@ -77,7 +77,7 @@ public class ControladorPaciente {
         return pacienteDAO.contarPacientes();
     }
     
-    public void EliminarPaciente(int idPaciente) throws Exception{
+    public void EliminarPaciente(int idPaciente) throws Exception{//mas q eliminar poner inactivo xd
         pacienteDAO.Eliminar(idPaciente);
     }
     
@@ -87,6 +87,15 @@ public class ControladorPaciente {
     
     public void AgregarEspecialdiad(int idPaciente, Alergia alergia)throws Exception{
         pacienteDAO.AgregarAlergia(idPaciente, alergia);
+    } 
+    public int obtenerCantidadPacientes()throws Exception{
+        return pacienteDAO.obtenerCantidadPacientes();
+    }
+    public double obtenerEdadPromedioPacientes()throws Exception{
+        return pacienteDAO.obtenerEdadPromedioPacientes();
+    }
+    public int[] obtenerPacientesActivosInactivos()throws Exception{
+        return  pacienteDAO.obtenerPacientesActivosInactivos();
     }
 
 }

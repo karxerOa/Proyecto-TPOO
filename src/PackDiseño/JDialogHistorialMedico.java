@@ -124,7 +124,11 @@ public class JDialogHistorialMedico extends javax.swing.JDialog {
 
         jLabel2.setText("Fecha:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 50, 30));
+
+        txtFecha.setEnabled(false);
         jPanel3.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, 30));
+
+        txtPaciente.setEnabled(false);
         jPanel3.add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
 
         jLabel3.setText("Paciente:");
@@ -136,6 +140,7 @@ public class JDialogHistorialMedico extends javax.swing.JDialog {
 
         txtSintomas.setColumns(20);
         txtSintomas.setRows(5);
+        txtSintomas.setEnabled(false);
         jScrollPane3.setViewportView(txtSintomas);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -165,6 +170,8 @@ public class JDialogHistorialMedico extends javax.swing.JDialog {
 
         jLabel7.setText("Enfermedad Diagnosticada");
 
+        txtEnfermedadDiagnosticada.setEnabled(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -190,12 +197,14 @@ public class JDialogHistorialMedico extends javax.swing.JDialog {
 
         txtMedicamentos.setColumns(20);
         txtMedicamentos.setRows(5);
+        txtMedicamentos.setEnabled(false);
         jScrollPane4.setViewportView(txtMedicamentos);
 
         jLabel8.setText("Medicamentos - Dosis");
 
         txtRecomendaciones.setColumns(20);
         txtRecomendaciones.setRows(5);
+        txtRecomendaciones.setEnabled(false);
         jScrollPane5.setViewportView(txtRecomendaciones);
 
         jLabel9.setText("Recomendaciones");
@@ -244,6 +253,7 @@ public class JDialogHistorialMedico extends javax.swing.JDialog {
 
         txtAlergias.setColumns(20);
         txtAlergias.setRows(5);
+        txtAlergias.setEnabled(false);
         jScrollPane1.setViewportView(txtAlergias);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);

@@ -26,6 +26,7 @@ public class FormMenuDoctor extends javax.swing.JFrame {
     
     public FormMenuDoctor(int idDoctor) {
         initComponents();
+        setLocationRelativeTo(null);
         this.idDoctor = idDoctor;
         MostrarPanelHijo.Mostrar(new PanelInicioDoc(idDoctor), PanelHijo, 970, 620);
     }

@@ -7,7 +7,6 @@ package Controladores;
 import DAO.AtencionDAO;
 import DTO.HistorialMedicoDTO;
 import Estructuras.ListaCircularDoble;
-import java.sql.SQLException;
 /**
  *
  * @author apnil
@@ -23,7 +22,7 @@ public class ControladorAtencion {
         atencionDAO.Registrar(idPaciente, idDiagnostico, idReceta);
     }
     
-    public ListaCircularDoble<HistorialMedicoDTO> ObtenerHistorial(int idPaciente)throws SQLException{
+    public ListaCircularDoble<HistorialMedicoDTO> ObtenerHistorial(int idPaciente)throws Exception{
         return atencionDAO.ObtenerHistorial(idPaciente);
     }
 }

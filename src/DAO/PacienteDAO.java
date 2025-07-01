@@ -164,7 +164,7 @@ public class PacienteDAO {
     
     public ArrayList<Paciente> obtenerPacientesDni()throws SQLException{
         ArrayList<Paciente> pacientes = new ArrayList();
-        String sql = "SELECT * FROM Paciente";
+        String sql = "SELECT * FROM Paciente WHERE Activo = 1";
         try (Connection con = Conexion.getConexion();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -249,8 +249,7 @@ public class PacienteDAO {
     
     public void Eliminar(int idPaciente) throws SQLException{
         String consulta = """
-                          DELETE FROM Paciente
-                          WHERE PacienteID = ?
+                          UPDATE Paciente SET Activo = 0 WHERE PacienteID = ?;
                           """;
         try {
             Connection con = Conexion.getConexion();
@@ -258,7 +257,7 @@ public class PacienteDAO {
             stmt.setInt(1, idPaciente);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Error al eliminar al paciente: " + e.getMessage());
+            throw new SQLException("Error al establece inactivo al paciente: " + e.getMessage());
         }
     }
     
@@ -292,5 +291,56 @@ public class PacienteDAO {
         } catch (SQLException e) {
             throw new SQLException("Error al agregar alergia al paciente: " + e.getMessage());
         }
+    }
+    public int obtenerCantidadPacientes()throws SQLException {
+        String sql = "SELECT COUNT(*) AS TotalPacientes FROM Paciente";
+        try (Connection conn = Conexion.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("TotalPacientes");
+            }
+
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener el total de pacientes: " + e.getMessage());
+        }
+        return 0;
+    }
+    public double obtenerEdadPromedioPacientes()throws SQLException {
+        String sql = "SELECT AVG(DATEDIFF(YEAR, FechaNacimiento, GETDATE())) AS EdadPromedio FROM Paciente";
+        try (Connection conn = Conexion.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getDouble("EdadPromedio");
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener el promedio de edad de pacientes: " + e.getMessage());
+        }
+        return 0.0;
+    }
+    
+    public int[] obtenerPacientesActivosInactivos()throws SQLException {
+        String sql = """
+                     SELECT 
+                      SUM(CASE WHEN Activo = 1 THEN 1 ELSE 0 END) AS Activos,
+                      SUM(CASE WHEN Activo = 0 THEN 1 ELSE 0 END) AS Inactivos
+                     FROM Paciente
+                     """;
+
+        try (Connection conn = Conexion.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                int activos = rs.getInt("Activos");
+                int inactivos = rs.getInt("Inactivos");
+                return new int[]{activos, inactivos};
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener los pacientes activos: " + e.getMessage());
+        }
+
+        return new int[]{0, 0};
     }
 }
