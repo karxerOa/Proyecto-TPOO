@@ -6,6 +6,7 @@ package Vista;
 
 import Modelo.Turno;
 import Controladores.ControladorDoctor;
+import Controladores.ControladorTurno;
 import Modelo.DTO.DoctorSimpleDTO;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -167,7 +168,20 @@ public class PanelRegistrarTurnos extends javax.swing.JPanel {
             if(checkViernes.isSelected())DiasSeleccionado.add(DayOfWeek.FRIDAY);
             if(checkSabado.isSelected())DiasSeleccionado.add(DayOfWeek.SATURDAY);
             if(checkDomingo.isSelected())DiasSeleccionado.add(DayOfWeek.SUNDAY);
-
+            
+            if (DiasSeleccionado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un día para asignar el turno.", "Días no seleccionados", JOptionPane.WARNING_MESSAGE);
+            return; 
+            }
+            
+            ControladorTurno CT = new ControladorTurno();
+            boolean conflicto = CT.ExisteTurnoDoctor(IdDoctor, HoraInicio, HoraFin, DiasSeleccionado);
+            
+            if(conflicto){
+                JOptionPane.showMessageDialog(this, "El doctor ya tiene un turno que se cruza con este horario en uno de los dias selecionados","ConflictoHorario",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             Turno nuevoturno = new Turno();
             nuevoturno.setHoraInicio(HoraInicio);
             nuevoturno.setHoraFin(HoraFin);

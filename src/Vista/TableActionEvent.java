@@ -10,4 +10,5 @@ package Vista;
  */
 public interface TableActionEvent {
     public void Action(int row, String texto);
+
 }

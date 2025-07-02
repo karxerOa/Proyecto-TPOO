@@ -110,7 +110,6 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        TablaAtencion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TablaAtencion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -127,6 +126,7 @@ public class PanelAtenderPacientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TablaAtencion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         TablaAtencion.setRowHeight(30);
         TablaAtencion.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jScrollPane1.setViewportView(TablaAtencion);

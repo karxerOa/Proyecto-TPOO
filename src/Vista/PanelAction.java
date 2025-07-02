@@ -19,6 +19,8 @@ public class PanelAction extends javax.swing.JPanel {
     public PanelAction(String texto) {
         initComponents();
         actionButton1.setText(texto);
+        
+        
     }
 
     public void initEvent(TableActionEvent event, int row, String texto) {
@@ -30,6 +32,7 @@ public class PanelAction extends javax.swing.JPanel {
             }
         });
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

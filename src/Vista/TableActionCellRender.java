@@ -33,6 +33,6 @@ public class TableActionCellRender extends DefaultTableCellRenderer{
         return a;
     }
     
-    
-    
 }
+
+
