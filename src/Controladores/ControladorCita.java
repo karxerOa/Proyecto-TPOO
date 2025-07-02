@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import Clases.Cita;
-import DAO.CitaDAO;
+import Modelo.Cita;
+import Modelo.DAO.CitaDAO;
 import java.sql.*;
 
 /**

@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import Clases.Alergia;
-import DAO.AlergiaDAO;
+import Modelo.Alergia;
+import Modelo.DAO.AlergiaDAO;
 
 /**
  *

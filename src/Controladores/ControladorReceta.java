@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import Clases.Receta;
-import DAO.RecetaDAO;
+import Modelo.Receta;
+import Modelo.DAO.RecetaDAO;
 
 
 /**

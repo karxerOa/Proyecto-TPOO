@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import Clases.Recepcionista;
-import DAO.RecepcionistaDAO;
+import Modelo.Recepcionista;
+import Modelo.DAO.RecepcionistaDAO;
 import java.sql.SQLException;
 
 /**

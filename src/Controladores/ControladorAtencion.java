@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import DAO.AtencionDAO;
-import DTO.HistorialMedicoDTO;
+import Modelo.DAO.AtencionDAO;
+import Modelo.DTO.HistorialMedicoDTO;
 import Estructuras.ListaCircularDoble;
 /**
  *

@@ -4,9 +4,9 @@
  */
 package Controladores;
 
-import Clases.Especialidad;
-import DAO.EspecialidadDAO;
-import DTO.EspecialidadBasicoDTO;
+import Modelo.Especialidad;
+import Modelo.DAO.EspecialidadDAO;
+import Modelo.DTO.EspecialidadBasicoDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

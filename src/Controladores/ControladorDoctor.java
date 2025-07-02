@@ -5,13 +5,13 @@
 package Controladores;
 
 
-import Clases.Doctor;
-import Clases.Turno;
-import DAO.DoctorDAO;
-import DAO.PacienteDAO;
-import DTO.DoctorDTO;
-import DTO.DoctorSimpleDTO;
-import DTO.TurnoDTO;
+import Modelo.Doctor;
+import Modelo.Turno;
+import Modelo.DAO.DoctorDAO;
+import Modelo.DAO.PacienteDAO;
+import Modelo.DTO.DoctorDTO;
+import Modelo.DTO.DoctorSimpleDTO;
+import Modelo.DTO.TurnoDTO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 

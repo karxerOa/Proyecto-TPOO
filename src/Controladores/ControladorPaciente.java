@@ -4,12 +4,12 @@
  */
 package Controladores;
 
-import Clases.Alergia;
-import Clases.Paciente;
-import DAO.PacienteDAO;
-import DTO.PacienteDetalleDTO;
-import DTO.PacienteDniDTO;
-import DTO.PacienteResumenDTO;
+import Modelo.Alergia;
+import Modelo.Paciente;
+import Modelo.DAO.PacienteDAO;
+import Modelo.DTO.PacienteDetalleDTO;
+import Modelo.DTO.PacienteDniDTO;
+import Modelo.DTO.PacienteResumenDTO;
 import java.util.ArrayList;
 /**
  *

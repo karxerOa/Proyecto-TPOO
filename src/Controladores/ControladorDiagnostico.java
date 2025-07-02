@@ -4,8 +4,8 @@
  */
 package Controladores;
 
-import Clases.Diagnostico;
-import Conexion.Conexion;
+import Modelo.Diagnostico;
+import Modelo.DAO.Conexion;
 import java.sql.*;
 /**
  *

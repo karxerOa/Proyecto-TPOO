@@ -4,10 +4,10 @@
  */
 package Controladores;
 
-import Clases.Usuario;
-import DAO.UsuarioDAO;
-import DTO.IdentidadUsuarioDTO;
-import DTO.UsuarioDTO;
+import Modelo.Usuario;
+import Modelo.DAO.UsuarioDAO;
+import Modelo.DTO.IdentidadUsuarioDTO;
+import Modelo.DTO.UsuarioDTO;
 import java.sql.*;
 /**
  *
