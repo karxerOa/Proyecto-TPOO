@@ -2,39 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorDoctor.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelEspecialidades.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/EspecialidadDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorEspecialidades.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/TableActionCellRender.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/TableActionEvent.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/TableActionCellEditor.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelAction.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelAtenderPacientes.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelDatosDoctor.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelAgendarCita.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/FormMenuDoctor.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/JDialogAtencion.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/JDialogHistorialMedico.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/JDialogDoctoresDisponibles.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DTO/EspecialidadDTO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DTO/EspecialidadBasicoDTO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/AtencionDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/PacienteDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Vista/PanelRegistrarTurnos.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DTO/TurnoDTO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/Alergia.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/Administrador.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorDiagnostico.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorPaciente.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorUsuarios.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/TurnoDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/RecetaDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorTurno.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorReceta.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Modelo/DAO/DoctorDAO.java</file>
-            <file>file:/C:/Users/William/Desktop/Proyecto-TPOO/src/Controladores/ControladorRecepcionista.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

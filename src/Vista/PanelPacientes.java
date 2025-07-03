@@ -53,7 +53,7 @@ public class PanelPacientes extends javax.swing.JPanel {
             lblTotalPacientes.setText(Integer.toString(cp.obtenerCantidadPacientes()));
             lbEdadPromedio.setText(Double.toString(cp.obtenerEdadPromedioPacientes()));
             int[] act = cp.obtenerPacientesActivosInactivos();
-            lbActivos.setText(Integer.toString(act[0]));
+           lbActivos.setText(Integer.toString(act[0]));
             lbInactivos.setText(Integer.toString(act[1]));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(PanelPacientes.this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
