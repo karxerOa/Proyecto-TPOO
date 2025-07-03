@@ -48,6 +48,9 @@ public class Especialidad {
         if (Nombre == null || Nombre.isBlank()) {
             throw new Exception("El nombre de la especialidad no puede estar vacío.");
         }
+        if (!Nombre.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$")) {
+            throw new Exception("El nombre de la especialidad solo puede contener letras y espacios.");
+        }
         this.Nombre = Nombre;
     }
 
