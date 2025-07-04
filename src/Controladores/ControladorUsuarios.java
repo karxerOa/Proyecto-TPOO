@@ -31,4 +31,8 @@ public class ControladorUsuarios {
     public int RegistrarUser(Usuario usuario) throws SQLException{
         return usuarioDAO.RegistrarUser(usuario);
     }
+    
+    public int[] obtenerIdAdministrador(int idUsuario)throws SQLException{
+        return usuarioDAO.obtenerIdAdministrador(idUsuario);
+    }
 }

@@ -55,6 +55,27 @@ public class UsuarioDAO {
         }
         return idDoc;
     }
+    
+    public int[] obtenerIdAdministrador(int idUsuario)throws SQLException{
+        int[] datos = new int[2];
+        String consulta = """
+                          SELECT AdministradorID, NivelAcceso  FROM Administrador
+                          WHERE UsuarioId = ?
+                          """;
+        try(Connection con = Conexion.getConexion();
+            PreparedStatement pstmt = con.prepareStatement(consulta)){
+            pstmt.setInt(1, idUsuario);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                datos[0] = rs.getInt("AdministradorID");
+                datos[1] = rs.getInt("NivelAcceso");
+            }
+        }catch(SQLException e){
+            throw new SQLException("Error al identificar al propietario de la cuenta");
+        }
+        return datos;
+    }
+    
     public int RegistrarUser(Usuario usuario) throws SQLException{
         String sql = "INSERT INTO Usuario(NombreUsuario,Contraseña,Rol)VALUES(?,?,?)";
         try (Connection conn = Conexion.getConexion();

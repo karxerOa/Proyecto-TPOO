@@ -171,7 +171,8 @@ public class LogRes extends javax.swing.JFrame {
                         b.setVisible(true);
                         break;
                     case "Administrador":
-                        FormMenuAdmin a = new FormMenuAdmin();
+                        int[] datosAdmin = cUsuarios.obtenerIdAdministrador(identUser.getIdUsuario());
+                        FormMenuAdmin a = new FormMenuAdmin(datosAdmin);
                         this.setVisible(false);
                         a.setVisible(true);
                         break;

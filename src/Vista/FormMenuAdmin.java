@@ -23,10 +23,20 @@ public class FormMenuAdmin extends javax.swing.JFrame {
     int xMouse, yMouse;
     private Color colorTemp;
     private Colores colores = new Colores(new Color(0,125,118));
+    private int[] datosAdmin;
 
-    public FormMenuAdmin() {
+    public FormMenuAdmin(int[] datosAdmin) {
         initComponents();
         setLocationRelativeTo(null);
+        this.datosAdmin = datosAdmin;
+        if (datosAdmin[1] == 1) {
+            btnRegistrarDoc.setEnabled(false);
+            btnRegistrarRecepcionista.setEnabled(false);
+        }
+        else if (datosAdmin[1] == 2) {
+            btnRegistrarDoc.setEnabled(true);
+            btnRegistrarRecepcionista.setEnabled(true);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.

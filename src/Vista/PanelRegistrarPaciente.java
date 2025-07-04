@@ -28,7 +28,6 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
      */
     private Color col;
     private int idPacientetemp = 0;
-    private Paciente paciente = new Paciente();
     private ArrayList<Alergia> alergias = new ArrayList();
     private ArrayList<Integer> indicestemporales = new ArrayList();
     public PanelRegistrarPaciente(Color col) {
@@ -315,6 +314,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
             ControladorPaciente consPa = new ControladorPaciente();
             ControladorAlergia controladorAlergia = new ControladorAlergia();
             // Datos del paciente
+            Paciente paciente = new Paciente();
             paciente.setNombre(txtNombres.getText());
             paciente.setApellidoPaterno(txtAPaterno.getText());
             paciente.setApellidoMaterno(txtAMaterno.getText());
@@ -367,7 +367,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
                 alergia.setNombreAlergia(txtDescripciònAlergia.getText());
                 alergia.setSeveridad(txtSeveridadAlerg.getText());
                 alergias.add(alergia);
-                JOptionPane.showMessageDialog(this, "Se agregola alergia", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Se agrego la alergia", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 btgAlergias.clearSelection();
                 txtDescripciònAlergia.setText("");
                 txtSeveridadAlerg.setText("");
@@ -408,6 +408,9 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
         inicializarPlaceholders();
         cbGenero.setSelectedIndex(-1);
         dpFechaNac.setDate(null);
+        alergias.clear();
+        indicestemporales.clear();
+        btgAlergias.clearSelection();
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgAlergias;

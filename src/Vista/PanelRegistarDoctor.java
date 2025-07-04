@@ -157,6 +157,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         cbGenero.setSelectedIndex(-1);
         txtUsuario.setText("");
         txtContraseña.setText("");
+        ListaEspecialidadDoctor.clear();
         inicializarPlaceholders();
     }
     @SuppressWarnings("unchecked")
@@ -227,7 +228,6 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         jLabel14.setText("USUARIO");
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setEnabled(false);
 
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
         txtContraseña.setText("Contraseña");

@@ -27,11 +27,4 @@ public class Administrador extends Persona{
     public int getNivelAcceso() {
         return nivelAcceso;
     }
-
-//    private int validarNivelAcceso(int nivel){
-//        if (nivel < 1 || nivel > 3) {
-//            throw new IllegalArgumentException("Numero invalido, debe de estar en el rango 1-3.");
-//        }
-//        return  nivel;
-//    }
 }

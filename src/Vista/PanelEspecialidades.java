@@ -6,12 +6,9 @@ package Vista;
 
 import Modelo.Especialidad;
 import Controladores.ControladorEspecialidades;
-import Controladores.ControladorPaciente;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,7 +47,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         }
     }
     private void eventoTabla(){
-     
+        TablaEspecialidades.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender("Eliminar"));
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void Action(int row, String texto) {
@@ -66,7 +63,6 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 }
             }
         };
-        TablaEspecialidades.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender("Eliminar"));
         TablaEspecialidades.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event, "Eliminar"));
         
         DefaultTableCellRenderer centrado = new DefaultTableCellRenderer();
@@ -104,6 +100,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtNewNombre = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -242,7 +239,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("ACTUALZIAR ESPECIALDIAD");
+        jLabel7.setText("ACTUALIZAR ESPECIALDIAD");
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
@@ -261,6 +258,10 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jLabel10.setText("Especialidad:");
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
         jPanel4.add(txtNewNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 190, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel1.setText("Ingrsesar el nombre de la especialidad a modificar su descripcion");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 310, 30));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 320, 620));
 
@@ -286,6 +287,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
             ControladorEspecialidades controladorEspecialidades = new ControladorEspecialidades();
             controladorEspecialidades.Agregar_Especialidades(RegistrarEspecialdiad);
             cargarEspecialdiadesTabla();
+            eventoTabla();
             JOptionPane.showMessageDialog(this, "Se registro la especialidad Correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
         }
         catch(Exception e){
@@ -328,6 +330,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btn_agregarEspecialidad1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
