@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Vista/PanelEspecialidades.java</file>
-            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Modelo/Especialidad.java</file>
+            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Util/Validador.java</file>
+            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Modelo/Persona.java</file>
+            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Vista/PanelInicioDoc.java</file>
+            <file>file:/C:/Users/apnil/OneDrive/Desktop/Proyecto-TPOO/src/Vista/PanelAtenderPacientes.java</file>
         </group>
     </open-files>
 </project-private>

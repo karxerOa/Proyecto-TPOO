@@ -75,7 +75,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante1">
+        <Container class="Vista.PanelGradiante" name="panelGradiante1">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -186,7 +186,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante3">
+        <Container class="Vista.PanelGradiante" name="panelGradiante3">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -271,7 +271,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante2">
+        <Container class="Vista.PanelGradiante" name="panelGradiante2">
 
           <Layout>
             <DimensionLayout dim="0">

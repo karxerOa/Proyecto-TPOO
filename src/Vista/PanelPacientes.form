@@ -245,7 +245,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante1">
+        <Container class="Vista.PanelGradiante" name="panelGradiante1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
@@ -354,7 +354,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante2">
+    <Container class="Vista.PanelGradiante" name="panelGradiante2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="330" y="80" width="310" height="-1"/>
@@ -413,7 +413,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="PackDise&#xf1;o.PanelGradiante" name="panelGradiante3">
+    <Container class="Vista.PanelGradiante" name="panelGradiante3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="20" y="80" width="-1" height="-1"/>
