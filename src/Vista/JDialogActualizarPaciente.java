@@ -274,7 +274,7 @@ public class JDialogActualizarPaciente extends javax.swing.JDialog {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         try {
             ControladorPaciente controladorPaciente = new ControladorPaciente();
-            controladorPaciente.ActualizarDatos(pac.getIdPaciente(), txtCorreo.getText(), txtDireccion.getText() ,txtDireccion.getText());
+            controladorPaciente.ActualizarDatos(pac.getIdPaciente(), txtCorreo.getText(), txtTelefono.getText() ,txtDireccion.getText());
             JOptionPane.showMessageDialog(this, "Se actualizaron los datos correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
