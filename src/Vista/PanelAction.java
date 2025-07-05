@@ -55,9 +55,7 @@ public class PanelAction extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(actionButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(actionButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

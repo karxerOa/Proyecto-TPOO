@@ -23,7 +23,7 @@ public class Conexion {
             Connection conn = DriverManager.getConnection(url);
             return conn;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fallo al conectar con el servidor, intente nuevamente", "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

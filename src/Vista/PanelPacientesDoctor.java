@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
+import util.Placeholders;
 
 /**
  *
@@ -30,10 +31,11 @@ public class PanelPacientesDoctor extends javax.swing.JPanel {
         try {
             controlPac.obtenerPacientesDni();
             pacientesOriginal = controlPac.listaPacientes;
+            llenarTablaPacientes(pacientesOriginal);
+            Placeholders.configurarPlaceholder(txtBuscar, "Ingrese el nombre o documento de identidad del paciente a buscar");
             eventoTabla();
             eventoTabla2();
             eventoTextField();
-            llenarTablaPacientes(pacientesOriginal);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

@@ -17,7 +17,6 @@ import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.JOptionPane;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import java.io.File;
 import java.io.FileOutputStream;
 /**
  *
@@ -432,6 +431,8 @@ public class JDialogAtencion extends javax.swing.JDialog {
                 dispose();
             }
             else if(opcion == JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(rootPane, "No se genero la receta", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

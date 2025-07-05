@@ -158,7 +158,7 @@ public class JDialogAgregarAleriga extends javax.swing.JDialog {
                 alergia.setNombreAlergia(txtDescripciònAlergia.getText());
                 alergia.setSeveridad(txtSeveridadAlerg.getText());
                 ControladorPaciente controladorPaciente = new ControladorPaciente();
-                controladorPaciente.AgregarEspecialdiad(idPaciente, alergia);
+                controladorPaciente.AgregarAlergia(idPaciente, alergia);
                 JOptionPane.showMessageDialog(this, "Registro exitoso", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 txtDescripciònAlergia.setText("");
                 txtSeveridadAlerg.setText("");

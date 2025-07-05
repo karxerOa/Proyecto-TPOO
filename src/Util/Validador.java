@@ -30,20 +30,20 @@ public class Validador {
         if (doc.equals(placeholder)) {
             throw new IllegalArgumentException("El documento de indentidad no puede ir vacio");
         }
-        if (doc.length() != 8 && doc.length() != 12) {
+        if (doc.length() != 8 && doc.length() != 20) {
             throw new IllegalArgumentException("El documento de indentidad debe tener 8 o 20 digitos digitos.");
         }
         return doc;
     }
     public static String validarCorreo(String correo) {
         if (correo == null || !correo.contains("@")) {
-            throw new IllegalArgumentException("Correo inválido.");
+            throw new IllegalArgumentException("Correo inválido");
         }
         return correo;
     }
     public static LocalDate validarFecha(LocalDate fecha) {
         if (fecha == null || fecha.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("Fecha inválida.");
+            throw new IllegalArgumentException("Fecha inválida");
         }
         return fecha;
     }

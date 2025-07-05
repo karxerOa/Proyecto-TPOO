@@ -453,7 +453,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
             newdoc.setCodigoColegiatura(txtCMP.getText());
             newdoc.setUser(newUsser);
             if (ListaEspecialidadDoctor.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Error: El doctor debe poseer minimo 1 especialidad", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El doctor debe poseer minimo 1 especialidad", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             int IdUsuario = U.RegistrarUser(newUsser);
@@ -483,7 +483,7 @@ public class PanelRegistarDoctor extends javax.swing.JPanel {
         int Index = cbEspecialidad.getSelectedIndex();
         Especialidad EspecialidadesSleccionada = lista.get(Index);
         if (ListaEspecialidadDoctor.contains(EspecialidadesSleccionada)) {
-        JOptionPane.showMessageDialog(this, "Esta especialidad ya ha sido agregada.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Esta especialidad ya ha sido agregada", "Advertencia", JOptionPane.WARNING_MESSAGE);
         return;
     }
         ListaEspecialidadDoctor.add(EspecialidadesSleccionada);

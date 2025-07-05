@@ -204,7 +204,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 btn_agregarEspecialidad1ActionPerformed(evt);
             }
         });
-        jPanel4.add(btn_agregarEspecialidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, -1));
+        jPanel4.add(btn_agregarEspecialidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +212,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel4.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 510, -1, -1));
+        jPanel4.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, -1, -1));
         jPanel4.add(txt_especialidadDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 190, -1));
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -239,7 +239,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("ACTUALIZAR ESPECIALDIAD");
+        jLabel7.setText("ACTUALIZAR ESPECIALIDAD");
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N

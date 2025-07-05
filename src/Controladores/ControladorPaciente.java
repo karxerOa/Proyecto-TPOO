@@ -85,7 +85,7 @@ public class ControladorPaciente {
         pacienteDAO.ActualizarDatos(idPaciente, correo, telefono, direccion);
     }
     
-    public void AgregarEspecialdiad(int idPaciente, Alergia alergia)throws Exception{
+    public void AgregarAlergia(int idPaciente, Alergia alergia)throws Exception{
         pacienteDAO.AgregarAlergia(idPaciente, alergia);
     } 
     public int obtenerCantidadPacientes()throws Exception{

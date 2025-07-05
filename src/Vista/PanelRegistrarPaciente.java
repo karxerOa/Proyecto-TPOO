@@ -374,7 +374,7 @@ public class PanelRegistrarPaciente extends javax.swing.JPanel {
                 txtDescripciònAlergia.setEnabled(true);
                 txtSeveridadAlerg.setEnabled(true);
             }else {
-                JOptionPane.showMessageDialog(this, "Debes seleccionar un tipo de alergia", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Debes seleccionar un tipo de alergia si deseas agregar una alergia", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
